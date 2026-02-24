@@ -1,0 +1,14 @@
+# Database Connection
+DATABASE_URL=postgresql://postgres.oxztoazztxpwatxetwzs:[PolitiCard2025]@aws-1-us-east-2.pooler.supabase.com:6543/postgres
+
+# Google AI Studio API Key
+GOOGLE_AI_STUDIO_API_KEY=your_google_ai_key_here
+
+# App Settings
+SECRET_KEY=politicard-super-secret-key-change-in-production-2025
+ENVIRONMENT=development
+DEBUG=True
+
+# CORS Settings
+ALLOWED_ORIGINS=http://localhost:3000,http://localhost:8000,http://127.0.0.1:8000
+GOOGLE_CIVIC_API_KEY=AIzaSyDGaaJGzwXKfTOXovwmLQmn_e4IV_lJf4U
