@@ -1,8 +1,7 @@
-import google.generativeai as genai
+from google import genai
 from app.config import GOOGLE_AI_API_KEY
 
-genai.configure(api_key=GOOGLE_AI_API_KEY)
-model = genai.GenerativeModel("gemini-2.0-flash")
+client = genai.Client(api_key=GOOGLE_AI_API_KEY)
 
 def classify_typology(survey_responses: dict) -> dict:
     prompt = f"""You are a political typology classifier. Based on the following survey responses, 
@@ -17,7 +16,7 @@ Survey responses: {survey_responses}
 Respond ONLY in this exact JSON format:
 {{"economic_score": 0, "social_score": 0, "engagement_level": "", "typology_label": ""}}"""
 
-    response = model.generate_content(prompt)
+    response = client.models.generate_content(model="gemini-2.0-flash", contents=prompt)
     return response.text
 
 def summarize_official(official_data: dict) -> str:
@@ -27,7 +26,7 @@ Keep it factual and balanced. 2-3 paragraphs max.
 
 Official info: {official_data}"""
 
-    response = model.generate_content(prompt)
+    response = client.models.generate_content(model="gemini-2.0-flash", contents=prompt)
     return response.text
 
 def analyze_sentiment(article_text: str) -> dict:
@@ -40,7 +39,7 @@ Article: {article_text}
 Respond ONLY in this exact JSON format:
 {{"sentiment_score": 0.0, "lean": "", "confidence": 0.0, "summary": ""}}"""
 
-    response = model.generate_content(prompt)
+    response = client.models.generate_content(model="gemini-2.0-flash", contents=prompt)
     return response.text
 
 def recommend_content(typology: dict, available_content: list) -> str:
@@ -55,7 +54,7 @@ Available content: {available_content}
 
 Respond with a ranked list of content IDs and brief explanations."""
 
-    response = model.generate_content(prompt)
+    response = client.models.generate_content(model="gemini-2.0-flash", contents=prompt)
     return response.text
 
 def moderate_discussion(message: str) -> dict:
@@ -71,5 +70,5 @@ Message: {message}
 Respond ONLY in this exact JSON format:
 {{"is_civil": true, "has_hate_speech": false, "is_on_topic": true, "action": "", "reason": ""}}"""
 
-    response = model.generate_content(prompt)
+    response = client.models.generate_content(model="gemini-2.0-flash", contents=prompt)
     return response.text
