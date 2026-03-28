@@ -221,50 +221,177 @@ def get_fl_house_members() -> list:
     return results
 
 
-def get_state_legislators_for_county(county: str, sample_zip: str) -> list:
-    """Fetch state legislators for a county using OpenStates geo lookup."""
-    results = []
-    try:
-        # Get lat/lng for sample ZIP
-        geo_r = requests.get(
-            "https://nominatim.openstreetmap.org/search",
-            params={"postalcode": sample_zip, "country": "US", "format": "json", "limit": 1},
-            headers={"User-Agent": "PolitiScore/1.0"},
-            timeout=10,
-        )
-        geo_data = geo_r.json()
-        if not geo_data:
-            return []
-        lat = geo_data[0]["lat"]
-        lng = geo_data[0]["lon"]
+# ── FL Senate district → counties mapping ─────────────────────────────────────
+FL_SENATE_DISTRICT_TO_COUNTIES = {
+    "1": ["Escambia"],
+    "2": ["Okaloosa", "Walton"],
+    "3": ["Bay", "Gulf", "Calhoun", "Jackson", "Holmes", "Washington"],
+    "4": ["Duval"],
+    "5": ["Nassau", "Baker", "Columbia", "Hamilton", "Suwannee"],
+    "6": ["Alachua", "Gilchrist", "Levy"],
+    "7": ["Volusia", "Flagler", "Putnam"],
+    "8": ["Lake", "Sumter"],
+    "9": ["Orange"],
+    "10": ["Seminole"],
+    "11": ["Brevard", "Indian River"],
+    "12": ["Duval"],
+    "13": ["Clay", "St. Johns"],
+    "14": ["Duval"],
+    "15": ["Marion", "Citrus"],
+    "16": ["Hillsborough"],
+    "17": ["Pasco", "Hernando"],
+    "18": ["Hillsborough"],
+    "19": ["Hillsborough", "Manatee"],
+    "20": ["Pinellas"],
+    "21": ["Pinellas"],
+    "22": ["Sarasota", "Manatee"],
+    "23": ["Charlotte", "Lee"],
+    "24": ["Lee"],
+    "25": ["Collier", "Hendry", "Glades"],
+    "26": ["Collier", "Monroe"],
+    "27": ["Miami-Dade"],
+    "28": ["Miami-Dade"],
+    "29": ["Miami-Dade"],
+    "30": ["Miami-Dade", "Broward"],
+    "31": ["Broward"],
+    "32": ["Broward"],
+    "33": ["Broward"],
+    "34": ["Palm Beach"],
+    "35": ["Palm Beach"],
+    "36": ["Palm Beach"],
+    "37": ["Martin", "St. Lucie", "Okeechobee"],
+    "38": ["St. Lucie", "Indian River"],
+    "39": ["Osceola", "Polk"],
+    "40": ["Orange", "Brevard"],
+}
 
-        # Query OpenStates
-        os_r = requests.get(
-            "https://v3.openstates.org/people.geo",
-            params={"lat": lat, "lng": lng},
-            headers={"X-API-KEY": OPENSTATES_API_KEY},
-            timeout=15,
-        )
-        if os_r.status_code == 200:
-            for p in os_r.json().get("results", []):
-                role = p.get("current_role", {})
-                results.append({
-                    "name": p.get("name", ""),
-                    "title": f"{role.get('title', 'State Official')}, District {role.get('district', '')}",
-                    "office": role.get("title", "State Official"),
-                    "level": "state",
-                    "party": p.get("party", ""),
-                    "state": "FL",
-                    "district": str(role.get("district", "")),
-                    "branch": "legislative",
-                    "zip_codes": ",".join(FLORIDA_COUNTIES.get(county, [])),
-                    "photo_url": p.get("image"),
-                    "website": p.get("openstates_url"),
-                })
-        time.sleep(0.5)  # Rate limit
-    except Exception as e:
-        print(f"  Warning: OpenStates error for {county}: {e}")
+# ── FL House district → counties mapping ──────────────────────────────────────
+FL_HOUSE_DISTRICT_TO_COUNTIES = {
+    "1": ["Escambia"], "2": ["Escambia"], "3": ["Escambia"],
+    "4": ["Okaloosa"], "5": ["Okaloosa", "Walton"], "6": ["Walton", "Holmes", "Washington"],
+    "7": ["Bay"], "8": ["Bay"], "9": ["Bay", "Gulf", "Calhoun"],
+    "10": ["Jackson", "Holmes"], "11": ["Jackson", "Gadsden"],
+    "12": ["Leon"], "13": ["Leon"], "14": ["Leon", "Wakulla", "Jefferson"],
+    "15": ["Madison", "Taylor", "Lafayette", "Dixie", "Gilchrist"],
+    "16": ["Alachua"], "17": ["Alachua"], "18": ["Alachua", "Levy", "Columbia"],
+    "19": ["Columbia", "Suwannee", "Hamilton", "Baker"],
+    "20": ["Nassau", "Duval"], "21": ["Duval"], "22": ["Duval"], "23": ["Duval"],
+    "24": ["Duval"], "25": ["Duval"], "26": ["Duval"], "27": ["Duval"],
+    "28": ["Clay", "St. Johns"], "29": ["St. Johns"], "30": ["Flagler", "Putnam"],
+    "31": ["Volusia"], "32": ["Volusia"], "33": ["Volusia"], "34": ["Volusia"],
+    "35": ["Volusia", "Brevard"], "36": ["Brevard"], "37": ["Brevard"],
+    "38": ["Brevard"], "39": ["Brevard"], "40": ["Indian River", "Okeechobee"],
+    "41": ["St. Lucie"], "42": ["St. Lucie", "Martin"],
+    "43": ["Martin", "Palm Beach"], "44": ["Palm Beach"], "45": ["Palm Beach"],
+    "46": ["Palm Beach"], "47": ["Palm Beach"], "48": ["Palm Beach"],
+    "49": ["Palm Beach"], "50": ["Palm Beach", "Broward"],
+    "51": ["Broward"], "52": ["Broward"], "53": ["Broward"], "54": ["Broward"],
+    "55": ["Broward"], "56": ["Broward"], "57": ["Broward"], "58": ["Broward"],
+    "59": ["Broward"], "60": ["Broward", "Miami-Dade"],
+    "61": ["Miami-Dade"], "62": ["Miami-Dade"], "63": ["Miami-Dade"],
+    "64": ["Miami-Dade"], "65": ["Miami-Dade"], "66": ["Miami-Dade"],
+    "67": ["Miami-Dade"], "68": ["Miami-Dade"], "69": ["Miami-Dade"],
+    "70": ["Miami-Dade"], "71": ["Miami-Dade"], "72": ["Miami-Dade"],
+    "73": ["Miami-Dade"], "74": ["Miami-Dade"], "75": ["Miami-Dade"],
+    "76": ["Monroe", "Miami-Dade"],
+    "77": ["Collier"], "78": ["Collier", "Hendry"],
+    "79": ["Lee"], "80": ["Lee"], "81": ["Lee"], "82": ["Lee"],
+    "83": ["Charlotte", "Sarasota"], "84": ["Sarasota"], "85": ["Sarasota"],
+    "86": ["Manatee"], "87": ["Manatee", "Hillsborough"],
+    "88": ["Hillsborough"], "89": ["Hillsborough"], "90": ["Hillsborough"],
+    "91": ["Hillsborough"], "92": ["Hillsborough"], "93": ["Hillsborough"],
+    "94": ["Hillsborough"], "95": ["Hillsborough"],
+    "96": ["Pinellas"], "97": ["Pinellas"], "98": ["Pinellas"],
+    "99": ["Pinellas"], "100": ["Pinellas"],
+    "101": ["Pasco"], "102": ["Pasco"], "103": ["Pasco", "Hernando"],
+    "104": ["Hernando", "Citrus"], "105": ["Marion"],
+    "106": ["Marion", "Lake"], "107": ["Lake"], "108": ["Lake", "Orange"],
+    "109": ["Sumter", "Lake"], "110": ["Orange"], "111": ["Orange"],
+    "112": ["Orange"], "113": ["Orange"], "114": ["Orange"],
+    "115": ["Seminole"], "116": ["Seminole"], "117": ["Seminole", "Orange"],
+    "118": ["Osceola"], "119": ["Osceola", "Polk"],
+    "120": ["Polk", "Highlands"],
+}
+
+
+_ALL_FL_LEGISLATORS = None  # Cache
+
+def fetch_all_fl_legislators() -> list:
+    """Fetch all FL state legislators from OpenStates in bulk (cached)."""
+    global _ALL_FL_LEGISLATORS
+    if _ALL_FL_LEGISLATORS is not None:
+        return _ALL_FL_LEGISLATORS
+
+    results = []
+    page = 1
+    print("  Fetching all FL state legislators from OpenStates...")
+    while True:
+        try:
+            r = requests.get(
+                "https://v3.openstates.org/people",
+                params={
+                    "jurisdiction": "ocd-jurisdiction/country:us/state:fl/government",
+                    "current_role_org_classification": "upper lower",
+                    "per_page": 50,
+                    "page": page,
+                },
+                headers={"X-API-KEY": OPENSTATES_API_KEY},
+                timeout=20,
+            )
+            if r.status_code != 200:
+                print(f"  Warning: OpenStates returned {r.status_code}: {r.text[:300]}")
+                break
+            data = r.json()
+            batch = data.get("results", [])
+            if not batch:
+                break
+            results.extend(batch)
+            print(f"  Fetched page {page} ({len(batch)} legislators)")
+            if len(batch) < 50:
+                break
+            page += 1
+            time.sleep(0.5)
+        except Exception as e:
+            print(f"  Warning: OpenStates fetch error: {e}")
+            break
+
+    print(f"  Total FL legislators fetched: {len(results)}")
+    _ALL_FL_LEGISLATORS = results
     return results
+
+
+def get_state_legislators_for_county(county: str, sample_zip: str) -> list:
+    """Get state legislators for a county using bulk fetch + district mapping."""
+    all_legislators = fetch_all_fl_legislators()
+    county_results = []
+
+    for p in all_legislators:
+        role = p.get("current_role", {})
+        district = str(role.get("district", ""))
+        title = role.get("title", "")
+
+        # Determine which counties this district covers
+        if "Senator" in title:
+            district_counties = FL_SENATE_DISTRICT_TO_COUNTIES.get(district, [])
+        else:
+            district_counties = FL_HOUSE_DISTRICT_TO_COUNTIES.get(district, [])
+
+        if county in district_counties:
+            county_results.append({
+                "name": p.get("name", ""),
+                "title": f"{title}, District {district}",
+                "office": title,
+                "level": "state",
+                "party": p.get("party", ""),
+                "state": "FL",
+                "district": district,
+                "branch": "legislative",
+                "zip_codes": ",".join(FLORIDA_COUNTIES.get(county, [])),
+                "photo_url": p.get("image"),
+                "website": p.get("openstates_url"),
+            })
+
+    return county_results
 
 
 def build_zip_codes_string(county: str) -> str:
