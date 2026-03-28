@@ -7,19 +7,19 @@ load_dotenv()
 router = APIRouter()
 
 SUPABASE_URL = os.getenv("SUPABASE_URL")
-SUPABASE_SERVICE_KEY = os.getenv("SUPABASE_SERVICE_KEY")
+SUPABASE_SERVICE_KEY = os.getenv("SUPABASE_SERVICE_KEY") or os.getenv("SUPABASE_KEY")
 
-supabase = create_client(SUPABASE_URL, SUPABASE_SERVICE_KEY)
+# Gracefully handle missing keys
+supabase = None
+if SUPABASE_URL and SUPABASE_SERVICE_KEY:
+    supabase = create_client(SUPABASE_URL, SUPABASE_SERVICE_KEY)
 
 
 @router.get("/officials/{zip_code}")
 async def get_officials_by_zip(zip_code: str):
-    """
-    Fetch elected officials for a given ZIP code from Supabase.
-    Returns officials where zip_codes contains the ZIP or is tagged ALL_FL.
-    """
+    if not supabase:
+        raise HTTPException(status_code=503, detail="Database not configured")
     try:
-        # Query officials whose zip_codes field contains this ZIP
         response = supabase.table("elected_officials") \
             .select("*") \
             .or_(f"zip_codes.ilike.%{zip_code}%,zip_codes.eq.ALL_FL") \
@@ -28,7 +28,6 @@ async def get_officials_by_zip(zip_code: str):
 
         officials_raw = response.data or []
 
-        # Deduplicate by name+title (in case of overlapping zip_codes)
         seen = set()
         officials = []
         for o in officials_raw:
@@ -37,7 +36,6 @@ async def get_officials_by_zip(zip_code: str):
                 seen.add(key)
                 officials.append(o)
 
-        # Format to match what the frontend expects
         formatted = []
         for o in officials:
             formatted.append({
@@ -57,7 +55,6 @@ async def get_officials_by_zip(zip_code: str):
                 "zip_codes": o.get("zip_codes", ""),
             })
 
-        # Sort: federal first, then state, then local
         level_order = {"federal": 0, "state": 1, "local": 2}
         formatted.sort(key=lambda x: level_order.get(x["level"], 3))
 
