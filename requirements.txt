@@ -4,7 +4,8 @@ httpx
 python-dotenv
 sqlalchemy
 psycopg2-binary
-passlib[bcrypt]
+bcrypt==3.2.2
+passlib[bcrypt]==1.7.4
 python-jose[cryptography]
 pydantic[email]
 google-genai
