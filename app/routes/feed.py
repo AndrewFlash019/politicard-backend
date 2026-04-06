@@ -7,7 +7,7 @@ from app.dependencies.auth import get_current_user
 router = APIRouter(prefix="/feed", tags=["feed"])
 
 @router.get("/zip/{zip_code}")
-def get_feed_by_zip(zip_code: str, db: Session = Depends(get_db), current_user=Depends(get_current_user)):
+def get_feed_by_zip(zip_code: str, db: Session = Depends(get_db)):
     if len(zip_code) != 5 or not zip_code.isdigit():
         raise HTTPException(status_code=400, detail="Invalid ZIP code format")
 
