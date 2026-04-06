@@ -8,7 +8,7 @@ from app.dependencies.auth import get_current_user
 router = APIRouter(prefix="/officials", tags=["officials"])
 
 @router.get("/zip/{zip_code}", response_model=OfficialsByZipResponse)
-def lookup_by_zip(zip_code: str, db: Session = Depends(get_db), current_user=Depends(get_current_user)):
+def lookup_by_zip(zip_code: str, db: Session = Depends(get_db)):
     if len(zip_code) != 5 or not zip_code.isdigit():
         raise HTTPException(status_code=400, detail="Invalid ZIP code format")
     result = get_officials_by_zip(db, zip_code)
