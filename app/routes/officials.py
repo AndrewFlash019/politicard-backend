@@ -50,9 +50,11 @@ def _fetch_metrics_for_county(county_name: str) -> dict:
     for row in rows:
         category = row.get("category") or "Other"
         grouped.setdefault(category, []).append({
-            "name": row.get("name", ""),
-            "value": row.get("value", ""),
-            "type": row.get("type", "text"),
+            "name": row.get("metric_name", ""),
+            "value": row.get("metric_value", ""),
+            "type": row.get("metric_type", "text"),
+            "source": row.get("source"),
+            "year": row.get("year"),
         })
 
     return {"county": county_name, "metrics": grouped}
@@ -71,18 +73,21 @@ def get_metrics_by_zip(zip_code: str):
         raise HTTPException(status_code=503, detail="Database not configured")
     try:
         lookup = _supabase.table("county_zips") \
-            .select("county") \
-            .eq("zip_code", zip_code) \
-            .limit(1) \
+            .select("county,zip_codes") \
+            .ilike("zip_codes", f"%{zip_code}%") \
             .execute()
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
     rows = lookup.data or []
-    if not rows:
-        raise HTTPException(status_code=404, detail=f"No county found for ZIP {zip_code}")
+    county_name = None
+    for row in rows:
+        zips_raw = row.get("zip_codes") or ""
+        zips = {z.strip() for z in zips_raw.replace(";", ",").split(",") if z.strip()}
+        if zip_code in zips:
+            county_name = row.get("county")
+            break
 
-    county_name = rows[0].get("county")
     if not county_name:
         raise HTTPException(status_code=404, detail=f"No county found for ZIP {zip_code}")
 
