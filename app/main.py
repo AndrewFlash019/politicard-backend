@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.routes.auth import router as auth_router
 from app.routes.users import router as users_router
-from app.routes.officials import router as officials_router
+from app.routes.officials import router as officials_router, metrics_router
 from app.routes.ai import router as ai_router
 from app.routes.civic import router as civic_router
 from app.routes.feed import router as feed_router
@@ -26,6 +26,7 @@ app.add_middleware(
 app.include_router(auth_router)
 app.include_router(users_router)
 app.include_router(officials_router)
+app.include_router(metrics_router)
 app.include_router(ai_router)
 app.include_router(civic_router)
 app.include_router(feed_router)
