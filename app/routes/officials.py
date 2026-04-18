@@ -140,6 +140,64 @@ def get_official_metrics(official_id: int, db: Session = Depends(get_db)):
     return []
 
 
+@router.get("/{official_id}/donors")
+def get_official_donors(official_id: int, db: Session = Depends(get_db)):
+    if not _supabase:
+        raise HTTPException(status_code=503, detail="Database not configured")
+
+    exists = db.execute(
+        text("SELECT 1 FROM elected_officials WHERE id = :id"),
+        {"id": official_id},
+    ).first()
+    if not exists:
+        raise HTTPException(status_code=404, detail="Official not found")
+
+    try:
+        response = (
+            _supabase.table("campaign_finance")
+            .select(
+                "cycle,total_raised,total_spent,cash_on_hand,"
+                "individual_contributions,pac_contributions,top_donors,"
+                "source,source_url,last_updated"
+            )
+            .eq("official_id", official_id)
+            .order("cycle", desc=True)
+            .limit(1)
+            .execute()
+        )
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+    rows = response.data or []
+    if not rows:
+        return {}
+
+    row = rows[0]
+    total_raised = row.get("total_raised") or 0
+    individual = row.get("individual_contributions") or 0
+    pac = row.get("pac_contributions") or 0
+
+    def _pct(part):
+        if not total_raised:
+            return 0
+        return round(float(part) / float(total_raised) * 100, 2)
+
+    return {
+        "cycle": row.get("cycle"),
+        "total_raised": row.get("total_raised"),
+        "total_spent": row.get("total_spent"),
+        "cash_on_hand": row.get("cash_on_hand"),
+        "individual_contributions": row.get("individual_contributions"),
+        "pac_contributions": row.get("pac_contributions"),
+        "individual_percentage": _pct(individual),
+        "pac_percentage": _pct(pac),
+        "top_donors": row.get("top_donors") or [],
+        "source": row.get("source"),
+        "source_url": row.get("source_url"),
+        "last_updated": row.get("last_updated"),
+    }
+
+
 @router.get("/{official_id}/legislation")
 def get_official_legislation(official_id: int, db: Session = Depends(get_db)):
     official = db.execute(
