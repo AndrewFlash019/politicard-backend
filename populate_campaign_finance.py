@@ -228,18 +228,18 @@ def process_one(supabase, oid: int, name: str, office: str) -> str:
         print(f"    [donor fetch failed: {e}]", flush=True)
         donors = []
 
-    try:
-        pacs = get_top_pacs(cand_id, CYCLE)
-    except Exception as e:
-        print(f"    [pac fetch failed: {e}]", flush=True)
-        pacs = []
-
     raised = _num(totals.get("receipts"))
     spent = _num(totals.get("disbursements"))
     coh = _num(totals.get("last_cash_on_hand_end_period"))
     ind = _num(totals.get("individual_contributions"))
     pac = _num(totals.get("other_political_committee_contributions"))
     self_funded = _num(totals.get("candidate_contribution"))
+
+    try:
+        pacs = get_top_pacs(cand_id, CYCLE, total_raised=raised)
+    except Exception as e:
+        print(f"    [pac fetch failed: {e}]", flush=True)
+        pacs = []
 
     print(
         f"  raised=${(raised or 0):,.0f}  spent=${(spent or 0):,.0f}  "
