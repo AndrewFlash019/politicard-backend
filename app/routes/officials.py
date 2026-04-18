@@ -157,7 +157,7 @@ def get_official_donors(official_id: int, db: Session = Depends(get_db)):
             _supabase.table("campaign_finance")
             .select(
                 "cycle,total_raised,total_spent,cash_on_hand,"
-                "individual_contributions,pac_contributions,top_donors,"
+                "individual_contributions,pac_contributions,top_donors,top_pacs,"
                 "source,source_url,last_updated"
             )
             .eq("official_id", official_id)
@@ -192,6 +192,7 @@ def get_official_donors(official_id: int, db: Session = Depends(get_db)):
         "individual_percentage": _pct(individual),
         "pac_percentage": _pct(pac),
         "top_donors": row.get("top_donors") or [],
+        "top_pacs": row.get("top_pacs") or [],
         "source": row.get("source"),
         "source_url": row.get("source_url"),
         "last_updated": row.get("last_updated"),
