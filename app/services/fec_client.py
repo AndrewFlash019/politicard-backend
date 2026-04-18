@@ -59,7 +59,7 @@ def _fec_get(path: str, params: dict | None = None, max_retries: int = 6) -> dic
 _CONDUIT_SUBSTRINGS = ("WINRED", "ACTBLUE")
 
 
-def _principal_committee_id(candidate_id: str) -> str | None:
+def _principal_committee_id(candidate_id: str, cycle: int | None = None) -> str | None:
     """Resolve the candidate's primary principal committee id.
 
     Filtering Schedule A by ``candidate_id`` surfaces every transaction
@@ -67,17 +67,20 @@ def _principal_committee_id(candidate_id: str) -> str | None:
     committees and conduit passthroughs — which makes aggregated totals
     meaningless. Scoping to the candidate's own principal committee keeps
     the query to receipts the campaign actually took in.
+
+    Uses ``/candidate/{id}/committees/?designation=P``; the base
+    ``/candidate/{id}/`` record omits ``principal_committees``.
     """
-    data = _fec_get(f"/candidate/{candidate_id}/")
+    params: dict[str, Any] = {"designation": "P"}
+    if cycle is not None:
+        params["cycle"] = cycle
+    data = _fec_get(f"/candidate/{candidate_id}/committees/", params)
     if not data:
         return None
     results = data.get("results") or []
     if not results:
         return None
-    pcs = results[0].get("principal_committees") or []
-    if not pcs:
-        return None
-    cid = pcs[0].get("committee_id")
+    cid = results[0].get("committee_id")
     return cid or None
 
 
@@ -87,13 +90,17 @@ def get_top_pacs(
     n: int = 10,
     total_raised: float | None = None,
 ) -> list[dict]:
-    """Return top ``n`` PAC/committee contributors to the candidate's
-    principal committee for ``cycle``.
+    """Return top ``n`` PAC contributors to the candidate's principal
+    committee for ``cycle``.
 
-    Pulls Schedule A transactions against the principal committee with
-    ``is_individual=false``, drops memo duplicates and WinRed/ActBlue
-    conduits, aggregates by ``contributor_name``, and returns the top
-    contributors as dicts with ``name``, ``amount``, ``state``.
+    Uses Form 3 line ``11C`` (contributions from other political
+    committees) scoped to the candidate's principal committee, which
+    excludes loans, JFC transfers, in-kind from the candidate, and
+    similar non-PAC receipts that dominate Schedule A by amount.
+    Still drops memo duplicates and WinRed/ActBlue conduit rows as a
+    belt-and-suspenders guard, aggregates by ``contributor_name``, and
+    returns the top contributors as dicts with ``name``, ``amount``,
+    ``state``.
 
     If ``total_raised`` is provided and any single aggregated PAC total
     exceeds it, the result is treated as contaminated (e.g. JFC bleed-
@@ -104,7 +111,7 @@ def get_top_pacs(
     if not candidate_id:
         return []
     try:
-        committee_id = _principal_committee_id(candidate_id)
+        committee_id = _principal_committee_id(candidate_id, cycle=cycle)
     except Exception as e:
         print(f"    [get_top_pacs principal-committee lookup failed: {e}]", flush=True)
         return []
@@ -117,7 +124,7 @@ def get_top_pacs(
             {
                 "committee_id": committee_id,
                 "two_year_transaction_period": cycle,
-                "is_individual": "false",
+                "line_number": "F3-11C",
                 "sort": "-contribution_receipt_amount",
                 "per_page": 100,
             },
