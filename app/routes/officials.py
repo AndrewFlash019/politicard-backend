@@ -81,7 +81,7 @@ def _query_metric_rows(county: str, category: str | None) -> list[dict]:
     try:
         query = (
             _supabase.table("official_metrics")
-            .select("metric_name,metric_value,metric_type,source,year")
+            .select("metric_name,metric_value,metric_type,source,year,county,category")
             .ilike("county", county)
         )
         if category:
