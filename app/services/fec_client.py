@@ -56,22 +56,66 @@ def _fec_get(path: str, params: dict | None = None, max_retries: int = 6) -> dic
     return None
 
 
-def get_top_pacs(candidate_id: str, cycle: int, n: int = 10) -> list[dict]:
-    """Return top ``n`` PAC/committee contributors for a candidate in a cycle.
+_CONDUIT_SUBSTRINGS = ("WINRED", "ACTBLUE")
 
-    Pulls Schedule A transactions with ``is_individual=false`` (which selects
-    PACs and other committees), aggregates by ``contributor_name``, and
-    returns the top contributors as dicts with ``name``, ``amount``, ``state``.
+
+def _principal_committee_id(candidate_id: str) -> str | None:
+    """Resolve the candidate's primary principal committee id.
+
+    Filtering Schedule A by ``candidate_id`` surfaces every transaction
+    where the candidate is linked anywhere — including joint fundraising
+    committees and conduit passthroughs — which makes aggregated totals
+    meaningless. Scoping to the candidate's own principal committee keeps
+    the query to receipts the campaign actually took in.
+    """
+    data = _fec_get(f"/candidate/{candidate_id}/")
+    if not data:
+        return None
+    results = data.get("results") or []
+    if not results:
+        return None
+    pcs = results[0].get("principal_committees") or []
+    if not pcs:
+        return None
+    cid = pcs[0].get("committee_id")
+    return cid or None
+
+
+def get_top_pacs(
+    candidate_id: str,
+    cycle: int,
+    n: int = 10,
+    total_raised: float | None = None,
+) -> list[dict]:
+    """Return top ``n`` PAC/committee contributors to the candidate's
+    principal committee for ``cycle``.
+
+    Pulls Schedule A transactions against the principal committee with
+    ``is_individual=false``, drops memo duplicates and WinRed/ActBlue
+    conduits, aggregates by ``contributor_name``, and returns the top
+    contributors as dicts with ``name``, ``amount``, ``state``.
+
+    If ``total_raised`` is provided and any single aggregated PAC total
+    exceeds it, the result is treated as contaminated (e.g. JFC bleed-
+    through) and ``[]`` is returned with a warning logged.
 
     Errors, rate-limit exhaustion, and empty results all yield ``[]``.
     """
     if not candidate_id:
         return []
     try:
+        committee_id = _principal_committee_id(candidate_id)
+    except Exception as e:
+        print(f"    [get_top_pacs principal-committee lookup failed: {e}]", flush=True)
+        return []
+    if not committee_id:
+        return []
+
+    try:
         data = _fec_get(
             "/schedules/schedule_a/",
             {
-                "candidate_id": candidate_id,
+                "committee_id": committee_id,
                 "two_year_transaction_period": cycle,
                 "is_individual": "false",
                 "sort": "-contribution_receipt_amount",
@@ -87,8 +131,13 @@ def get_top_pacs(candidate_id: str, cycle: int, n: int = 10) -> list[dict]:
 
     agg: dict[str, dict] = {}
     for r in data.get("results", []) or []:
+        if (r.get("memo_code") or "").upper() == "X":
+            continue
         name = (r.get("contributor_name") or "").strip()
         if not name:
+            continue
+        upper = name.upper()
+        if any(sub in upper for sub in _CONDUIT_SUBSTRINGS):
             continue
         try:
             amount = float(r.get("contribution_receipt_amount") or 0)
@@ -101,6 +150,17 @@ def get_top_pacs(candidate_id: str, cycle: int, n: int = 10) -> list[dict]:
         cur["amount"] += amount
         if not cur["state"] and state:
             cur["state"] = state
+
+    if total_raised is not None and total_raised > 0:
+        for name, v in agg.items():
+            if v["amount"] > total_raised:
+                print(
+                    f"    [get_top_pacs WARNING: {name} aggregate "
+                    f"${v['amount']:,.0f} exceeds total_raised "
+                    f"${total_raised:,.0f} — dropping committee {committee_id}]",
+                    flush=True,
+                )
+                return []
 
     top = sorted(agg.items(), key=lambda kv: -kv[1]["amount"])[:n]
     return [
