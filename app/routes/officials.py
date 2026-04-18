@@ -1,5 +1,6 @@
 import os
 from fastapi import APIRouter, Depends, HTTPException
+from sqlalchemy import text
 from sqlalchemy.orm import Session
 from supabase import create_client
 from dotenv import load_dotenv
@@ -32,6 +33,31 @@ def lookup_by_zip(zip_code: str, db: Session = Depends(get_db)):
 def add_official(official: OfficialCreate, db: Session = Depends(get_db), current_user=Depends(get_current_user)):
     official_data = official.model_dump()
     return create_official(db, official_data)
+
+
+@router.get("/{official_id}/legislation")
+def get_official_legislation(official_id: int, db: Session = Depends(get_db)):
+    official = db.execute(
+        text("SELECT name FROM elected_officials WHERE id = :id"),
+        {"id": official_id},
+    ).first()
+    if not official:
+        raise HTTPException(status_code=404, detail="Official not found")
+
+    rows = db.execute(
+        text(
+            """
+            SELECT id, bill_number, title, description, status, vote_position,
+                   date, source, source_url, activity_type, chamber
+            FROM legislative_activity
+            WHERE LOWER(TRIM(official_name)) = LOWER(TRIM(:name))
+            ORDER BY date DESC NULLS LAST
+            """
+        ),
+        {"name": official.name},
+    ).mappings().all()
+
+    return [dict(row) for row in rows]
 
 
 def _fetch_metrics_for_county(county_name: str) -> dict:
