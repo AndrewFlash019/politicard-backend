@@ -202,6 +202,7 @@ def get_top_pacs(
 
 _CATEGORY_LABELS = {
     "MEDIA_EXPENSES": "Media & Advertising",
+    "ADVERTISING": "Media & Advertising",
     "FUNDRAISING": "Fundraising",
     "SALARY": "Payroll",
     "TRAVEL": "Travel",
@@ -254,20 +255,21 @@ def get_disbursements(candidate_id: str, cycle: int) -> dict:
     rows: list[dict] = []
     max_rows = 500
     per_page = 100
-    for page in range(1, (max_rows // per_page) + 1):
+    # Schedule B pagination ignores page=N and requires last_index-style
+    # cursors derived from the prior page's ``pagination.last_indexes``.
+    cursor: dict[str, Any] = {}
+    while len(rows) < max_rows:
+        params = {
+            "committee_id": committee_id,
+            "two_year_transaction_period": cycle,
+            "sort": "-disbursement_amount",
+            "per_page": per_page,
+        }
+        params.update(cursor)
         try:
-            data = _fec_get(
-                "/schedules/schedule_b/",
-                {
-                    "committee_id": committee_id,
-                    "two_year_transaction_period": cycle,
-                    "sort": "-disbursement_amount",
-                    "per_page": per_page,
-                    "page": page,
-                },
-            )
+            data = _fec_get("/schedules/schedule_b/", params)
         except Exception as e:
-            print(f"    [get_disbursements page {page} error: {e}]", flush=True)
+            print(f"    [get_disbursements page error: {e}]", flush=True)
             break
         if not data:
             break
@@ -277,8 +279,10 @@ def get_disbursements(candidate_id: str, cycle: int) -> dict:
         rows.extend(results)
         if len(results) < per_page:
             break
-        if len(rows) >= max_rows:
+        last_indexes = (data.get("pagination") or {}).get("last_indexes")
+        if not last_indexes:
             break
+        cursor = last_indexes
 
     total_spent = 0.0
     by_vendor: dict[str, dict] = {}
