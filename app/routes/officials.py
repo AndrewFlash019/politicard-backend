@@ -199,6 +199,44 @@ def get_official_donors(official_id: int, db: Session = Depends(get_db)):
     }
 
 
+@router.get("/{official_id}/spending")
+def get_official_spending(official_id: int, db: Session = Depends(get_db)):
+    if not _supabase:
+        raise HTTPException(status_code=503, detail="Database not configured")
+
+    exists = db.execute(
+        text("SELECT 1 FROM elected_officials WHERE id = :id"),
+        {"id": official_id},
+    ).first()
+    if not exists:
+        raise HTTPException(status_code=404, detail="Official not found")
+
+    try:
+        response = (
+            _supabase.table("campaign_finance_spending")
+            .select("total_spent,top_vendors,spending_by_category,cycle,updated_at")
+            .eq("official_id", official_id)
+            .order("cycle", desc=True)
+            .limit(1)
+            .execute()
+        )
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+    rows = response.data or []
+    if not rows:
+        raise HTTPException(status_code=404, detail="No spending data for this official")
+
+    row = rows[0]
+    return {
+        "total_spent": row.get("total_spent"),
+        "top_vendors": row.get("top_vendors") or [],
+        "spending_by_category": row.get("spending_by_category") or [],
+        "cycle": row.get("cycle"),
+        "updated_at": row.get("updated_at"),
+    }
+
+
 @router.get("/{official_id}/legislation")
 def get_official_legislation(official_id: int, db: Session = Depends(get_db)):
     official = db.execute(
