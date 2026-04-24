@@ -11,3 +11,6 @@ pydantic[email]
 google-genai
 alembic
 supabase
+requests
+beautifulsoup4
+lxml
