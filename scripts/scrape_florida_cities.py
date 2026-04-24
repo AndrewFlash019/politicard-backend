@@ -63,6 +63,14 @@ URL_PATTERNS = [
     "https://www.villageof{slug}fl.gov",
     "https://www.cityof{slug}.com",
     "https://www.{slug}.org",
+    # Extended patterns (often found via Wikipedia; still worth probing first).
+    "https://www.{slug}fl.org",
+    "https://{slug}fl.org",
+    "https://www.{slug}fl.us",
+    "https://www.cityof{slug}fl.us",
+    "https://{hslug}-fl.gov",
+    "https://www.{hslug}-fl.gov",
+    "https://www.cityof{hslug}-fl.gov",
 ]
 
 OFFICIAL_PATHS = [
@@ -112,6 +120,11 @@ BAD_NAME_TOKENS = {
     "st", "ave", "rd", "dr", "blvd", "hwy", "lane", "way", "drive",
     "profile", "link", "view", "close", "open", "download", "print",
     "email", "tel", "http", "https", "www", "com", "org",
+    "vice", "pro", "tem", "deputy", "acting", "interim", "honorable",
+    "councilmember", "councilman", "councilwoman", "councilperson",
+    "business", "impact", "estimate", "form", "forms", "request", "requests",
+    "finance", "library", "parks", "departments", "records",
+    "notice", "alert", "public",
 }
 
 NAME_STOPWORDS = {
@@ -127,6 +140,38 @@ GOV_LINK_KEYWORDS = [
     "city-hall", "leadership",
 ]
 
+# Path-part signals controlling whether "Mayor of {city}" extraction is allowed
+# on a given URL. News/archive/history pages commonly mention former mayors by
+# name — we refuse to treat those as the current mayor.
+MAYOR_PATH_ALLOW_TOKENS = (
+    "mayor", "office-of-the-mayor", "about-mayor", "about-the-mayor",
+    "council", "commission", "government", "officials", "elected",
+    "leadership", "city-hall", "town-hall", "about",
+)
+MAYOR_PATH_DENY_TOKENS = (
+    "history", "histories", "historic", "news", "archive", "archives",
+    "former", "past", "previous", "blog", "media", "press",
+    "release", "event", "events", "agenda", "minutes", "meeting",
+    "memoriam", "obituary", "calendar", "story", "stories",
+)
+
+
+def path_allows_mayor(url: str) -> bool:
+    """True iff a URL's path is plausibly the *current* mayor's page."""
+    try:
+        path = urllib.parse.urlparse(url).path.lower()
+    except Exception:
+        return True
+    for bad in MAYOR_PATH_DENY_TOKENS:
+        if bad in path:
+            return False
+    if path in ("", "/"):
+        return True  # homepage is fine
+    for good in MAYOR_PATH_ALLOW_TOKENS:
+        if good in path:
+            return True
+    return False
+
 LOG = logging.getLogger("scrape_fl")
 
 
@@ -137,6 +182,15 @@ def slug(name: str) -> str:
     s = name.lower()
     s = re.sub(r"[\s\-'’.,]+", "", s)
     s = re.sub(r"[^a-z0-9]", "", s)
+    return s
+
+
+def hyphen_slug(name: str) -> str:
+    """Lowercase with internal hyphens kept, external punctuation stripped."""
+    s = name.lower()
+    s = re.sub(r"[\s_]+", "-", s)
+    s = re.sub(r"[^a-z0-9\-]", "", s)
+    s = re.sub(r"-+", "-", s).strip("-")
     return s
 
 
@@ -187,12 +241,28 @@ def clean_name(raw: str) -> str | None:
         return None
     if len(tokens) < 2:
         return None
+    # Length caps: real names are typically 2-3 full words plus maybe one
+    # middle initial. Anything larger is almost always a concatenation of two
+    # separate names ("Whitman Daniel J Alfonso") or harvested form label.
+    full_words = [t for t in n.split() if not re.fullmatch(r"[A-Z]\.?", t)]
+    if len(full_words) > 3 or len(tokens) > 4:
+        return None
+    if len(tokens) == 4:
+        # 4 tokens only allowed if exactly one is a middle initial in position 1
+        # ("Scott J. Brook Jr."-style suffix is stripped above already, so this
+        # usually catches "Whitman Daniel J Alfonso").
+        return None
     # Reject domain-like tokens ("MyClearwater.com") and hyphenated junk.
     for t in n.split():
         if "." in t[1:] and not re.fullmatch(r"[A-Z]\.", t):
             return None
         if t.count("-") > 1:
             return None
+    # Reject if the same full-word appears twice ("Scott Black Scott Black",
+    # "Councilmember Councilmember").
+    lowered = [t.lower().strip(".") for t in full_words]
+    if len(set(lowered)) < len(lowered):
+        return None
     return n
 
 
@@ -297,6 +367,7 @@ def discover_website(session: PoliteSession, muni: dict) -> str | None:
     name_slug = slug(muni["name"])
     if not name_slug:
         return None
+    name_hslug = hyphen_slug(muni["name"])
 
     existing = (muni.get("website") or "").strip()
     candidates: list[str] = []
@@ -311,7 +382,10 @@ def discover_website(session: PoliteSession, muni: dict) -> str | None:
         patterns = ["https://www.villageof{slug}fl.gov", "https://www.villageof{slug}.org"] + patterns
 
     for pat in patterns:
-        candidates.append(pat.format(slug=name_slug))
+        try:
+            candidates.append(pat.format(slug=name_slug, hslug=name_hslug))
+        except KeyError:
+            candidates.append(pat.format(slug=name_slug))
 
     seen: set[str] = set()
     fallback_url: str | None = None  # first-reachable-but-unverified, used only if no real match
@@ -331,9 +405,49 @@ def discover_website(session: PoliteSession, muni: dict) -> str | None:
         if fallback_url is None and (".gov" in urllib.parse.urlparse(final).netloc):
             # A .gov URL that didn't prove its identity is still better than nothing.
             fallback_url = final
-    if fallback_url:
+
+    # Last resort: pull the official website from the Wikipedia article's infobox.
+    wiki_url = discover_website_via_wikipedia(session, muni["name"])
+    if wiki_url:
+        r = session.get(wiki_url, timeout=URL_PROBE_TIMEOUT)
+        if r is not None and 200 <= r.status_code < 400 and r.text:
+            final = r.url.rstrip("/")
+            if _looks_like_city_site(r.text, muni["name"], final):
+                LOG.info("  verified URL (via wikipedia): %s", final)
+                return final
+            if fallback_url is None:
+                fallback_url = final
+                LOG.info("  tentative URL (via wikipedia): %s", final)
+
+    if fallback_url and fallback_url != (wiki_url or "").rstrip("/"):
         LOG.info("  tentative URL: %s", fallback_url)
     return fallback_url
+
+
+def discover_website_via_wikipedia(session: PoliteSession, city_name: str) -> str | None:
+    """Pull the `website` field from the city's Wikipedia infobox."""
+    wiki_slug = city_name.replace(" ", "_") + ",_Florida"
+    url = f"https://en.wikipedia.org/wiki/{urllib.parse.quote(wiki_slug)}"
+    r = session.get(url, timeout=URL_PROBE_TIMEOUT)
+    if r is None or r.status_code >= 400 or not r.text:
+        return None
+    try:
+        soup = BeautifulSoup(r.text, "lxml")
+    except Exception:
+        return None
+    box = soup.find("table", class_=re.compile(r"infobox"))
+    if not box:
+        return None
+    for row in box.find_all("tr"):
+        th = row.find("th")
+        td = row.find("td")
+        if not th or not td:
+            continue
+        if re.search(r"website", th.get_text(" ", strip=True), re.I):
+            a = td.find("a", href=True)
+            if a and a["href"].startswith(("http://", "https://")):
+                return a["href"].rstrip("/")
+    return None
 
 
 # --- Extraction ------------------------------------------------------------
@@ -352,14 +466,22 @@ class Official:
 @dataclass
 class CityResult:
     officials: list[Official] = field(default_factory=list)
+    # Secondary pool of mayor candidates surfaced on non-authoritative pages
+    # (news/history mentions, ambiguous matches). Not emitted unless the
+    # primary pool is empty, and even then only if there's exactly one.
+    mayor_candidates: list[Official] = field(default_factory=list)
+    rejected_mayors: list[Official] = field(default_factory=list)
     source: str = ""
     verified_url: str | None = None
 
-    def add(self, off: Official) -> None:
+    def add(self, off: Official, *, mayor_allowed: bool = True) -> None:
+        if off.role in ("Mayor", "Vice Mayor") and not mayor_allowed:
+            # Keep for debugging / AMBIGUOUS_MAYOR logs but don't emit.
+            self.mayor_candidates.append(off)
+            return
         key = (off.name.lower(), off.role)
         for existing in self.officials:
             if (existing.name.lower(), existing.role) == key:
-                # prefer the record with more info
                 if not existing.email and off.email:
                     existing.email = off.email
                 if not existing.phone and off.phone:
@@ -368,6 +490,18 @@ class CityResult:
                     existing.photo_url = off.photo_url
                 return
         self.officials.append(off)
+
+    def finalize_mayor(self) -> None:
+        """Enforce 'at most one Mayor of X' — if multiple Mayor records came in,
+        keep the first (highest-signal, inserted earliest) and demote the rest
+        to rejected_mayors for AMBIGUOUS_MAYOR reporting."""
+        mayors = [o for o in self.officials if o.role == "Mayor"]
+        if len(mayors) <= 1:
+            return
+        keeper = mayors[0]
+        rejects = mayors[1:]
+        self.officials = [o for o in self.officials if o.role != "Mayor" or o is keeper]
+        self.rejected_mayors.extend(rejects)
 
 
 def role_from_title(title_text: str) -> str | None:
@@ -411,7 +545,36 @@ def extract_from_text(text: str, source_url: str) -> list[Official]:
     return out
 
 
-def extract_officials_from_html(html: str, source_url: str) -> list[Official]:
+def _local_card_text(el, max_chars: int = 600) -> str:
+    """Return text from the smallest plausible bio-card scope around `el`:
+    either the element itself, or the nearest ancestor that also holds an
+    <img>/<h*> (typical profile card). Bounded so we don't scoop the whole page.
+    """
+    try:
+        own = el.get_text(" ", strip=True)
+        if own and len(own) <= max_chars:
+            best = own
+        else:
+            best = (own or "")[:max_chars]
+        # Walk up to 2 ancestors; stop at the first one that looks card-shaped
+        # (contains an <img> or an <h1-5>) and is still modest in size.
+        cur = el.parent
+        for _ in range(2):
+            if cur is None or not hasattr(cur, "find"):
+                break
+            ctext = cur.get_text(" ", strip=True)
+            if len(ctext) > max_chars:
+                break
+            if cur.find("img") or cur.find(["h1", "h2", "h3", "h4", "h5"]):
+                best = ctext
+                break
+            cur = cur.parent
+        return best
+    except Exception:
+        return ""
+
+
+def extract_officials_from_html(html: str, source_url: str, *, mayor_allowed: bool = True) -> list[Official]:
     """Heuristic extractor: looks for name-title pairings in likely layouts."""
     soup = BeautifulSoup(html, "lxml")
 
@@ -452,19 +615,19 @@ def extract_officials_from_html(html: str, source_url: str) -> list[Official]:
         if not name:
             continue
 
-        # Collect contact info from nearby context.
-        ctx_text = ""
-        parent = el.parent
-        if parent:
-            ctx_text = parent.get_text(" ", strip=True)
-        else:
-            ctx_text = text
-        email_m = EMAIL_RE.search(ctx_text)
-        phone = normalize_phone(ctx_text)
+        if role in ("Mayor", "Vice Mayor") and not mayor_allowed:
+            # Page path isn't authoritative for the current mayor — skip.
+            continue
+
+        # Collect contact info from the *local* card scope only, so a single
+        # generic "cityhall@..." email doesn't get broadcast to every official.
+        ctx_text = _local_card_text(el)
+        email_m = EMAIL_RE.search(ctx_text) if ctx_text else None
+        phone = normalize_phone(ctx_text) if ctx_text else None
 
         # photo: nearest <img> within the parent/card
         photo = None
-        card = parent if parent else el
+        card = el.parent if el.parent else el
         img = card.find("img") if hasattr(card, "find") else None
         if img and img.get("src"):
             src = img["src"]
@@ -483,9 +646,33 @@ def extract_officials_from_html(html: str, source_url: str) -> list[Official]:
     # Catches sites that dump member bios into a single <div> or paragraph.
     page_text = soup.get_text(" ", strip=True)
     for off in extract_from_text(page_text, source_url):
-        # Only add if this (name, role) wasn't already captured via Layout A.
+        if off.role in ("Mayor", "Vice Mayor") and not mayor_allowed:
+            continue
         if not any(o.name.lower() == off.name.lower() and o.role == off.role for o in found):
             found.append(off)
+
+    # Safety net: don't let a single email get assigned to the entire council.
+    # If the page has exactly one distinct email and ≥2 officials carry it,
+    # keep it only on the mayor and NULL it for everyone else.
+    emails = [(i, o.email) for i, o in enumerate(found) if o.email]
+    if emails:
+        distinct = {e.lower() for _, e in emails}
+        if len(distinct) == 1 and len(emails) >= 2:
+            the_email = emails[0][1]
+            keeper_idx = None
+            for i, o in enumerate(found):
+                if o.email and o.email.lower() == the_email.lower() and o.role == "Mayor":
+                    keeper_idx = i
+                    break
+            if keeper_idx is None:
+                # No mayor in the group — drop the shared email entirely.
+                for _, o in enumerate(found):
+                    if o.email and o.email.lower() == the_email.lower():
+                        o.email = None
+            else:
+                for i, o in enumerate(found):
+                    if i != keeper_idx and o.email and o.email.lower() == the_email.lower():
+                        o.email = None
 
     return found
 
@@ -539,8 +726,9 @@ def scrape_city_site(session: PoliteSession, base_url: str, result: CityResult) 
         r = session.get(url)
         if r is None or r.status_code >= 400 or not _is_html(r):
             return
-        for off in extract_officials_from_html(r.text, r.url):
-            result.add(off)
+        allow_mayor = path_allows_mayor(r.url)
+        for off in extract_officials_from_html(r.text, r.url, mayor_allowed=allow_mayor):
+            result.add(off, mayor_allowed=allow_mayor)
 
     # 1) Canned path probes.
     for path in OFFICIAL_PATHS:
@@ -561,8 +749,9 @@ def scrape_city_site(session: PoliteSession, base_url: str, result: CityResult) 
             if r is None or r.status_code >= 400 or not _is_html(r):
                 continue
             offs_before = len(result.officials)
-            for off in extract_officials_from_html(r.text, r.url):
-                result.add(off)
+            allow_mayor = path_allows_mayor(r.url)
+            for off in extract_officials_from_html(r.text, r.url, mayor_allowed=allow_mayor):
+                result.add(off, mayor_allowed=allow_mayor)
             # If this page didn't yield anyone, keep its HTML as a candidate for 2-hop.
             if len(result.officials) == offs_before:
                 second_hop_seeds.append((r.text, r.url))
@@ -584,8 +773,9 @@ def scrape_city_site(session: PoliteSession, base_url: str, result: CityResult) 
                 r = session.get(link)
                 if r is None or r.status_code >= 400 or not _is_html(r):
                     continue
-                for off in extract_officials_from_html(r.text, r.url):
-                    result.add(off)
+                allow_mayor = path_allows_mayor(r.url)
+                for off in extract_officials_from_html(r.text, r.url, mayor_allowed=allow_mayor):
+                    result.add(off, mayor_allowed=allow_mayor)
                 if any(o.role == "Mayor" for o in result.officials) and len(result.officials) >= 3:
                     return
 
@@ -718,21 +908,59 @@ def branch_for(role: str) -> str:
     return "executive" if role in ("Mayor", "Vice Mayor") else "legislative"
 
 
-def insert_officials(supabase, muni: dict, result: CityResult, zip_codes: str | None) -> tuple[int, int]:
+def _db_has_mayor(supabase, city_name: str) -> bool:
+    """True if the DB already holds a 'Mayor of {city}' row."""
+    try:
+        r = (
+            supabase.table("elected_officials")
+            .select("id")
+            .eq("level", "local")
+            .eq("state", "FL")
+            .eq("category", "City Government")
+            .eq("district", city_name)
+            .eq("title", f"Mayor of {city_name}")
+            .limit(1)
+            .execute()
+        )
+        return bool(r.data)
+    except Exception:
+        return False
+
+
+def insert_officials(
+    supabase, muni: dict, result: CityResult, zip_codes: str | None
+) -> tuple[int, int]:
     inserted = 0
     skipped = 0
+    city = muni["name"]
+    mayor_seated = _db_has_mayor(supabase, city)
+
     for off in result.officials:
+        # Hard rule: at most one "Mayor of {city}" in the DB.
+        if off.role == "Mayor":
+            if mayor_seated:
+                log_failure(
+                    supabase,
+                    muni,
+                    f"AMBIGUOUS_MAYOR: extra mayor candidate '{off.name}' skipped "
+                    f"(city already has a seated mayor)",
+                    off.source_url or result.verified_url,
+                )
+                skipped += 1
+                continue
+            mayor_seated = True  # reserve the slot for this insert
+
         if existing_official_match(supabase, off.name, zip_codes):
             skipped += 1
             continue
         row = {
             "name": off.name,
-            "title": title_for(muni["name"], off.role),
+            "title": title_for(city, off.role),
             "level": "local",
             "branch": branch_for(off.role),
             "state": "FL",
             "category": "City Government",
-            "district": muni["name"],
+            "district": city,
             "zip_codes": zip_codes,
             "email": off.email,
             "phone": off.phone,
@@ -744,7 +972,17 @@ def insert_officials(supabase, muni: dict, result: CityResult, zip_codes: str | 
             supabase.table("elected_officials").insert(row).execute()
             inserted += 1
         except Exception as e:
-            LOG.warning("insert failed %s / %s: %s", muni["name"], off.name, e)
+            LOG.warning("insert failed %s / %s: %s", city, off.name, e)
+
+    # Log rejected mayor candidates surfaced elsewhere on the site.
+    for rej in result.rejected_mayors:
+        log_failure(
+            supabase,
+            muni,
+            f"AMBIGUOUS_MAYOR: duplicate mayor candidate '{rej.name}' dropped",
+            rej.source_url or result.verified_url,
+        )
+
     return inserted, skipped
 
 
@@ -808,6 +1046,28 @@ def scrape_one(session: PoliteSession, supabase, muni: dict) -> tuple[int, int, 
             fallback_wikipedia(session, muni["name"], muni["county"], result)
         except Exception as e:
             LOG.debug("wikipedia fallback error: %s", e)
+
+    # Enforce at-most-one in-memory mayor before any DB writes.
+    result.finalize_mayor()
+
+    # City-level email dedupe: if the same email is attached to ≥2 officials
+    # across the full result (not just one page), it's almost certainly a
+    # generic city-hall mailbox that got broadcast. Keep it on the mayor only.
+    email_counts: dict[str, int] = {}
+    for off in result.officials:
+        if off.email:
+            key = off.email.lower()
+            email_counts[key] = email_counts.get(key, 0) + 1
+    for shared_email, cnt in email_counts.items():
+        if cnt < 2:
+            continue
+        mayor = next(
+            (o for o in result.officials if o.role == "Mayor" and o.email and o.email.lower() == shared_email),
+            None,
+        )
+        for o in result.officials:
+            if o.email and o.email.lower() == shared_email and o is not mayor:
+                o.email = None
 
     zip_codes = get_county_zips(supabase, muni["county"])
     inserted, skipped = 0, 0
