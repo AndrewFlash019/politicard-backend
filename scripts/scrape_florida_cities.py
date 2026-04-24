@@ -106,6 +106,12 @@ BAD_NAME_TOKENS = {
     "click", "here", "read", "more", "learn", "view", "see", "visit",
     "page", "staff", "directory", "biography", "bio",
     "term", "expires", "appointed", "elected",
+    "skip", "sidebar", "navigation", "menu", "main", "return",
+    "last", "item", "search", "submit", "cancel",
+    "navigate", "site", "sitemap", "content",
+    "st", "ave", "rd", "dr", "blvd", "hwy", "lane", "way", "drive",
+    "profile", "link", "view", "close", "open", "download", "print",
+    "email", "tel", "http", "https", "www", "com", "org",
 }
 
 NAME_STOPWORDS = {
@@ -165,6 +171,15 @@ def clean_name(raw: str) -> str | None:
         return None
     if n in NAME_STOPWORDS:
         return None
+    # Normalize ALL-CAPS to Title Case so NAME_RE accepts them.
+    if n.isupper() or (n.replace(" ", "").isupper() and not any(c.islower() for c in n)):
+        parts = []
+        for word in n.split():
+            if re.fullmatch(r"[A-Z]\.?", word):
+                parts.append(word)  # initial
+            else:
+                parts.append(word[:1] + word[1:].lower())
+        n = " ".join(parts)
     if not NAME_RE.match(n):
         return None
     tokens = [t.lower().strip(".") for t in n.split()]
@@ -172,6 +187,12 @@ def clean_name(raw: str) -> str | None:
         return None
     if len(tokens) < 2:
         return None
+    # Reject domain-like tokens ("MyClearwater.com") and hyphenated junk.
+    for t in n.split():
+        if "." in t[1:] and not re.fullmatch(r"[A-Z]\.", t):
+            return None
+        if t.count("-") > 1:
+            return None
     return n
 
 
@@ -241,6 +262,37 @@ class PoliteSession:
 # --- URL discovery ---------------------------------------------------------
 
 
+def _looks_like_city_site(html: str, city_name: str, url: str = "") -> bool:
+    """Cheap heuristic: does this page actually belong to the given city?"""
+    if not html:
+        return False
+    cname = city_name.lower()
+    lower = html.lower()
+    # The city's name must appear at all in the doc.
+    if cname not in lower:
+        return False
+    # Strong signal: city name appears in the <title>.
+    title_m = re.search(r"<title[^>]*>(.*?)</title>", html, re.I | re.S)
+    title = (title_m.group(1) if title_m else "").lower()
+    if cname in title:
+        return True
+    # Strong signal: URL is on a .gov domain and city name is in the HTML.
+    host = urllib.parse.urlparse(url).netloc.lower()
+    if host.endswith(".gov"):
+        return True
+    # Otherwise require a civic-context phrase somewhere in the first 80k.
+    window = lower[:80_000]
+    for phrase in (
+        f"city of {cname}", f"town of {cname}", f"village of {cname}",
+        "city council", "city commission", "town council",
+        "mayor", "elected officials", "city hall", "town hall",
+        "municipal", "city clerk", "city manager",
+    ):
+        if phrase in window:
+            return True
+    return False
+
+
 def discover_website(session: PoliteSession, muni: dict) -> str | None:
     name_slug = slug(muni["name"])
     if not name_slug:
@@ -262,6 +314,7 @@ def discover_website(session: PoliteSession, muni: dict) -> str | None:
         candidates.append(pat.format(slug=name_slug))
 
     seen: set[str] = set()
+    fallback_url: str | None = None  # first-reachable-but-unverified, used only if no real match
     for url in candidates:
         if url in seen:
             continue
@@ -269,11 +322,18 @@ def discover_website(session: PoliteSession, muni: dict) -> str | None:
         r = session.get(url, timeout=URL_PROBE_TIMEOUT)
         if r is None:
             continue
-        if 200 <= r.status_code < 400 and r.text and len(r.text) > 500:
-            final = r.url.rstrip("/")
+        if not (200 <= r.status_code < 400 and r.text and len(r.text) > 500):
+            continue
+        final = r.url.rstrip("/")
+        if _looks_like_city_site(r.text, muni["name"], final):
             LOG.info("  verified URL: %s", final)
             return final
-    return None
+        if fallback_url is None and (".gov" in urllib.parse.urlparse(final).netloc):
+            # A .gov URL that didn't prove its identity is still better than nothing.
+            fallback_url = final
+    if fallback_url:
+        LOG.info("  tentative URL: %s", fallback_url)
+    return fallback_url
 
 
 # --- Extraction ------------------------------------------------------------
@@ -317,13 +377,48 @@ def role_from_title(title_text: str) -> str | None:
     return None
 
 
+# Direct text patterns. Name is 2-4 capitalized words (allowing an initial),
+# role is any of mayor/vice mayor/council member/commissioner variants.
+_NAME_TOKEN = r"[A-Z][A-Za-z'’.\-]+"
+_NAME_CHUNK = rf"(?:{_NAME_TOKEN}(?:\s+(?:{_NAME_TOKEN}|[A-Z]\.?)){{1,3}})"
+_ROLE_TOKEN = r"(?:vice\s*mayor|mayor\s*pro\s*tem|mayor|city\s*commissioner|commissioner|council\s*member|councilmember|councilman|councilwoman|councilperson)"
+ROLE_THEN_NAME_RE = re.compile(rf"\b{_ROLE_TOKEN}[:\s]+({_NAME_CHUNK})\b", re.I)
+NAME_THEN_ROLE_RE = re.compile(rf"\b({_NAME_CHUNK})\s*[,\-–]?\s*{_ROLE_TOKEN}\b", re.I)
+
+
+def extract_from_text(text: str, source_url: str) -> list[Official]:
+    """Scan free text for role+name and name+role patterns."""
+    out: list[Official] = []
+    seen: set[tuple[str, str]] = set()
+
+    def _emit(raw_name: str, role_text: str) -> None:
+        role = role_from_title(role_text)
+        if not role:
+            return
+        name = clean_name(raw_name)
+        if not name:
+            return
+        key = (name.lower(), role)
+        if key in seen:
+            return
+        seen.add(key)
+        out.append(Official(name=name, role=role, source_url=source_url))
+
+    for m in ROLE_THEN_NAME_RE.finditer(text):
+        _emit(m.group(1), m.group(0))
+    for m in NAME_THEN_ROLE_RE.finditer(text):
+        _emit(m.group(1), m.group(0))
+    return out
+
+
 def extract_officials_from_html(html: str, source_url: str) -> list[Official]:
     """Heuristic extractor: looks for name-title pairings in likely layouts."""
     soup = BeautifulSoup(html, "lxml")
 
-    # Strip noise. Keep <nav> / <header> since many municipal sites put council
-    # member links (with role+name text) inside navigation blocks.
-    for tag in soup(["script", "style", "form", "noscript"]):
+    # Strip noise. Keep <nav> / <header> (many municipal sites put council
+    # member links inside nav blocks) and keep <form> (ASP.NET/CivicPlus sites
+    # wrap their entire page body inside a postback form).
+    for tag in soup(["script", "style", "noscript"]):
         tag.decompose()
 
     found: list[Official] = []
@@ -383,6 +478,14 @@ def extract_officials_from_html(html: str, source_url: str) -> list[Official]:
             photo_url=photo,
             source_url=source_url,
         ))
+
+    # Layout B: scan the whole page text for Role+Name / Name+Role patterns.
+    # Catches sites that dump member bios into a single <div> or paragraph.
+    page_text = soup.get_text(" ", strip=True)
+    for off in extract_from_text(page_text, source_url):
+        # Only add if this (name, role) wasn't already captured via Layout A.
+        if not any(o.name.lower() == off.name.lower() and o.role == off.role for o in found):
+            found.append(off)
 
     return found
 
@@ -446,13 +549,45 @@ def scrape_city_site(session: PoliteSession, base_url: str, result: CityResult) 
         if any(o.role == "Mayor" for o in result.officials) and len(result.officials) >= 3:
             return
 
-    # 2) One-hop crawl: pull candidate links off the homepage, follow top scorers.
+    # 2) One-hop crawl: pull candidate links off the homepage.
+    second_hop_seeds: list[tuple[str, str]] = []  # (html, url) of pages to mine for further links
     home = session.get(base_url)
     if home is not None and home.status_code < 400 and _is_html(home):
         for link in discover_gov_links(home.text, base_url):
-            visit(link)
+            if link in tried:
+                continue
+            tried.add(link)
+            r = session.get(link)
+            if r is None or r.status_code >= 400 or not _is_html(r):
+                continue
+            offs_before = len(result.officials)
+            for off in extract_officials_from_html(r.text, r.url):
+                result.add(off)
+            # If this page didn't yield anyone, keep its HTML as a candidate for 2-hop.
+            if len(result.officials) == offs_before:
+                second_hop_seeds.append((r.text, r.url))
             if any(o.role == "Mayor" for o in result.officials) and len(result.officials) >= 3:
                 return
+
+    # 3) Two-hop crawl: any intermediate government index page we visited had no
+    # officials — pull gov-keyword links off those and try those too. This
+    # handles CivicPlus-style sites where "Government" → "City Council" is two
+    # clicks deep (Casselberry, Chipley, etc).
+    if not any(o.role == "Mayor" for o in result.officials):
+        seen_links: set[str] = set()
+        for html, src_url in second_hop_seeds[:3]:
+            for link in discover_gov_links(html, src_url):
+                if link in tried or link in seen_links:
+                    continue
+                seen_links.add(link)
+                tried.add(link)
+                r = session.get(link)
+                if r is None or r.status_code >= 400 or not _is_html(r):
+                    continue
+                for off in extract_officials_from_html(r.text, r.url):
+                    result.add(off)
+                if any(o.role == "Mayor" for o in result.officials) and len(result.officials) >= 3:
+                    return
 
 
 # --- FLC / Wikipedia fallbacks --------------------------------------------
