@@ -204,11 +204,11 @@ def get_official_spending(official_id: int, db: Session = Depends(get_db)):
     if not _supabase:
         raise HTTPException(status_code=503, detail="Database not configured")
 
-    exists = db.execute(
-        text("SELECT 1 FROM elected_officials WHERE id = :id"),
+    official_row = db.execute(
+        text("SELECT name FROM elected_officials WHERE id = :id"),
         {"id": official_id},
     ).first()
-    if not exists:
+    if not official_row:
         raise HTTPException(status_code=404, detail="Official not found")
 
     try:
@@ -228,13 +228,55 @@ def get_official_spending(official_id: int, db: Session = Depends(get_db)):
         raise HTTPException(status_code=404, detail="No spending data for this official")
 
     row = rows[0]
+
+    # Pull categorized vendor list (joins vendor_categories) so the UI can
+    # render a category badge alongside each vendor.
+    top_vendors_categorized: list[dict] = []
+    try:
+        cat_response = (
+            _supabase.table("official_top_vendors_categorized")
+            .select("vendor_name,amount,fec_purpose,category")
+            .eq("official_name", official_row.name)
+            .execute()
+        )
+        top_vendors_categorized = cat_response.data or []
+    except Exception:
+        top_vendors_categorized = []
+
     return {
         "total_spent": row.get("total_spent"),
         "top_vendors": row.get("top_vendors") or [],
+        "top_vendors_categorized": top_vendors_categorized,
         "spending_by_category": row.get("spending_by_category") or [],
         "cycle": row.get("cycle"),
         "updated_at": row.get("updated_at"),
     }
+
+
+@router.get("/{official_id}/funders-by-industry")
+def get_official_funders_by_industry(official_id: int, db: Session = Depends(get_db)):
+    if not _supabase:
+        raise HTTPException(status_code=503, detail="Database not configured")
+
+    exists = db.execute(
+        text("SELECT 1 FROM elected_officials WHERE id = :id"),
+        {"id": official_id},
+    ).first()
+    if not exists:
+        raise HTTPException(status_code=404, detail="Official not found")
+
+    try:
+        response = (
+            _supabase.table("official_funders_by_industry")
+            .select("category,category_total,funders")
+            .eq("official_id", official_id)
+            .order("category_total", desc=True)
+            .execute()
+        )
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+    return response.data or []
 
 
 @router.get("/{official_id}/legislation")
