@@ -1,0 +1,19 @@
+__pycache__/
+*.pyc
+*.pyo
+
+# Logs
+*.log
+
+# Local data caches
+data/
+
+# Env
+.env
+venv/
+env/
+
+# Editor / tooling
+.claude/
+.vscode/
+.idea/
