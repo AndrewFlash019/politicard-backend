@@ -140,6 +140,101 @@ def get_official_metrics(official_id: int, db: Session = Depends(get_db)):
     return []
 
 
+@router.get("/{official_id}/accountability-scorecard")
+def get_official_scorecard(official_id: int, db: Session = Depends(get_db)):
+    if not _supabase:
+        raise HTTPException(status_code=503, detail="Database not configured")
+
+    official = db.execute(
+        text("SELECT id, name FROM elected_officials WHERE id = :id"),
+        {"id": official_id},
+    ).first()
+    if not official:
+        raise HTTPException(status_code=404, detail="Official not found")
+
+    try:
+        response = (
+            _supabase.table("accountability_metrics")
+            .select(
+                "metric_key,metric_label,metric_value,metric_unit,"
+                "performance_rating,benchmark_value,benchmark_label,"
+                "year,source,source_url,notes"
+            )
+            .eq("official_id", official_id)
+            .order("year", desc=True)
+            .execute()
+        )
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+    rows = response.data or []
+
+    # For each metric_key keep the latest year of real data; fall back to the
+    # latest no_data row only when no real data exists for that key.
+    latest_by_key: dict[str, dict] = {}
+    for row in rows:
+        key = (row.get("metric_key") or "").strip()
+        if not key:
+            continue
+        value = (row.get("metric_value") or "").strip()
+        if not value:
+            continue
+        rating = row.get("performance_rating") or "no_data"
+        existing = latest_by_key.get(key)
+        if existing is None:
+            latest_by_key[key] = row
+            continue
+        existing_rating = existing.get("performance_rating") or "no_data"
+        # Real data beats no_data regardless of year (rows already DESC by year).
+        if existing_rating == "no_data" and rating != "no_data":
+            latest_by_key[key] = row
+
+    metrics = []
+    for key, row in latest_by_key.items():
+        metrics.append({
+            "key": key,
+            "label": row.get("metric_label") or key,
+            "value": row.get("metric_value") or "",
+            "unit": row.get("metric_unit"),
+            "rating": row.get("performance_rating") or "no_data",
+            "benchmark_value": row.get("benchmark_value"),
+            "benchmark_label": row.get("benchmark_label"),
+            "year": row.get("year"),
+            "source": row.get("source") or "",
+            "source_url": row.get("source_url"),
+            "notes": row.get("notes"),
+        })
+
+    metrics.sort(key=lambda m: (m["rating"] == "no_data", m["label"]))
+
+    metrics_tracked = len(metrics)
+    metrics_with_real_data = sum(1 for m in metrics if m["rating"] != "no_data")
+
+    if metrics_tracked == 0:
+        overall_rating = "Insufficient Data"
+    else:
+        strong = sum(1 for m in metrics if m["rating"] in ("excellent", "good"))
+        concerning = sum(1 for m in metrics if m["rating"] in ("concerning", "poor"))
+        unknown = metrics_tracked - metrics_with_real_data
+        if strong >= metrics_tracked * 0.7:
+            overall_rating = "Doing the Job"
+        elif concerning >= metrics_tracked * 0.4:
+            overall_rating = "Underperforming"
+        elif unknown >= metrics_tracked * 0.5:
+            overall_rating = "Insufficient Data"
+        else:
+            overall_rating = "Mixed Results"
+
+    return {
+        "official_id": official.id,
+        "official_name": official.name,
+        "overall_rating": overall_rating,
+        "metrics_tracked": metrics_tracked,
+        "metrics_with_real_data": metrics_with_real_data,
+        "metrics": metrics,
+    }
+
+
 @router.get("/{official_id}/donors")
 def get_official_donors(official_id: int, db: Session = Depends(get_db)):
     if not _supabase:
