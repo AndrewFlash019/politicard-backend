@@ -232,6 +232,23 @@ def _row(
     }
 
 
+_PERSON_NAME_BLOCKLIST = re.compile(
+    r"\b(Committee|Subcommittee|Caucus|Conference|Appropriations|Council)\b",
+    re.IGNORECASE,
+)
+
+
+def _is_real_person(name: str | None) -> bool:
+    """Defensive: reject names that look like legislative orgs.
+
+    Stops a future ingestion bug from re-introducing the OpenStates
+    organization-as-person rows we cleaned up in Session 7 cleanup.
+    """
+    if not name:
+        return False
+    return not _PERSON_NAME_BLOCKLIST.search(name)
+
+
 def insert_rows(supabase, rows: list[dict]) -> int:
     """Bulk insert with ON CONFLICT DO NOTHING via PostgREST.
 
@@ -239,6 +256,7 @@ def insert_rows(supabase, rows: list[dict]) -> int:
     to PostgREST's `Prefer: resolution=ignore-duplicates` for the named
     constraint. Falls back to per-row insert on bulk failure.
     """
+    rows = [r for r in rows if _is_real_person(r.get("official_name"))]
     if not rows:
         return 0
     try:
@@ -273,12 +291,21 @@ def _chunked(items: list[dict], n: int = 200) -> Iterable[list[dict]]:
 # --- Federal: bills (sponsored + cosponsored) ------------------------------
 
 
-def _fetch_member_bills(bioguide: str, kind: str, max_pages: int = 10) -> list[dict]:
-    """kind ∈ {'sponsored','cosponsored'}."""
+def _fetch_member_bills(bioguide: str, kind: str, max_pages: int = 25) -> list[dict]:
+    """kind ∈ {'sponsored','cosponsored'}.
+
+    Congress.gov returns newest-first across ALL congresses for the member.
+    We paginate to up to max_pages * 250 bills (6,250) and filter to
+    CURRENT_CONGRESS at the end. This avoids the previous early-break that
+    could under-count long-serving members whose 119th-Congress bills
+    extended past the first all-current page.
+    """
     path = "sponsored-legislation" if kind == "sponsored" else "cosponsored-legislation"
     field = "sponsoredLegislation" if kind == "sponsored" else "cosponsoredLegislation"
     bills: list[dict] = []
     offset = 0
+    saw_current = False
+    consecutive_old_pages = 0
     for _ in range(max_pages):
         d = http_get(
             f"{CONGRESS_BASE}/member/{bioguide}/{path}",
@@ -290,10 +317,16 @@ def _fetch_member_bills(bioguide: str, kind: str, max_pages: int = 10) -> list[d
         items = d.get(field) or []
         if not items:
             break
-        # Filter to current congress (oldest pages will leave it).
         cur = [b for b in items if b.get("congress") == CURRENT_CONGRESS]
-        bills.extend(cur)
-        if all(b.get("congress", 0) < CURRENT_CONGRESS for b in items):
+        if cur:
+            bills.extend(cur)
+            saw_current = True
+            consecutive_old_pages = 0
+        else:
+            consecutive_old_pages += 1
+        # Once we've seen current-congress bills and then encounter 2 consecutive
+        # all-old pages, we're past the 119th bills entirely.
+        if saw_current and consecutive_old_pages >= 2:
             break
         if len(items) < 250:
             break
@@ -850,7 +883,7 @@ def main() -> int:
     parser.add_argument("--phase", choices=PHASES, default="all")
     parser.add_argument("--limit", type=int, default=None)
     parser.add_argument("--ids", type=str, default=None)
-    parser.add_argument("--vote-cap", type=int, default=250,
+    parser.add_argument("--vote-cap", type=int, default=2000,
                         help="Max votes to ingest per legislator per source")
     args = parser.parse_args()
 
