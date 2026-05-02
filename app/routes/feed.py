@@ -1,4 +1,4 @@
-from datetime import datetime, timezone
+from datetime import date, datetime, time, timezone
 from typing import Optional
 
 from fastapi import APIRouter, Depends, HTTPException, Query
@@ -42,6 +42,7 @@ def _relative_time(ts: Optional[datetime]) -> str:
 def _serialize(row, last_visit: Optional[datetime]) -> dict:
     created = row[7]
     last_updated = row[8]
+    event_date = row[13]
     is_new = bool(last_visit and created and created > last_visit)
     is_updated = bool(
         last_visit
@@ -50,7 +51,14 @@ def _serialize(row, last_visit: Optional[datetime]) -> dict:
         and created
         and created <= last_visit
     )
-    primary_ts = last_updated or created
+    # Display the date the legislative action actually happened, not when we
+    # ingested it; fall back to ingest timestamps only when event_date is null.
+    # event_date comes back as a `date` from postgres — promote to UTC datetime
+    # so _relative_time can do tz-aware arithmetic on it.
+    if isinstance(event_date, date) and not isinstance(event_date, datetime):
+        primary_ts = datetime.combine(event_date, time.min, tzinfo=timezone.utc)
+    else:
+        primary_ts = event_date or last_updated or created
     return {
         "id": row[0],
         "card_type": row[1],
