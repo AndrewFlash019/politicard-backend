@@ -214,6 +214,7 @@ def _row(
     source: str,
     source_url: str | None = None,
     state: str = "FL",
+    official_id: int | None = None,
 ) -> dict:
     return {
         "official_name": official_name,
@@ -229,6 +230,7 @@ def _row(
         "source": source,
         "source_url": source_url,
         "state": state,
+        "official_id": official_id,
     }
 
 
@@ -337,6 +339,7 @@ def _fetch_member_bills(bioguide: str, kind: str, max_pages: int = 25) -> list[d
 def process_federal_bills(supabase, off: dict, bioguide: str) -> tuple[int, int]:
     """Returns (sponsored_inserted, cosponsored_inserted)."""
     name = off["name"]
+    off_id = off.get("id")
     chamber = "senate" if "Senator" in (off.get("title") or "") else "house"
 
     rows: list[dict] = []
@@ -349,6 +352,7 @@ def process_federal_bills(supabase, off: dict, bioguide: str) -> tuple[int, int]
             url = b.get("url") or f"https://www.congress.gov/bill/{CURRENT_CONGRESS}th-congress/{slug}"
             rows.append(_row(
                 official_name=name,
+                official_id=off_id,
                 official_level="federal",
                 chamber=chamber,
                 activity_type=activity,
@@ -437,6 +441,7 @@ def _committee_membership_full() -> dict[str, list[dict]]:
 
 def process_federal_committees(supabase, off: dict, bioguide: str) -> int:
     name = off["name"]
+    off_id = off.get("id")
     chamber = "senate" if "Senator" in (off.get("title") or "") else "house"
     membership = _committee_membership_full()
     entries = membership.get(bioguide, [])
@@ -450,6 +455,7 @@ def process_federal_committees(supabase, off: dict, bioguide: str) -> int:
             title = f"{e['parent']} → {title}"
         rows.append(_row(
             official_name=name,
+            official_id=off_id,
             official_level="federal",
             chamber=chamber,
             activity_type="committee",
@@ -508,6 +514,7 @@ def _vote_voter_pages(govtrack_id: int, cap: int) -> list[dict]:
 
 def process_federal_votes(supabase, off: dict, govtrack_id: int, cap: int) -> int:
     name = off["name"]
+    off_id = off.get("id")
     chamber = "senate" if "Senator" in (off.get("title") or "") else "house"
     voter_records = _vote_voter_pages(govtrack_id, cap)
     rows: list[dict] = []
@@ -539,6 +546,7 @@ def process_federal_votes(supabase, off: dict, govtrack_id: int, cap: int) -> in
             status = None
         rows.append(_row(
             official_name=name,
+            official_id=off_id,
             official_level="federal",
             chamber=chamber,
             activity_type="vote",
@@ -598,6 +606,7 @@ def _state_bill_url(identifier: str, session: str = "2025") -> str:
 
 def process_state_bills(supabase, off: dict) -> int:
     name = off["name"]
+    off_id = off.get("id")
     title = off.get("title") or ""
     chamber = "upper" if "Senator" in title else "lower"
     chamber_label = "senate" if chamber == "upper" else "house"
@@ -618,6 +627,7 @@ def process_state_bills(supabase, off: dict) -> int:
         info = actions.get(bid, {})
         rows.append(_row(
             official_name=name,
+            official_id=off_id,
             official_level="state",
             chamber=chamber_label,
             activity_type="bill_sponsored",
@@ -692,6 +702,7 @@ def _build_state_committee_index() -> dict[str, list[dict]]:
 
 def process_state_committees(supabase, off: dict) -> int:
     name = off["name"]
+    off_id = off.get("id")
     title = off.get("title") or ""
     chamber = "upper" if "Senator" in title else "lower"
     chamber_label = "senate" if chamber == "upper" else "house"
@@ -708,6 +719,7 @@ def process_state_committees(supabase, off: dict) -> int:
     for e in entries:
         rows.append(_row(
             official_name=name,
+            official_id=off_id,
             official_level="state",
             chamber=chamber_label,
             activity_type="committee",
@@ -768,6 +780,7 @@ def _build_state_vote_index() -> dict[str, list[dict]]:
 
 def process_state_votes(supabase, off: dict, cap: int) -> int:
     name = off["name"]
+    off_id = off.get("id")
     title = off.get("title") or ""
     chamber = "upper" if "Senator" in title else "lower"
     chamber_label = "senate" if chamber == "upper" else "house"
@@ -808,6 +821,7 @@ def process_state_votes(supabase, off: dict, cap: int) -> int:
         status = "passed_chamber" if "pass" in result_l else ("failed" if "fail" in result_l else None)
         rows.append(_row(
             official_name=name,
+            official_id=off_id,
             official_level="state",
             chamber=chamber_label,
             activity_type="vote",
@@ -949,12 +963,21 @@ def main() -> int:
     if phase in ("state-bills", "state-committees", "state-votes", "all"):
         for i, off in enumerate(state, 1):
             try:
+                per_off = {"bill_sponsored": 0, "committee": 0, "vote": 0}
                 if phase in ("state-bills", "all"):
-                    counters["bill_sponsored"] += process_state_bills(supabase, off)
+                    per_off["bill_sponsored"] = process_state_bills(supabase, off)
+                    counters["bill_sponsored"] += per_off["bill_sponsored"]
                 if phase in ("state-committees", "all"):
-                    counters["committee"] += process_state_committees(supabase, off)
+                    per_off["committee"] = process_state_committees(supabase, off)
+                    counters["committee"] += per_off["committee"]
                 if phase in ("state-votes", "all"):
-                    counters["vote"] += process_state_votes(supabase, off, args.vote_cap)
+                    per_off["vote"] = process_state_votes(supabase, off, args.vote_cap)
+                    counters["vote"] += per_off["vote"]
+                LOG.info(
+                    "[state %d/%d] id=%s %s | inserted: %d bills, %d committees, %d votes",
+                    i, len(state), off.get("id"), off.get("name"),
+                    per_off["bill_sponsored"], per_off["committee"], per_off["vote"],
+                )
                 if i % 5 == 0:
                     LOG.info("State progress %d/%d | %s | %d failures", i, len(state), dict(counters), failures)
             except Exception as e:
