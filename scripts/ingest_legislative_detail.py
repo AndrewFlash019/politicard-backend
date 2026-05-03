@@ -70,6 +70,7 @@ from ingest_congress_metrics import (  # noqa: E402
     SUPABASE_URL,
     USDS_COMMITTEES,
     _load_csv_indexes,
+    _name_tokens,
     fetch_committee_data,
     fetch_fl_congress_members,
     fetch_fl_govtrack_roles,
@@ -604,6 +605,101 @@ def _state_bill_url(identifier: str, session: str = "2025") -> str:
     return f"https://www.flsenate.gov/Session/Bill/{session}/{no_space}"
 
 
+_v3_fl_people_cache: list[dict] | None = None
+
+
+def _load_v3_fl_people() -> list[dict]:
+    """Fetch every FL legislator from OpenStates v3 /people (cached).
+
+    The CSV person index in ingest_congress_metrics is built from
+    bill_sponsorships.csv, so legislators who never primary- or co-
+    sponsored a bill are absent. /people returns all current legislators
+    regardless of sponsorship, giving us a reliable name-to-person_id
+    map for the vote_people.csv lookup.
+    """
+    global _v3_fl_people_cache
+    if _v3_fl_people_cache is not None:
+        return _v3_fl_people_cache
+    out: list[dict] = []
+    page = 1
+    while True:
+        d = http_get(
+            f"{OPENSTATES_BASE}/people",
+            params={
+                "jurisdiction": "fl",
+                "per_page": 50,
+                "page": page,
+                "apikey": OPENSTATES_KEY,
+            },
+        )
+        time.sleep(OPENSTATES_DELAY)
+        if not d:
+            break
+        results = d.get("results") or []
+        if not results:
+            break
+        for p in results:
+            role = p.get("current_role") or {}
+            cls = (role.get("org_classification") or "").lower()
+            chamber = cls if cls in ("upper", "lower") else None
+            out.append({
+                "person_id": p.get("id"),
+                "name": p.get("name") or "",
+                "family_name": p.get("family_name") or "",
+                "given_name": p.get("given_name") or "",
+                "primary_chamber": chamber,
+            })
+        pag = d.get("pagination") or {}
+        if page >= (pag.get("max_page") or 1):
+            break
+        page += 1
+        if page > 20:
+            break
+    _v3_fl_people_cache = out
+    LOG.info("Loaded %d FL legislators from OpenStates v3 /people", len(out))
+    return out
+
+
+def find_state_person(name: str, chamber: str) -> dict | None:
+    """Resolve a FL elected_official to an OpenStates person record.
+
+    Tries the bulk-CSV index first (fast, includes primary_bill_ids for
+    sponsorship phases). Falls back to /people v3 when the CSV misses,
+    so legislators who didn't sponsor anything in 2025 can still be
+    matched to their voter_id for the votes phase.
+    """
+    p = find_state_person_csv(name, chamber)
+    if p:
+        return p
+    target_tokens = _name_tokens(name)
+    if not target_tokens:
+        return None
+    last_target = target_tokens[-1]
+    full_target = " ".join(target_tokens)
+    candidates: list[dict] = []
+    for v in _load_v3_fl_people():
+        if v.get("primary_chamber") != chamber:
+            continue
+        family_tokens = _name_tokens(v.get("family_name") or "")
+        if family_tokens and family_tokens[-1] == last_target:
+            candidates.append(v)
+    if not candidates:
+        return None
+    if len(candidates) > 1:
+        # Disambiguate by full-name token match
+        exact = [
+            v for v in candidates
+            if " ".join(_name_tokens(v.get("name") or "")) == full_target
+        ]
+        if exact:
+            candidates = exact
+    chosen = candidates[0]
+    return {
+        "person_id": chosen["person_id"],
+        "primary_bill_ids": [],
+    }
+
+
 def process_state_bills(supabase, off: dict) -> int:
     name = off["name"]
     off_id = off.get("id")
@@ -611,9 +707,9 @@ def process_state_bills(supabase, off: dict) -> int:
     chamber = "upper" if "Senator" in title else "lower"
     chamber_label = "senate" if chamber == "upper" else "house"
 
-    person = find_state_person_csv(name, chamber)
+    person = find_state_person(name, chamber)
     if not person:
-        LOG.warning("No CSV person for %s (%s)", name, title)
+        LOG.warning("No CSV/v3 person for %s (%s)", name, title)
         return 0
     idx = _load_csv_indexes()
     actions = _build_state_action_index()
@@ -706,7 +802,7 @@ def process_state_committees(supabase, off: dict) -> int:
     title = off.get("title") or ""
     chamber = "upper" if "Senator" in title else "lower"
     chamber_label = "senate" if chamber == "upper" else "house"
-    person = find_state_person_csv(name, chamber)
+    person = find_state_person(name, chamber)
     if not person:
         return 0
     pid = person["person_id"]
@@ -784,7 +880,7 @@ def process_state_votes(supabase, off: dict, cap: int) -> int:
     title = off.get("title") or ""
     chamber = "upper" if "Senator" in title else "lower"
     chamber_label = "senate" if chamber == "upper" else "house"
-    person = find_state_person_csv(name, chamber)
+    person = find_state_person(name, chamber)
     if not person:
         return 0
     idx = _load_csv_indexes()
