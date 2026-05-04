@@ -348,6 +348,58 @@ def get_official_spending(official_id: int, db: Session = Depends(get_db)):
     }
 
 
+@router.get("/{official_id}/expenditures")
+def get_official_expenditures(official_id: int, db: Session = Depends(get_db)):
+    """FEC schedule_b-derived top expenditures for the official's most recent
+    cycle in campaign_finance. Returns the {top_payees, by_category,
+    total_transactions} payload written by scripts/ingest_fec_disbursements.py.
+
+    Returns 404 when the official exists but no top_expenditures has been
+    ingested yet, so the frontend can hide the section cleanly.
+    """
+    if not _supabase:
+        raise HTTPException(status_code=503, detail="Database not configured")
+
+    exists = db.execute(
+        text("SELECT 1 FROM elected_officials WHERE id = :id"),
+        {"id": official_id},
+    ).first()
+    if not exists:
+        raise HTTPException(status_code=404, detail="Official not found")
+
+    try:
+        response = (
+            _supabase.table("campaign_finance")
+            .select("cycle,top_expenditures,source,source_url,last_updated")
+            .eq("official_id", official_id)
+            .order("cycle", desc=True)
+            .limit(1)
+            .execute()
+        )
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+    rows = response.data or []
+    if not rows or not rows[0].get("top_expenditures"):
+        raise HTTPException(status_code=404, detail="No expenditure data for this official")
+
+    row = rows[0]
+    te = row["top_expenditures"]
+    by_category = te.get("by_category") or {}
+    total_spent = sum(float(v) for v in by_category.values() if v is not None)
+
+    return {
+        "cycle": row.get("cycle"),
+        "top_payees": te.get("top_payees") or [],
+        "by_category": by_category,
+        "total_transactions": te.get("total_transactions"),
+        "total_spent": total_spent,
+        "source": row.get("source"),
+        "source_url": row.get("source_url"),
+        "last_updated": row.get("last_updated"),
+    }
+
+
 @router.get("/{official_id}/funders-by-industry")
 def get_official_funders_by_industry(official_id: int, db: Session = Depends(get_db)):
     if not _supabase:
