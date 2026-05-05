@@ -11,6 +11,40 @@ from app.database import get_db
 
 router = APIRouter(prefix="/feed", tags=["feed"])
 constituent_router = APIRouter(prefix="/constituent-votes", tags=["constituent-votes"])
+engagement_router = APIRouter(prefix="/users", tags=["engagement"])
+official_alignment_router = APIRouter(prefix="/officials", tags=["alignment"])
+
+
+# Civic-engagement levels: (min_votes, label, emoji)
+ENGAGEMENT_LEVELS = [
+    (0,  "New Voter",          "🌱"),
+    (1,  "Poll Voter",         "🗳️"),
+    (5,  "Civic Voice",        "📣"),
+    (8,  "Active Citizen",     "🏛️"),
+    (10, "Civic Champion",     "🏆"),
+    (15, "Democracy Defender", "🛡️"),
+]
+
+
+def _engagement_level_for(votes: int) -> dict:
+    current_idx = 0
+    for i, (mv, _, _) in enumerate(ENGAGEMENT_LEVELS):
+        if votes >= mv:
+            current_idx = i
+    cur_min, cur_name, cur_emoji = ENGAGEMENT_LEVELS[current_idx]
+    nxt = ENGAGEMENT_LEVELS[current_idx + 1] if current_idx + 1 < len(ENGAGEMENT_LEVELS) else None
+    if nxt:
+        next_min, next_name, _ = nxt
+        votes_to_next = max(0, next_min - votes)
+    else:
+        next_name, votes_to_next = None, 0
+    return {
+        "level_name": cur_name,
+        "level_emoji": cur_emoji,
+        "level_threshold": cur_min,
+        "next_level_name": next_name,
+        "votes_to_next_level": votes_to_next,
+    }
 
 
 def _relative_time(ts: Optional[datetime]) -> str:
@@ -414,4 +448,81 @@ def cast_constituent_vote(
         "support_count": counts.get("support_count", 0),
         "oppose_count": counts.get("oppose_count", 0),
         "neutral_count": counts.get("neutral_count", 0),
+    }
+
+
+# ---------------------------------------------------------------------------
+# Civic engagement: total votes + level progression for a user_id
+# ---------------------------------------------------------------------------
+@engagement_router.get("/{user_id}/engagement")
+def get_user_engagement(user_id: str, db: Session = Depends(get_db)):
+    row = db.execute(
+        text("SELECT COUNT(*) AS n FROM constituent_votes WHERE user_id = :uid"),
+        {"uid": user_id},
+    ).mappings().first() or {}
+    total = int(row.get("n") or 0)
+    level = _engagement_level_for(total)
+    return {
+        "user_id": user_id,
+        "total_votes": total,
+        **level,
+    }
+
+
+# ---------------------------------------------------------------------------
+# Per-official alignment: how often did this user vote the same way as the
+# official's recorded vote_position. Maps support↔Yea, oppose↔Nay; neutral
+# rows do not count toward agree/disagree but are reflected in total_compared.
+# ---------------------------------------------------------------------------
+@official_alignment_router.get("/{official_id}/alignment")
+def get_official_alignment(
+    official_id: int,
+    user_id: str = Query(..., description="anon-* or authenticated user id"),
+    db: Session = Depends(get_db),
+):
+    rows = db.execute(
+        text(
+            """
+            SELECT cv.position AS user_position, la.vote_position AS official_position
+            FROM constituent_votes cv
+            JOIN legislative_activity la ON la.id = cv.feed_card_id
+            WHERE cv.user_id = :uid
+              AND la.official_id = :oid
+              AND la.activity_type = 'vote'
+              AND la.vote_position IS NOT NULL
+            """
+        ),
+        {"uid": user_id, "oid": official_id},
+    ).mappings().all()
+
+    agree = 0
+    disagree = 0
+    skipped = 0
+    for r in rows:
+        u = (r["user_position"] or "").lower()
+        o = (r["official_position"] or "").lower()
+        is_yea = o.startswith("y") or o == "aye"
+        is_nay = o.startswith("n") and not o.startswith("not")
+        if u == "support":
+            if is_yea: agree += 1
+            elif is_nay: disagree += 1
+            else: skipped += 1
+        elif u == "oppose":
+            if is_nay: agree += 1
+            elif is_yea: disagree += 1
+            else: skipped += 1
+        else:
+            skipped += 1
+
+    total_compared = agree + disagree
+    pct = round((agree / total_compared) * 100, 1) if total_compared else None
+
+    return {
+        "official_id": official_id,
+        "user_id": user_id,
+        "agree_count": agree,
+        "disagree_count": disagree,
+        "skipped_count": skipped,
+        "total_compared": total_compared,
+        "alignment_pct": pct,
     }
