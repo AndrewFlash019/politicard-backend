@@ -428,8 +428,10 @@ def get_official_funders_by_industry(official_id: int, db: Session = Depends(get
 
 @router.get("/{official_id}/legislation")
 def get_official_legislation(official_id: int, db: Session = Depends(get_db)):
+    """Bills the official sponsored or cosponsored. Excludes Senate
+    procedural placeholders (SS*/SP*) and rows missing a bill number."""
     official = db.execute(
-        text("SELECT name FROM elected_officials WHERE id = :id"),
+        text("SELECT 1 FROM elected_officials WHERE id = :id"),
         {"id": official_id},
     ).first()
     if not official:
@@ -439,13 +441,50 @@ def get_official_legislation(official_id: int, db: Session = Depends(get_db)):
         text(
             """
             SELECT id, bill_number, title, description, status, vote_position,
+                   date, source, source_url, activity_type, chamber,
+                   plain_english_summary, full_text_url
+            FROM legislative_activity
+            WHERE official_id = :id
+              AND activity_type IN ('bill_sponsored', 'bill_cosponsored')
+              AND bill_number IS NOT NULL
+              AND bill_number NOT LIKE 'SS%'
+              AND bill_number NOT LIKE 'SP%'
+            ORDER BY date DESC NULLS LAST
+            LIMIT 50
+            """
+        ),
+        {"id": official_id},
+    ).mappings().all()
+
+    return [dict(row) for row in rows]
+
+
+@router.get("/{official_id}/committees")
+def get_official_committees(official_id: int, db: Session = Depends(get_db)):
+    """Committee assignments for the official. Includes both rows tagged
+    activity_type='committee' and the Senate-procedural SS*/SP* placeholder
+    rows that ingestion stores against committee codes."""
+    official = db.execute(
+        text("SELECT 1 FROM elected_officials WHERE id = :id"),
+        {"id": official_id},
+    ).first()
+    if not official:
+        raise HTTPException(status_code=404, detail="Official not found")
+
+    rows = db.execute(
+        text(
+            """
+            SELECT id, bill_number, title, description, status,
                    date, source, source_url, activity_type, chamber
             FROM legislative_activity
-            WHERE LOWER(TRIM(official_name)) = LOWER(TRIM(:name))
+            WHERE official_id = :id
+              AND (activity_type = 'committee'
+                   OR bill_number LIKE 'SS%'
+                   OR bill_number LIKE 'SP%')
             ORDER BY date DESC NULLS LAST
             """
         ),
-        {"name": official.name},
+        {"id": official_id},
     ).mappings().all()
 
     return [dict(row) for row in rows]

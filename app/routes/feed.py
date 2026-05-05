@@ -1,13 +1,16 @@
+import hashlib
 from datetime import datetime, timezone
 from typing import Optional
 
-from fastapi import APIRouter, Depends, HTTPException, Query
+from fastapi import APIRouter, Depends, HTTPException, Query, Request
+from pydantic import BaseModel, Field
 from sqlalchemy.orm import Session
 from sqlalchemy import text
 
 from app.database import get_db
 
 router = APIRouter(prefix="/feed", tags=["feed"])
+constituent_router = APIRouter(prefix="/constituent-votes", tags=["constituent-votes"])
 
 
 def _relative_time(ts: Optional[datetime]) -> str:
@@ -252,3 +255,163 @@ def get_feed_by_zip(
 @router.get("/zip/{zip_code}")
 def get_feed_by_zip_legacy(zip_code: str, db: Session = Depends(get_db)):
     return get_feed_by_zip(zip_code, last_visit=None, limit=50, offset=0, db=db)
+
+
+# ---------------------------------------------------------------------------
+# Stream feed: chronological mix of every legislative_activity row tied to an
+# official representing the ZIP, with aggregate constituent_votes counts.
+# Powers the infinite-scroll feed UI.
+# ---------------------------------------------------------------------------
+@router.get("/{zip_code}/stream")
+def get_feed_stream(
+    zip_code: str,
+    limit: int = Query(50, ge=1, le=100),
+    offset: int = Query(0, ge=0),
+    db: Session = Depends(get_db),
+):
+    if len(zip_code) != 5 or not zip_code.isdigit():
+        raise HTTPException(status_code=400, detail="Invalid ZIP code format")
+
+    # Officials representing this ZIP
+    off_rows = db.execute(
+        text(
+            """
+            SELECT id, name, level
+            FROM elected_officials
+            WHERE zip_codes LIKE :zip_pat
+            """
+        ),
+        {"zip_pat": f"%{zip_code}%"},
+    ).mappings().all()
+    if not off_rows:
+        return {"zip_code": zip_code, "items": [], "limit": limit, "offset": offset}
+
+    official_ids = [o["id"] for o in off_rows]
+    name_by_id = {o["id"]: o["name"] for o in off_rows}
+    level_by_id = {o["id"]: o["level"] for o in off_rows}
+
+    # Build a parametrized IN list — psycopg2 accepts tuple binding
+    placeholders = ", ".join([f":id{i}" for i in range(len(official_ids))])
+    params = {f"id{i}": v for i, v in enumerate(official_ids)}
+    params["lim"] = limit
+    params["off"] = offset
+
+    rows = db.execute(
+        text(
+            f"""
+            SELECT la.id, la.official_id, la.activity_type, la.bill_number,
+                   la.title, la.description, la.plain_english_summary,
+                   la.status, la.vote_position, la.date,
+                   la.source, la.source_url, la.full_text_url,
+                   la.chamber,
+                   COALESCE(cv.support_count, 0) AS support_count,
+                   COALESCE(cv.oppose_count, 0)  AS oppose_count,
+                   COALESCE(cv.neutral_count, 0) AS neutral_count
+            FROM legislative_activity la
+            LEFT JOIN (
+                SELECT feed_card_id,
+                       COUNT(*) FILTER (WHERE position = 'support') AS support_count,
+                       COUNT(*) FILTER (WHERE position = 'oppose')  AS oppose_count,
+                       COUNT(*) FILTER (WHERE position = 'neutral') AS neutral_count
+                FROM constituent_votes
+                GROUP BY feed_card_id
+            ) cv ON cv.feed_card_id = la.id
+            WHERE la.official_id IN ({placeholders})
+            ORDER BY la.date DESC NULLS LAST, la.id DESC
+            LIMIT :lim OFFSET :off
+            """
+        ),
+        params,
+    ).mappings().all()
+
+    items = []
+    for r in rows:
+        d = dict(r)
+        d["official_name"] = name_by_id.get(d["official_id"])
+        d["official_level"] = level_by_id.get(d["official_id"])
+        # Promote a date-only column to ISO string for JSON
+        if d.get("date") and hasattr(d["date"], "isoformat"):
+            d["date"] = d["date"].isoformat()
+        items.append(d)
+
+    return {
+        "zip_code": zip_code,
+        "items": items,
+        "limit": limit,
+        "offset": offset,
+        "next_offset": offset + len(items) if len(items) == limit else None,
+    }
+
+
+# ---------------------------------------------------------------------------
+# Constituent vote: anonymous per-device support/oppose/neutral on a feed card.
+# user_id is derived from request IP+UA so a single device is stable across
+# refreshes without requiring auth, and unique-per-card enforcement remains
+# possible at the row level.
+# ---------------------------------------------------------------------------
+class ConstituentVoteIn(BaseModel):
+    official_id: int
+    feed_card_id: int
+    position: str = Field(..., description="support | oppose | neutral")
+    user_id: Optional[str] = None
+
+
+_VALID_POSITIONS = {"support", "oppose", "neutral"}
+
+
+def _anon_user_id(request: Request) -> str:
+    fwd = (request.headers.get("x-forwarded-for") or "").split(",")[0].strip()
+    ip = fwd or (request.client.host if request.client else "unknown")
+    ua = request.headers.get("user-agent", "")
+    return "anon-" + hashlib.sha256(f"{ip}|{ua}".encode()).hexdigest()[:24]
+
+
+@constituent_router.post("")
+@constituent_router.post("/")
+def cast_constituent_vote(
+    payload: ConstituentVoteIn,
+    request: Request,
+    db: Session = Depends(get_db),
+):
+    pos = (payload.position or "").lower().strip()
+    if pos not in _VALID_POSITIONS:
+        raise HTTPException(status_code=400, detail="position must be support|oppose|neutral")
+
+    user_id = (payload.user_id or _anon_user_id(request))[:120]
+
+    # Upsert: one row per (user_id, feed_card_id); a re-vote replaces the prior position
+    db.execute(
+        text(
+            """
+            INSERT INTO constituent_votes (user_id, feed_card_id, official_id, position, created_at)
+            VALUES (:uid, :fid, :oid, :pos, NOW())
+            ON CONFLICT (user_id, feed_card_id) DO UPDATE
+              SET position = EXCLUDED.position,
+                  official_id = EXCLUDED.official_id,
+                  created_at = NOW()
+            """
+        ),
+        {"uid": user_id, "fid": payload.feed_card_id, "oid": payload.official_id, "pos": pos},
+    )
+    db.commit()
+
+    counts = db.execute(
+        text(
+            """
+            SELECT
+              COUNT(*) FILTER (WHERE position = 'support') AS support_count,
+              COUNT(*) FILTER (WHERE position = 'oppose')  AS oppose_count,
+              COUNT(*) FILTER (WHERE position = 'neutral') AS neutral_count
+            FROM constituent_votes WHERE feed_card_id = :fid
+            """
+        ),
+        {"fid": payload.feed_card_id},
+    ).mappings().first() or {}
+
+    return {
+        "feed_card_id": payload.feed_card_id,
+        "your_position": pos,
+        "support_count": counts.get("support_count", 0),
+        "oppose_count": counts.get("oppose_count", 0),
+        "neutral_count": counts.get("neutral_count", 0),
+    }
