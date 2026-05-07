@@ -1,4 +1,4 @@
-"""Backfill plain_english_summary on legislative_activity rows via Gemini.
+"""Backfill plain_english_summary on legislative_activity rows via Claude.
 
 Targets rows where plain_english_summary IS NULL, builds a small prompt from
 the bill_number/title/description/status, and writes a 1–2 sentence civic-
@@ -11,7 +11,7 @@ Usage:
   python scripts/generate_plain_english_summaries.py --activity-type bill_sponsored
   python scripts/generate_plain_english_summaries.py --dry-run --limit 5
 
-Env: GOOGLE_AI_STUDIO_API_KEY, SUPABASE_URL, SUPABASE_SERVICE_KEY
+Env: ANTHROPIC_API_KEY, SUPABASE_URL, SUPABASE_SERVICE_KEY
 """
 
 from __future__ import annotations
@@ -29,15 +29,15 @@ load_dotenv()
 
 SUPABASE_URL = os.getenv("SUPABASE_URL")
 SUPABASE_KEY = os.getenv("SUPABASE_SERVICE_KEY") or os.getenv("SUPABASE_KEY")
-GOOGLE_AI_KEY = os.getenv("GOOGLE_AI_STUDIO_API_KEY")
+ANTHROPIC_KEY = os.getenv("ANTHROPIC_API_KEY")
 
-REQ_DELAY = 5.0          # 12 req/min, under free-tier 15 RPM ceiling
-RETRY_MAX = 3
+REQ_DELAY = 0.25         # Anthropic SDK auto-retries 429s; modest spacing only
 MAX_DESC_CHARS = 1200
 MAX_TITLE_CHARS = 600
 DEFAULT_ACTIVITY_TYPES = ("bill_sponsored", "bill_cosponsored", "vote")
 DEFAULT_LIMIT = 100
-MODEL = os.getenv("GEMINI_MODEL", "gemini-2.0-flash-lite")
+MODEL = os.getenv("ANTHROPIC_MODEL", "claude-haiku-4-5-20251001")
+MAX_OUTPUT_TOKENS = 200  # one short sentence — never need more
 
 
 def _build_prompt(row: dict) -> str:
@@ -81,15 +81,26 @@ def _build_prompt(row: dict) -> str:
     )
 
 
+_REFUSAL_PREFIXES = (
+    "i don't", "i do not", "i'd need", "i would need",
+    "i cannot", "i can't", "i'm unable", "i am unable",
+    "without ", "there is no", "there's no",
+)
+
+
 def _post_clean(text: str) -> str:
-    """Trim whitespace, strip trailing newlines, and cap at 240 chars."""
+    """Trim whitespace, strip trailing newlines, cap at 240 chars, and reject
+    refusal-style outputs (Claude declines to summarize a row with insufficient
+    info). Returns "" so the caller skips the row instead of writing a useless
+    'I don't have enough information' string into the DB."""
     if not text:
         return ""
     s = text.strip().strip('"').strip()
-    # Collapse internal whitespace
     s = " ".join(s.split())
+    low = s.lower()
+    if any(low.startswith(p) for p in _REFUSAL_PREFIXES):
+        return ""
     if len(s) > 240:
-        # Cut at sentence boundary if possible
         cut = s[:240]
         last_period = cut.rfind(".")
         if last_period > 200:
@@ -110,6 +121,9 @@ def _fetch_pending(supabase, *, activity_types: list[str], limit: int) -> list[d
             .select("id, activity_type, bill_number, title, description, status, vote_position, chamber, date")
             .is_("plain_english_summary", "null")
             .in_("activity_type", activity_types)
+            .not_.is_("title", "null")
+            .neq("title", "")
+            .neq("title", "(untitled)")
             .order("date", desc=True)
             .range(page * PAGE, page * PAGE + PAGE - 1)
             .execute()
@@ -124,41 +138,31 @@ def _fetch_pending(supabase, *, activity_types: list[str], limit: int) -> list[d
     return out[:limit]
 
 
-def _summarize_with_gemini(model, row: dict) -> Optional[str]:
-    """Call Gemini with retry-on-429. Free tier is 15 RPM and ~1500 RPD on
-    gemini-2.0-flash; rate-limit responses include a retry_delay seconds
-    field that we honour."""
+def _summarize_with_claude(client, row: dict) -> Optional[str]:
+    """Call Claude Haiku for a one-sentence civic summary. The Anthropic SDK
+    auto-retries 429s and 5xxs with exponential backoff (default max_retries=2),
+    so we don't add our own loop — typed exceptions propagate up so the caller
+    can skip the row and continue."""
+    import anthropic
     prompt = _build_prompt(row)
-    for attempt in range(1, RETRY_MAX + 1):
-        try:
-            resp = model.generate_content(prompt)
-            text = getattr(resp, "text", None)
-            if not text:
-                cand = (getattr(resp, "candidates", None) or [None])[0]
-                if cand and getattr(cand, "content", None):
-                    parts = getattr(cand.content, "parts", []) or []
-                    text = " ".join(getattr(p, "text", "") for p in parts).strip()
-            return _post_clean(text or "")
-        except Exception as e:
-            msg = str(e)
-            # Pull the retry_delay out of Gemini's quota error if present
-            wait = None
-            try:
-                m = msg.split("retry_delay")[1] if "retry_delay" in msg else ""
-                if "seconds" in m:
-                    wait = int("".join(ch for ch in m.split("seconds:")[1].split("\n")[0] if ch.isdigit()))
-            except Exception:
-                wait = None
-            if wait is None:
-                wait = min(60 * attempt, 60)
-            if "429" in msg or "ResourceExhausted" in msg or "quota" in msg.lower():
-                print(f"    [rate-limited, sleeping {wait}s (attempt {attempt}/{RETRY_MAX})]", flush=True)
-                time.sleep(wait)
-                continue
-            print(f"    [gemini error: {msg[:200]}]", flush=True)
-            return None
-    print(f"    [gave up after {RETRY_MAX} attempts]", flush=True)
-    return None
+    try:
+        resp = client.messages.create(
+            model=MODEL,
+            max_tokens=MAX_OUTPUT_TOKENS,
+            messages=[{"role": "user", "content": prompt}],
+        )
+    except anthropic.RateLimitError as e:
+        print(f"    [rate-limited after retries: {str(e)[:120]}]", flush=True)
+        return None
+    except anthropic.APIError as e:
+        print(f"    [anthropic error: {str(e)[:200]}]", flush=True)
+        return None
+
+    text_parts = []
+    for block in getattr(resp, "content", []) or []:
+        if getattr(block, "type", None) == "text":
+            text_parts.append(block.text)
+    return _post_clean(" ".join(text_parts))
 
 
 def main() -> int:
@@ -171,16 +175,20 @@ def main() -> int:
                         help="Print summaries but do not write to DB")
     args = parser.parse_args()
 
-    missing = [v for k, v in [("SUPABASE_URL", SUPABASE_URL), ("SUPABASE_SERVICE_KEY", SUPABASE_KEY), ("GOOGLE_AI_STUDIO_API_KEY", GOOGLE_AI_KEY)] if not v]
+    required = [
+        ("SUPABASE_URL", SUPABASE_URL),
+        ("SUPABASE_SERVICE_KEY", SUPABASE_KEY),
+        ("ANTHROPIC_API_KEY", ANTHROPIC_KEY),
+    ]
+    missing = [k for k, v in required if not v]
     if missing:
-        print("ERROR: missing env: " + ", ".join(k for k, _ in [("SUPABASE_URL", SUPABASE_URL), ("SUPABASE_SERVICE_KEY", SUPABASE_KEY), ("GOOGLE_AI_STUDIO_API_KEY", GOOGLE_AI_KEY)] if not _), file=sys.stderr)
+        print("ERROR: missing env: " + ", ".join(missing), file=sys.stderr)
         return 1
 
     supabase = create_client(SUPABASE_URL, SUPABASE_KEY)
 
-    import google.generativeai as genai
-    genai.configure(api_key=GOOGLE_AI_KEY)
-    model = genai.GenerativeModel(MODEL)
+    import anthropic
+    client = anthropic.Anthropic(api_key=ANTHROPIC_KEY)
 
     activity_types = [a.strip() for a in args.activity_type.split(",") if a.strip()]
     print(f"Fetching up to {args.limit} rows where plain_english_summary IS NULL "
@@ -201,7 +209,7 @@ def main() -> int:
         title_preview = (row.get("title") or "")[:60].replace("\n", " ")
         print(f"[{i}/{len(rows)}] id={rid} {head} {title_preview}", flush=True)
 
-        summary = _summarize_with_gemini(model, row)
+        summary = _summarize_with_claude(client, row)
         time.sleep(REQ_DELAY)
 
         if not summary:
