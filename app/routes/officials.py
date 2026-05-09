@@ -484,29 +484,77 @@ def get_official_legislative_activity(
     }
     type_clause = ""
     if type:
-        type_clause = "AND activity_type = :activity_type"
+        type_clause = "AND la.activity_type = :activity_type"
         params["activity_type"] = type
 
     rows = db.execute(
         text(
             f"""
-            SELECT bill_number, title, date, status, plain_english_summary, source_url
-            FROM legislative_activity
-            WHERE LOWER(TRIM(official_name)) = LOWER(TRIM(:name))
+            SELECT la.id, la.bill_number, la.title, la.date, la.status,
+                   la.plain_english_summary, la.source_url,
+                   COALESCE(cv.support_count, 0) AS support_count,
+                   COALESCE(cv.oppose_count, 0)  AS oppose_count,
+                   COALESCE(cv.neutral_count, 0) AS neutral_count
+            FROM legislative_activity la
+            LEFT JOIN (
+                SELECT feed_card_id,
+                       COUNT(*) FILTER (WHERE position = 'support') AS support_count,
+                       COUNT(*) FILTER (WHERE position = 'oppose')  AS oppose_count,
+                       COUNT(*) FILTER (WHERE position = 'neutral') AS neutral_count
+                FROM constituent_votes
+                GROUP BY feed_card_id
+            ) cv ON cv.feed_card_id = la.id
+            WHERE LOWER(TRIM(la.official_name)) = LOWER(TRIM(:name))
               {type_clause}
-            ORDER BY date DESC NULLS LAST
+            ORDER BY la.date DESC NULLS LAST
             LIMIT :limit OFFSET :offset
             """
         ),
         params,
     ).mappings().all()
 
+    items = []
+    for r in rows:
+        d = dict(r)
+        d["vote_counts"] = {
+            "support": int(d.pop("support_count", 0) or 0),
+            "oppose": int(d.pop("oppose_count", 0) or 0),
+            "neutral": int(d.pop("neutral_count", 0) or 0),
+        }
+        items.append(d)
+
     return {
         "official_id": official_id,
         "activity_type": type,
         "limit": limit,
         "offset": offset,
-        "items": [dict(row) for row in rows],
+        "items": items,
+    }
+
+
+@router.get("/{official_id}/my-votes")
+def get_official_my_votes(
+    official_id: int,
+    user_id: str = Query(..., description="anon-* or authenticated user id"),
+    db: Session = Depends(get_db),
+):
+    """Return all constituent_votes the given user has cast on bills tied to
+    this official (feed_card_id maps to legislative_activity.id)."""
+    rows = db.execute(
+        text(
+            """
+            SELECT feed_card_id, position
+            FROM constituent_votes
+            WHERE official_id = :oid AND user_id = :uid
+            """
+        ),
+        {"oid": official_id, "uid": user_id},
+    ).mappings().all()
+
+    return {
+        "official_id": official_id,
+        "user_id": user_id,
+        "votes": [{"feed_card_id": r["feed_card_id"], "position": r["position"]} for r in rows],
     }
 
 
@@ -524,23 +572,45 @@ def get_official_legislation(official_id: int, db: Session = Depends(get_db)):
     rows = db.execute(
         text(
             """
-            SELECT id, bill_number, title, description, status, vote_position,
-                   date, source, source_url, activity_type, chamber,
-                   plain_english_summary, full_text_url
-            FROM legislative_activity
-            WHERE official_id = :id
-              AND activity_type IN ('bill_sponsored', 'bill_cosponsored')
-              AND bill_number IS NOT NULL
-              AND bill_number NOT LIKE 'SS%'
-              AND bill_number NOT LIKE 'SP%'
-            ORDER BY date DESC NULLS LAST
+            SELECT la.id, la.bill_number, la.title, la.description, la.status,
+                   la.vote_position, la.date, la.source, la.source_url,
+                   la.activity_type, la.chamber, la.plain_english_summary,
+                   la.full_text_url,
+                   COALESCE(cv.support_count, 0) AS support_count,
+                   COALESCE(cv.oppose_count, 0)  AS oppose_count,
+                   COALESCE(cv.neutral_count, 0) AS neutral_count
+            FROM legislative_activity la
+            LEFT JOIN (
+                SELECT feed_card_id,
+                       COUNT(*) FILTER (WHERE position = 'support') AS support_count,
+                       COUNT(*) FILTER (WHERE position = 'oppose')  AS oppose_count,
+                       COUNT(*) FILTER (WHERE position = 'neutral') AS neutral_count
+                FROM constituent_votes
+                GROUP BY feed_card_id
+            ) cv ON cv.feed_card_id = la.id
+            WHERE la.official_id = :id
+              AND la.activity_type IN ('bill_sponsored', 'bill_cosponsored')
+              AND la.bill_number IS NOT NULL
+              AND la.bill_number NOT LIKE 'SS%'
+              AND la.bill_number NOT LIKE 'SP%'
+            ORDER BY la.date DESC NULLS LAST
             LIMIT 50
             """
         ),
         {"id": official_id},
     ).mappings().all()
 
-    return [dict(row) for row in rows]
+    items = []
+    for r in rows:
+        d = dict(r)
+        d["vote_counts"] = {
+            "support": int(d.pop("support_count", 0) or 0),
+            "oppose": int(d.pop("oppose_count", 0) or 0),
+            "neutral": int(d.pop("neutral_count", 0) or 0),
+        }
+        items.append(d)
+
+    return items
 
 
 @router.get("/{official_id}/committees")
