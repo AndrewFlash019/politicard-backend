@@ -1,6 +1,6 @@
 import os
 import re
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlalchemy import text
 from sqlalchemy.orm import Session
 from supabase import create_client
@@ -89,7 +89,10 @@ def _query_metric_rows(county: str, category: str | None) -> list[dict]:
         response = query.execute()
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
-    return response.data or []
+    rows = response.data or []
+    # Bills Sponsored belongs in the accountability scorecard, not the
+    # generic "at a glance" metrics card on the profile.
+    return [r for r in rows if (r.get("metric_name") or "").strip().lower() != "bills sponsored"]
 
 
 @router.get("/{official_id}/metrics")
@@ -140,13 +143,41 @@ def get_official_metrics(official_id: int, db: Session = Depends(get_db)):
     return []
 
 
+_BIOGUIDE_RE = re.compile(r"congress\.gov/member/([A-Z]\d{6})", re.IGNORECASE)
+
+
+def _slugify_name(name: str) -> str:
+    slug = re.sub(r"[^a-z0-9]+", "-", (name or "").lower()).strip("-")
+    return slug
+
+
+def _bills_view_url(name: str, level: str, source_url: str | None) -> str | None:
+    """Build a congress.gov member URL with bioguide for federal officials.
+
+    Bioguide is parsed out of the metric row's source_url because it's not
+    stored on elected_officials. State/local officials return None.
+    """
+    if (level or "").lower() != "federal":
+        return None
+    if not source_url:
+        return None
+    m = _BIOGUIDE_RE.search(source_url)
+    if not m:
+        return None
+    bioguide = m.group(1).upper()
+    slug = _slugify_name(name)
+    if not slug:
+        return f"https://www.congress.gov/member/{bioguide}"
+    return f"https://www.congress.gov/member/{slug}/{bioguide}"
+
+
 @router.get("/{official_id}/accountability-scorecard")
 def get_official_scorecard(official_id: int, db: Session = Depends(get_db)):
     if not _supabase:
         raise HTTPException(status_code=503, detail="Database not configured")
 
     official = db.execute(
-        text("SELECT id, name FROM elected_officials WHERE id = :id"),
+        text("SELECT id, name, level FROM elected_officials WHERE id = :id"),
         {"id": official_id},
     ).first()
     if not official:
@@ -191,7 +222,7 @@ def get_official_scorecard(official_id: int, db: Session = Depends(get_db)):
 
     metrics = []
     for key, row in latest_by_key.items():
-        metrics.append({
+        entry = {
             "key": key,
             "label": row.get("metric_label") or key,
             "value": row.get("metric_value") or "",
@@ -203,7 +234,12 @@ def get_official_scorecard(official_id: int, db: Session = Depends(get_db)):
             "source": row.get("source") or "",
             "source_url": row.get("source_url"),
             "notes": row.get("notes"),
-        })
+        }
+        if key == "bills_sponsored":
+            entry["view_bills_url"] = _bills_view_url(
+                official.name, official.level, row.get("source_url")
+            )
+        metrics.append(entry)
 
     metrics.sort(key=lambda m: (m["rating"] == "no_data", m["label"]))
 
@@ -372,6 +408,54 @@ def get_official_funders_by_industry(official_id: int, db: Session = Depends(get
         raise HTTPException(status_code=500, detail=str(e))
 
     return response.data or []
+
+
+@router.get("/{official_id}/legislative-activity")
+def get_official_legislative_activity(
+    official_id: int,
+    type: str | None = Query(None, description="activity_type filter, e.g. bill_sponsored"),
+    limit: int = Query(25, ge=1, le=200),
+    offset: int = Query(0, ge=0),
+    db: Session = Depends(get_db),
+):
+    official = db.execute(
+        text("SELECT name FROM elected_officials WHERE id = :id"),
+        {"id": official_id},
+    ).first()
+    if not official:
+        raise HTTPException(status_code=404, detail="Official not found")
+
+    params: dict = {
+        "name": official.name,
+        "limit": limit,
+        "offset": offset,
+    }
+    type_clause = ""
+    if type:
+        type_clause = "AND activity_type = :activity_type"
+        params["activity_type"] = type
+
+    rows = db.execute(
+        text(
+            f"""
+            SELECT bill_number, title, date, status, plain_english_summary, source_url
+            FROM legislative_activity
+            WHERE LOWER(TRIM(official_name)) = LOWER(TRIM(:name))
+              {type_clause}
+            ORDER BY date DESC NULLS LAST
+            LIMIT :limit OFFSET :offset
+            """
+        ),
+        params,
+    ).mappings().all()
+
+    return {
+        "official_id": official_id,
+        "activity_type": type,
+        "limit": limit,
+        "offset": offset,
+        "items": [dict(row) for row in rows],
+    }
 
 
 @router.get("/{official_id}/legislation")
