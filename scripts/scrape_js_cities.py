@@ -45,6 +45,7 @@ ANTHROPIC_KEY = os.getenv("ANTHROPIC_API_KEY")
 MODEL = os.getenv("ANTHROPIC_MODEL", "claude-haiku-4-5-20251001")
 MAX_OUTPUT_TOKENS = 1500
 PAGE_TIMEOUT_MS = 10_000
+SPA_PAGE_TIMEOUT_MS = 15_000  # used only with --spa-mode for slow SPAs
 INTER_CITY_DELAY = 3.0
 USER_AGENT = (
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
@@ -254,23 +255,38 @@ class PageScrape:
     error: Optional[str] = None
 
 
-def render_page(playwright, url: str) -> PageScrape:
+def render_page(playwright, url: str, *, spa_mode: bool = False) -> PageScrape:
     """Render a URL with chromium, walk up to 3 council-shaped links, and —
     if no roster-shaped link surfaces — also probe a hardcoded list of
     common direct paths (/government, /city-council, etc.) on the root host.
 
     Returns concatenated visible text from every page we successfully reached.
+
+    spa_mode=True trades latency for compatibility with single-page apps that
+    paint nothing on `domcontentloaded`: waits until network is quiet and
+    extends per-nav timeout to 15s.
     """
     browser = None
     visited: set[str] = set()
     text_chunks: list[str] = []
     walker_found_council_link = False
+    nav_wait = "networkidle" if spa_mode else "domcontentloaded"
+    nav_timeout = SPA_PAGE_TIMEOUT_MS if spa_mode else PAGE_TIMEOUT_MS
+
+    def _navigate(target: str):
+        page.goto(target, wait_until=nav_wait, timeout=nav_timeout)
+        if spa_mode:
+            try:
+                page.wait_for_load_state("networkidle", timeout=8000)
+            except Exception:
+                pass  # secondary wait is best-effort
+
     try:
         browser = playwright.chromium.launch(headless=True)
         context = browser.new_context(user_agent=USER_AGENT)
         page = context.new_page()
-        page.set_default_navigation_timeout(PAGE_TIMEOUT_MS)
-        page.goto(url, wait_until="domcontentloaded")
+        page.set_default_navigation_timeout(nav_timeout)
+        _navigate(url)
         visited.add(page.url)
         text_chunks.append(_grab_body(page))
 
@@ -280,7 +296,7 @@ def render_page(playwright, url: str) -> PageScrape:
                 break
             walker_found_council_link = True
             try:
-                page.goto(target, wait_until="domcontentloaded")
+                _navigate(target)
             except Exception as e:
                 LOG.info("subpage nav failed (%s): %s", target, e)
                 break
@@ -296,7 +312,12 @@ def render_page(playwright, url: str) -> PageScrape:
                 if target in visited:
                     continue
                 try:
-                    resp = page.goto(target, wait_until="domcontentloaded")
+                    resp = page.goto(target, wait_until=nav_wait, timeout=nav_timeout)
+                    if spa_mode:
+                        try:
+                            page.wait_for_load_state("networkidle", timeout=8000)
+                        except Exception:
+                            pass
                 except Exception:
                     continue
                 if resp is None or not resp.ok:
@@ -577,6 +598,11 @@ def main() -> int:
     parser.add_argument("--dry-run", action="store_true", help="Don't write to DB")
     parser.add_argument("--only", type=str, default=None, help="Comma-separated city names")
     parser.add_argument("--start", type=int, default=0, help="Skip first N queue rows")
+    parser.add_argument(
+        "--spa-mode",
+        action="store_true",
+        help="Wait for networkidle (15s timeout) — slower but works on SPAs that paint nothing on domcontentloaded.",
+    )
     args = parser.parse_args()
 
     logging.basicConfig(
@@ -629,7 +655,7 @@ def main() -> int:
                 time.sleep(INTER_CITY_DELAY)
                 continue
 
-            scrape = render_page(playwright, website)
+            scrape = render_page(playwright, website, spa_mode=args.spa_mode)
             if scrape.error or not scrape.text:
                 counters["render_failed"] += 1
                 LOG.info("  render failed (%s): %s", website, scrape.error or "no text")
