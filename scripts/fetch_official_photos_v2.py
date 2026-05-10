@@ -204,6 +204,11 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--limit", type=int, default=None, help="Cap rows processed")
     parser.add_argument("--dry-run", action="store_true")
+    parser.add_argument("--level", choices=["federal", "state", "local"], default=None,
+                        help="Restrict to a single official_level")
+    parser.add_argument("--include-real", action="store_true",
+                        help="Also reprocess officials whose photo_url is already a real photo "
+                             "(default: only ui-avatars + needs_photo=true)")
     args = parser.parse_args()
 
     if not (SUPABASE_URL and SUPABASE_KEY):
@@ -214,20 +219,23 @@ def main() -> int:
 
     sb = create_client(SUPABASE_URL, SUPABASE_KEY)
 
-    # Pull all officials currently using ui-avatars
+    # Pull officials needing a real photo. Default: still ui-avatars OR
+    # already flagged needs_photo (i.e. previous DiceBear fallbacks). Pass
+    # --include-real to reprocess everyone.
     rows: list[dict] = []
     page = 0
     PAGE = 500
     while True:
         q = (
             sb.table("elected_officials")
-            .select("id, name, level, state, title, website, photo_url")
+            .select("id, name, level, state, title, website, photo_url, needs_photo")
             .eq("state", "FL")
-            .ilike("photo_url", "%ui-avatars%")
             .order("id")
             .range(page * PAGE, page * PAGE + PAGE - 1)
-            .execute()
         )
+        if args.level:
+            q = q.eq("level", args.level)
+        q = q.execute()
         chunk = q.data or []
         if not chunk:
             break
@@ -235,9 +243,19 @@ def main() -> int:
         if len(chunk) < PAGE:
             break
         page += 1
+
+    # Filter to rows that need work: still ui-avatars OR previously flagged
+    # needs_photo (DiceBear fallback) — unless --include-real was passed.
+    if not args.include_real:
+        rows = [
+            r for r in rows
+            if (r.get("photo_url") and "ui-avatars" in r["photo_url"])
+            or r.get("needs_photo") is True
+        ]
+
     if args.limit:
         rows = rows[: args.limit]
-    log(f"to process: {len(rows)} ui-avatars officials  (dry-run={args.dry_run})")
+    log(f"to process: {len(rows)} officials  (level={args.level or 'all'} dry-run={args.dry_run})")
     if not rows:
         return 0
 
