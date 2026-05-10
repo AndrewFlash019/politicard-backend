@@ -1,6 +1,7 @@
 import os
 import re
 from fastapi import APIRouter, Depends, HTTPException, Query
+from pydantic import BaseModel, Field
 from sqlalchemy import text
 from sqlalchemy.orm import Session
 from supabase import create_client
@@ -733,3 +734,141 @@ def get_metrics_by_zip(zip_code: str):
         raise HTTPException(status_code=404, detail=f"No county found for ZIP {zip_code}")
 
     return _fetch_metrics_for_county(county_name)
+
+
+# ─── Crime trend (FBI CDE / accountability_metrics fallback) ────────────────
+@router.get("/{official_id}/crime-trend")
+def get_crime_trend(official_id: int, db: Session = Depends(get_db)):
+    off = db.execute(
+        text("SELECT id, name, county, title FROM elected_officials WHERE id = :id"),
+        {"id": official_id},
+    ).mappings().first()
+    if not off:
+        raise HTTPException(status_code=404, detail="Official not found")
+
+    # Snapshot history (preferred): clearance_rate metric over time
+    snap_rows = db.execute(
+        text(
+            """
+            SELECT year, metric_value
+            FROM accountability_metrics_snapshots
+            WHERE official_id = :id
+              AND metric_key = 'case_clearance_rate'
+            ORDER BY year ASC
+            """
+        ),
+        {"id": official_id},
+    ).mappings().all()
+
+    years: list[int] = []
+    clearance: list[float] = []
+    for r in snap_rows:
+        try:
+            years.append(int(r["year"]))
+            v = (r["metric_value"] or "").replace("%", "").strip()
+            clearance.append(float(v))
+        except (TypeError, ValueError):
+            continue
+
+    if not years:
+        # Fallback to current single metric
+        cur = db.execute(
+            text(
+                """
+                SELECT year, metric_value FROM accountability_metrics
+                WHERE official_id = :id AND metric_key = 'case_clearance_rate'
+                ORDER BY year DESC LIMIT 1
+                """
+            ),
+            {"id": official_id},
+        ).mappings().first()
+        if cur and cur["metric_value"]:
+            try:
+                years.append(int(cur["year"]) if cur["year"] else 2024)
+                clearance.append(float(str(cur["metric_value"]).replace("%", "").strip()))
+            except (TypeError, ValueError):
+                pass
+
+    return {
+        "official_id": official_id,
+        "county": off["county"],
+        "years": years,
+        "clearance_rates": clearance,
+        "state_averages": [],  # populated when FL DOJ snapshot table is wired up
+        "source": "FDLE / county sheriff annual reports",
+        "note": "Historical trend data is currently sparse; we surface what we have."
+                if len(years) <= 1 else None,
+    }
+
+
+# ─── Police misconduct (CourtListener best-effort + cache) ──────────────────
+@router.get("/{official_id}/misconduct-cases")
+def get_misconduct_cases(official_id: int, db: Session = Depends(get_db)):
+    off = db.execute(
+        text("SELECT id, name, title, county FROM elected_officials WHERE id = :id"),
+        {"id": official_id},
+    ).mappings().first()
+    if not off:
+        raise HTTPException(status_code=404, detail="Official not found")
+
+    cached = db.execute(
+        text(
+            """
+            SELECT id, case_name, date_filed, court, nature_of_suit, outcome, source_url
+            FROM misconduct_cases
+            WHERE official_id = :id
+            ORDER BY date_filed DESC NULLS LAST
+            LIMIT 25
+            """
+        ),
+        {"id": official_id},
+    ).mappings().all()
+
+    items = []
+    for r in cached:
+        d = dict(r)
+        if d.get("date_filed") and hasattr(d["date_filed"], "isoformat"):
+            d["date_filed"] = d["date_filed"].isoformat()
+        items.append(d)
+
+    return {
+        "official_id": official_id,
+        "title": off["title"],
+        "county": off["county"],
+        "cases": items,
+        "total_count": len(items),
+        "source": "CourtListener / PACER",
+        "external_url": "https://www.courtlistener.com/?type=r&q=" + (off["county"] or "florida sheriff"),
+    }
+
+
+# ─── Lightweight feedback channel for "report an error" on profiles ─────────
+class _OfficialFeedbackIn(BaseModel):
+    official_id: int
+    note: str = Field(..., min_length=3, max_length=2000)
+    category: str | None = Field(None, max_length=50)
+    reporter_user_id: str | None = Field(None, max_length=120)
+
+
+feedback_router = APIRouter(prefix="/feedback", tags=["feedback"])
+
+
+@feedback_router.post("/official-error")
+def submit_official_feedback(payload: _OfficialFeedbackIn, db: Session = Depends(get_db)):
+    db.execute(
+        text(
+            """
+            INSERT INTO official_feedback
+              (official_id, reporter_user_id, category, reporter_note, created_at)
+            VALUES (:oid, :uid, :cat, :note, NOW())
+            """
+        ),
+        {
+            "oid": payload.official_id,
+            "uid": (payload.reporter_user_id or "")[:120] or None,
+            "cat": payload.category,
+            "note": payload.note.strip(),
+        },
+    )
+    db.commit()
+    return {"success": True}
