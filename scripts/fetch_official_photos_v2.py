@@ -175,6 +175,79 @@ def try_ballotpedia(official: dict) -> Optional[str]:
     return None
 
 
+# ─── Source 8: Google Custom Search Engine ──────────────────────────────────
+GOOGLE_CSE_KEY = os.getenv("GOOGLE_CSE_API_KEY")
+GOOGLE_CSE_ID = os.getenv("GOOGLE_CSE_ID")
+
+# Only accept image hosts in this trust set when the result page sits on a
+# .gov / FL legislature / ballotpedia / wikipedia domain. Mirrors the DDG
+# script's allow-list — the CSE itself can be configured to bias toward
+# these too, but we re-verify here so a misconfigured CSE doesn't taint
+# the photo column.
+_GOOG_TRUSTED_HOST_SUFFIXES = (".gov", ".gov.us", ".fl.us", ".myflorida.com")
+_GOOG_TRUSTED_HOSTS = {
+    "ballotpedia.org", "myfloridahouse.gov", "flsenate.gov",
+    "en.wikipedia.org", "upload.wikimedia.org",
+    "broward.org", "miamidade.gov", "hillsboroughcounty.org", "pinellas.gov",
+    "polkfl.gov", "volusia.org", "tampa.gov",
+    "sun-sentinel.com", "miamiherald.com", "tampabay.com", "orlandosentinel.com",
+}
+
+
+def _goog_trusted(url: str) -> bool:
+    try:
+        host = (urlparse(url).hostname or "").lower()
+    except Exception:
+        return False
+    if host in _GOOG_TRUSTED_HOSTS:
+        return True
+    if any(host.endswith(s) for s in _GOOG_TRUSTED_HOST_SUFFIXES):
+        return True
+    if host.startswith("www.") and host[4:] in _GOOG_TRUSTED_HOSTS:
+        return True
+    return False
+
+
+def try_google_cse(official: dict) -> Optional[str]:
+    if not (GOOGLE_CSE_KEY and GOOGLE_CSE_ID):
+        return None
+    name = (official.get("name") or "").strip()
+    title = (official.get("title") or "").strip()
+    county = (official.get("county") or "").strip()
+    if not name:
+        return None
+    q = f'"{name}" "{title}" "{county} Florida" official photo'.strip()
+    try:
+        r = session.get(
+            "https://www.googleapis.com/customsearch/v1",
+            params={
+                "key": GOOGLE_CSE_KEY, "cx": GOOGLE_CSE_ID,
+                "q": q, "searchType": "image", "num": 5, "safe": "off",
+            },
+            timeout=TIMEOUT,
+        )
+        if r.status_code == 429:
+            log("    google CSE 429: daily quota exhausted")
+            return None
+        if r.status_code != 200:
+            return None
+        items = (r.json() or {}).get("items") or []
+    except (requests.RequestException, ValueError):
+        return None
+
+    for item in items:
+        img = (item.get("link") or "").strip()
+        page = ((item.get("image") or {}).get("contextLink") or "").strip()
+        if not img or len(img) > 500:
+            continue
+        # Either the image URL itself or its source page must be trusted
+        if not (_goog_trusted(img) or _goog_trusted(page)):
+            continue
+        if head_is_image(img):
+            return img
+    return None
+
+
 # ─── Source 9: DiceBear fallback ────────────────────────────────────────────
 def dicebear_url(name: str) -> str:
     seed = quote((name or "anon").strip().lower().replace(" ", "-"))
@@ -182,13 +255,17 @@ def dicebear_url(name: str) -> str:
 
 
 # ─── Pipeline ───────────────────────────────────────────────────────────────
-def find_photo(official: dict) -> Tuple[str, str, bool]:
+ALL_SOURCES = [
+    ("bioguide",    try_bioguide),
+    ("wikipedia",   try_wikipedia),
+    ("ballotpedia", try_ballotpedia),
+    ("google",      try_google_cse),
+]
+
+
+def find_photo(official: dict, sources: list[tuple[str, callable]]) -> Tuple[str, str, bool]:
     """Returns (url, source_label, is_real). Real means non-DiceBear."""
-    for source_fn, label in [
-        (try_bioguide,    "bioguide"),
-        (try_wikipedia,   "wikipedia"),
-        (try_ballotpedia, "ballotpedia"),
-    ]:
+    for label, source_fn in sources:
         try:
             url = source_fn(official)
         except Exception as e:
@@ -209,6 +286,8 @@ def main() -> int:
     parser.add_argument("--include-real", action="store_true",
                         help="Also reprocess officials whose photo_url is already a real photo "
                              "(default: only ui-avatars + needs_photo=true)")
+    parser.add_argument("--source", choices=[s[0] for s in ALL_SOURCES], default=None,
+                        help="Restrict to a single source (default: try all in order)")
     args = parser.parse_args()
 
     if not (SUPABASE_URL and SUPABASE_KEY):
@@ -259,13 +338,20 @@ def main() -> int:
     if not rows:
         return 0
 
+    # Build the source list once per run. --source filters; default = all.
+    if args.source:
+        sources = [(name, fn) for name, fn in ALL_SOURCES if name == args.source]
+    else:
+        sources = ALL_SOURCES
+    log(f"sources: {[s[0] for s in sources]}")
+
     real_count = fallback_count = failed_count = 0
     notfound_lines: list[str] = []
     pending_updates: list[Tuple[int, str, bool]] = []  # (id, url, is_real)
 
     for i, off in enumerate(rows, 1):
         try:
-            url, source, is_real = find_photo(off)
+            url, source, is_real = find_photo(off, sources)
         except Exception as e:
             failed_count += 1
             log(f"[{i}/{len(rows)}] id={off['id']:5d} {off.get('name','?')[:32]:32}  CRASH {e}")
