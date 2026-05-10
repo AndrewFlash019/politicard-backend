@@ -465,7 +465,16 @@ def cast_constituent_vote(
 @engagement_router.get("/{user_id}/engagement")
 def get_user_engagement(user_id: str, db: Session = Depends(get_db)):
     row = db.execute(
-        text("SELECT COUNT(*) AS n FROM constituent_votes WHERE user_id = :uid"),
+        text(
+            """
+            SELECT
+              COUNT(*) AS n,
+              COUNT(*) FILTER (WHERE position = 'support') AS support_count,
+              COUNT(*) FILTER (WHERE position = 'oppose')  AS oppose_count,
+              COUNT(*) FILTER (WHERE position = 'neutral') AS neutral_count
+            FROM constituent_votes WHERE user_id = :uid
+            """
+        ),
         {"uid": user_id},
     ).mappings().first() or {}
     total = int(row.get("n") or 0)
@@ -473,8 +482,46 @@ def get_user_engagement(user_id: str, db: Session = Depends(get_db)):
     return {
         "user_id": user_id,
         "total_votes": total,
+        "support_count": int(row.get("support_count") or 0),
+        "oppose_count": int(row.get("oppose_count") or 0),
+        "neutral_count": int(row.get("neutral_count") or 0),
         **level,
     }
+
+
+# ---------------------------------------------------------------------------
+# Recent votes by this user, joined to the underlying bill metadata so the
+# Profile tab can render a list with position pills.
+# ---------------------------------------------------------------------------
+@engagement_router.get("/{user_id}/votes")
+def get_user_votes(
+    user_id: str,
+    limit: int = Query(10, ge=1, le=50),
+    db: Session = Depends(get_db),
+):
+    rows = db.execute(
+        text(
+            """
+            SELECT cv.feed_card_id, cv.position, cv.created_at,
+                   la.bill_number, la.title, la.plain_english_summary,
+                   la.official_name, la.status, la.source_url
+            FROM constituent_votes cv
+            LEFT JOIN legislative_activity la ON la.id = cv.feed_card_id
+            WHERE cv.user_id = :uid
+            ORDER BY cv.created_at DESC
+            LIMIT :lim
+            """
+        ),
+        {"uid": user_id, "lim": limit},
+    ).mappings().all()
+
+    items = []
+    for r in rows:
+        d = dict(r)
+        if d.get("created_at") and hasattr(d["created_at"], "isoformat"):
+            d["created_at"] = d["created_at"].isoformat()
+        items.append(d)
+    return {"user_id": user_id, "items": items, "limit": limit}
 
 
 # ---------------------------------------------------------------------------
