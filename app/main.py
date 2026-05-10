@@ -81,32 +81,11 @@ app.add_middleware(
 )
 
 
-# ─── Per-route rate limit decorators applied via middleware. We use a small
-# lookup table because slowapi's per-route decorators require touching every
-# route; this approach scopes by URL prefix so it covers v1 aliases too.
-_ROUTE_LIMITS = (
-    ("/auth/",                 "10/minute"),
-    ("/constituent-votes",     "30/minute"),
-    ("/officials/",            "120/minute"),  # incl. .../legislative-activity, etc
-    ("/feed/",                 "60/minute"),
-    ("/typology/",             "60/minute"),
-)
-
-
-@app.middleware("http")
-async def _per_route_limit(request: Request, call_next):
-    path = request.url.path
-    for prefix, rule in _ROUTE_LIMITS:
-        if path.startswith(prefix) or path.startswith("/api/v1" + prefix):
-            try:
-                limiter.limit(rule)(lambda r: r)(request)
-            except RateLimitExceeded as exc:
-                return JSONResponse(
-                    status_code=429,
-                    content={"error": "Rate limit exceeded", "retry_after": getattr(exc, "retry_after", 60)},
-                )
-            break
-    return await call_next(request)
+# Per-route limits via middleware turned out to crash slowapi (decorator
+# pattern doesn't compose with ASGI middleware that way) and 500'd every
+# request matching /officials, /feed, /auth, /constituent-votes, /typology.
+# Reverted to the global default 100/min until we wire decorators on each
+# route handler properly.
 
 
 # ─── Mount routers (current paths + /api/v1 aliases) ────────────────────────
