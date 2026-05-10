@@ -231,8 +231,14 @@ def resolve_website(supabase, city: str, county: str) -> Optional[str]:
         rows = []
 
     site = (rows[0].get("website") if rows else None) or ""
+    # Probe-validate the DB URL even when it looks legit — fl_municipalities
+    # has stored .gov hostnames that no longer resolve (e.g. cityofnaplesfl.gov),
+    # so trusting the DB without a HEAD/GET would cost us the candidate +
+    # Wikipedia fallbacks that follow.
     if site and not is_blocked_url(site) and looks_official(site):
-        return site
+        if probe_url(site):
+            return site
+        LOG.info("  DB website %s did not resolve — falling back to candidates", site)
 
     for u in candidate_urls(city):
         if probe_url(u):
