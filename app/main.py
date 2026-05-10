@@ -6,9 +6,10 @@ from app.routes.officials import router as officials_router, metrics_router
 from app.routes.ai import router as ai_router
 from app.routes.civic import router as civic_router
 from app.routes.feed import router as feed_router, constituent_router, engagement_router, official_alignment_router
+from app.routes.typology import router as typology_router
 
 app = FastAPI(
-    title="PolitiCard API",
+    title="PolitiScore API",
     description="Civic engagement platform backend",
     version="1.0.0",
 )
@@ -33,3 +34,4 @@ app.include_router(feed_router)
 app.include_router(constituent_router)
 app.include_router(engagement_router)
 app.include_router(official_alignment_router)
+app.include_router(typology_router)

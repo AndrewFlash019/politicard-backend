@@ -190,8 +190,11 @@ def get_feed_by_zip(
     name_params = {f"n{i}": n for i, n in enumerate(official_names)}
     name_filter = f"official_name IN ({name_placeholders})" if official_names else "FALSE"
     county_filter = "county = :county" if county else "FALSE"
+    # Federal-level cards (US Senators, US Reps voting on national bills) are
+    # statewide by definition — show them to every FL ZIP regardless of county.
+    federal_filter = "(official_level = 'federal' AND county IS NULL)"
 
-    base_where = f"active = TRUE AND ({name_filter} OR {county_filter})"
+    base_where = f"active = TRUE AND ({name_filter} OR {county_filter} OR {federal_filter})"
     base_params = {**name_params, "county": county}
 
     # since_last_visit
@@ -442,12 +445,17 @@ def cast_constituent_vote(
         {"fid": payload.feed_card_id},
     ).mappings().first() or {}
 
+    support = int(counts.get("support_count") or 0)
+    oppose = int(counts.get("oppose_count") or 0)
+    neutral = int(counts.get("neutral_count") or 0)
     return {
+        "success": True,
         "feed_card_id": payload.feed_card_id,
         "your_position": pos,
-        "support_count": counts.get("support_count", 0),
-        "oppose_count": counts.get("oppose_count", 0),
-        "neutral_count": counts.get("neutral_count", 0),
+        "support_count": support,
+        "oppose_count": oppose,
+        "neutral_count": neutral,
+        "vote_counts": {"support": support, "oppose": oppose, "neutral": neutral},
     }
 
 

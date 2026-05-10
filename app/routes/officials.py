@@ -487,9 +487,41 @@ def get_official_legislative_activity(
         type_clause = "AND la.activity_type = :activity_type"
         params["activity_type"] = type
 
-    rows = db.execute(
-        text(
-            f"""
+    # bill_sponsored: ingestion writes one row per status update, so the same
+    # bill_number can appear 2-4 times. Collapse to one row per bill_number,
+    # keeping the row with the most recent date.
+    if type == "bill_sponsored":
+        sql = f"""
+            WITH dedup AS (
+                SELECT DISTINCT ON (la.bill_number) la.id, la.bill_number,
+                       la.title, la.date, la.status, la.plain_english_summary,
+                       la.source_url
+                FROM legislative_activity la
+                WHERE LOWER(TRIM(la.official_name)) = LOWER(TRIM(:name))
+                  {type_clause}
+                  AND la.bill_number IS NOT NULL
+                  AND TRIM(la.bill_number) <> ''
+                ORDER BY la.bill_number, la.date DESC NULLS LAST, la.id DESC
+            )
+            SELECT d.id, d.bill_number, d.title, d.date, d.status,
+                   d.plain_english_summary, d.source_url,
+                   COALESCE(cv.support_count, 0) AS support_count,
+                   COALESCE(cv.oppose_count, 0)  AS oppose_count,
+                   COALESCE(cv.neutral_count, 0) AS neutral_count
+            FROM dedup d
+            LEFT JOIN (
+                SELECT feed_card_id,
+                       COUNT(*) FILTER (WHERE position = 'support') AS support_count,
+                       COUNT(*) FILTER (WHERE position = 'oppose')  AS oppose_count,
+                       COUNT(*) FILTER (WHERE position = 'neutral') AS neutral_count
+                FROM constituent_votes
+                GROUP BY feed_card_id
+            ) cv ON cv.feed_card_id = d.id
+            ORDER BY d.date DESC NULLS LAST
+            LIMIT :limit OFFSET :offset
+        """
+    else:
+        sql = f"""
             SELECT la.id, la.bill_number, la.title, la.date, la.status,
                    la.plain_english_summary, la.source_url,
                    COALESCE(cv.support_count, 0) AS support_count,
@@ -508,10 +540,9 @@ def get_official_legislative_activity(
               {type_clause}
             ORDER BY la.date DESC NULLS LAST
             LIMIT :limit OFFSET :offset
-            """
-        ),
-        params,
-    ).mappings().all()
+        """
+
+    rows = db.execute(text(sql), params).mappings().all()
 
     items = []
     for r in rows:
