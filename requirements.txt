@@ -16,3 +16,4 @@ beautifulsoup4
 lxml
 slowapi
 anthropic
+ddgs
