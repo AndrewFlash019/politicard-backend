@@ -74,11 +74,32 @@ COUNCIL_LINK_HINTS = [
     "city commission",
     "town council",
     "village council",
+    "board of commissioners",
+    "leadership",
     "mayor",
     "commissioners",
+    "elected",
+    "officials",
+    "members",
+    "board",
+    "administration",
     "government",
     "city hall",
     "about",
+]
+
+# Direct paths to try when the link walker doesn't find a roster — added to
+# the URL after stripping any trailing path so we always probe from root.
+DIRECT_COUNCIL_PATHS = [
+    "/government",
+    "/city-council",
+    "/elected-officials",
+    "/mayor-council",
+    "/commission",
+    "/about/government",
+    "/our-government",
+    "/your-government",
+    "/city-commission",
 ]
 
 LOG = logging.getLogger("scrape_js_cities")
@@ -108,16 +129,72 @@ def looks_official(url: str) -> bool:
 
 
 def candidate_urls(city: str) -> list[str]:
+    """Ordered list of URLs to probe; first 200-OK wins.
+
+    Order matters — we prefer .gov over .com over .us so legitimate municipal
+    domains are picked before parking pages or chamber-of-commerce sites that
+    happen to occupy short .com hostnames.
+    """
     slug = slugify(city)
     if not slug:
         return []
     return [
-        f"https://www.cityof{slug}.gov",
-        f"https://{slug}fl.gov",
         f"https://www.{slug}fl.gov",
+        f"https://www.{slug}.gov",
+        f"https://{slug}fl.gov",
+        f"https://{slug}.gov",
+        f"https://www.cityof{slug}fl.gov",
+        f"https://www.cityof{slug}.gov",
+        f"https://www.{slug}-fl.gov",
+        f"https://www.cityof{slug}.com",
+        f"https://www.{slug}.com",
+        f"https://www.{slug}.us",
+        f"https://www.{slug}fl.us",
+        f"https://www.{slug}fl.org",
         f"https://www.{slug}.org",
-        f"https://{slug}.org",
     ]
+
+
+_WIKI_TIMEOUT = 8.0
+
+
+def discover_via_wikipedia(city: str) -> Optional[str]:
+    """Pull the official site URL out of the city's Wikipedia infobox.
+
+    Last-resort lookup when none of our slug guesses resolve. The Florida
+    article disambiguates with the suffix '_,_Florida'.
+    """
+    import requests
+    from bs4 import BeautifulSoup
+    slug = (city or "").replace(" ", "_") + ",_Florida"
+    url = f"https://en.wikipedia.org/wiki/{slug}"
+    try:
+        r = requests.get(url, timeout=_WIKI_TIMEOUT, headers={"User-Agent": USER_AGENT})
+    except Exception:
+        return None
+    if not r.ok or not r.text:
+        return None
+    try:
+        soup = BeautifulSoup(r.text, "lxml")
+    except Exception:
+        try:
+            soup = BeautifulSoup(r.text, "html.parser")
+        except Exception:
+            return None
+    box = soup.find("table", class_=re.compile(r"infobox"))
+    if not box:
+        return None
+    for row in box.find_all("tr"):
+        th, td = row.find("th"), row.find("td")
+        if not th or not td:
+            continue
+        if re.search(r"website", th.get_text(" ", strip=True), re.I):
+            a = td.find("a", href=True)
+            if a and a["href"].startswith(("http://", "https://")):
+                href = a["href"].rstrip("/")
+                if not is_blocked_url(href):
+                    return href
+    return None
 
 
 def probe_url(url: str, timeout: float = 5.0) -> bool:
@@ -159,6 +236,11 @@ def resolve_website(supabase, city: str, county: str) -> Optional[str]:
     for u in candidate_urls(city):
         if probe_url(u):
             return u
+
+    # Last resort: read the city's Wikipedia infobox for the canonical website.
+    wiki = discover_via_wikipedia(city)
+    if wiki and probe_url(wiki):
+        return wiki
     return None
 
 
@@ -173,38 +255,56 @@ class PageScrape:
 
 
 def render_page(playwright, url: str) -> PageScrape:
-    """Render a URL with chromium, follow up to two council-shaped links, and
-    return concatenated visible text from each page we touched.
+    """Render a URL with chromium, walk up to 3 council-shaped links, and —
+    if no roster-shaped link surfaces — also probe a hardcoded list of
+    common direct paths (/government, /city-council, etc.) on the root host.
 
-    Many municipal sites have a /Government hub that links to a real /Council
-    or /Commission roster page; one hop isn't enough. We collect text from
-    each visited page so Claude can see whichever one carries the roster.
-
-    Returns an error PageScrape if anything fails so the caller can continue.
+    Returns concatenated visible text from every page we successfully reached.
     """
     browser = None
-    visited: list[str] = []
+    visited: set[str] = set()
     text_chunks: list[str] = []
+    walker_found_council_link = False
     try:
         browser = playwright.chromium.launch(headless=True)
         context = browser.new_context(user_agent=USER_AGENT)
         page = context.new_page()
         page.set_default_navigation_timeout(PAGE_TIMEOUT_MS)
         page.goto(url, wait_until="domcontentloaded")
-        visited.append(page.url)
+        visited.add(page.url)
         text_chunks.append(_grab_body(page))
 
-        for _ in range(2):  # up to two follow-up hops
-            target = _best_council_link(page, exclude=set(visited))
+        for _ in range(3):  # up to three follow-up hops
+            target = _best_council_link(page, exclude=visited)
             if not target:
                 break
+            walker_found_council_link = True
             try:
                 page.goto(target, wait_until="domcontentloaded")
             except Exception as e:
                 LOG.info("subpage nav failed (%s): %s", target, e)
                 break
-            visited.append(page.url)
+            visited.add(page.url)
             text_chunks.append(_grab_body(page))
+
+        # Fallback: if the link walker never landed on a council-shaped page,
+        # probe direct paths off the root host. Skip ones that 4xx fast.
+        if not walker_found_council_link:
+            base = _root_url(page.url)
+            for path in DIRECT_COUNCIL_PATHS:
+                target = base.rstrip("/") + path
+                if target in visited:
+                    continue
+                try:
+                    resp = page.goto(target, wait_until="domcontentloaded")
+                except Exception:
+                    continue
+                if resp is None or not resp.ok:
+                    continue
+                visited.add(page.url)
+                text_chunks.append(_grab_body(page))
+                if len(text_chunks) >= 5:  # cap total pages to bound runtime
+                    break
 
         combined = _clean_text("\n\n".join(text_chunks))
         return PageScrape(final_url=page.url, text=combined)
@@ -216,6 +316,13 @@ def render_page(playwright, url: str) -> PageScrape:
                 browser.close()
             except Exception:
                 pass
+
+
+def _root_url(any_url: str) -> str:
+    p = urlparse(any_url)
+    if not p.scheme or not p.netloc:
+        return any_url
+    return f"{p.scheme}://{p.netloc}"
 
 
 def _grab_body(page) -> str:
