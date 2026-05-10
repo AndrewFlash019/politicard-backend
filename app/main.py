@@ -61,17 +61,20 @@ def _rate_limit_handler(request: Request, exc: RateLimitExceeded):
 
 
 # ─── CORS hardening (2I) ─────────────────────────────────────────────────────
-PROD_ORIGINS = [
+# Explicit allow-list. allow_credentials=True requires a non-wildcard
+# allow_origins (the CORS spec rejects "*" with credentials), so localhost
+# stays in the list across all envs and we never fall back to "*".
+ALLOWED_ORIGINS = [
     "https://politiscore.com",
     "https://www.politiscore.com",
     "https://app.politiscore.com",
     "https://magnificent-meerkat-40c5aa.netlify.app",
+    "http://localhost:3000",
 ]
-allowed_origins = ["*"] if ENV == "development" else PROD_ORIGINS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=allowed_origins,
-    allow_credentials=False,
+    allow_origins=ALLOWED_ORIGINS,
+    allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
     expose_headers=["X-Deprecated", "X-Use-Instead"],
