@@ -25,9 +25,12 @@ from typing import Iterable
 
 import requests
 from dotenv import load_dotenv
-from sqlalchemy import create_engine, text
+from supabase import create_client
 
 load_dotenv()
+
+SUPABASE_URL = os.getenv("SUPABASE_URL")
+SUPABASE_KEY = os.getenv("SUPABASE_SERVICE_KEY") or os.getenv("SUPABASE_KEY")
 
 DEFAULT_TITLE_PATTERNS = (
     "tax collector", "sheriff", "clerk", "supervisor of elections",
@@ -90,23 +93,34 @@ def main() -> int:
                         help="Comma-separated lowercase title substrings to include")
     args = parser.parse_args()
 
-    db_url = os.getenv("DATABASE_URL")
-    if not db_url:
-        print("ERROR: DATABASE_URL not set", file=sys.stderr)
+    if not (SUPABASE_URL and SUPABASE_KEY):
+        print("ERROR: SUPABASE_URL and SUPABASE_SERVICE_KEY must be set", file=sys.stderr)
         return 1
 
     patterns = tuple(p.strip().lower() for p in args.titles.split(",") if p.strip())
 
-    engine = create_engine(db_url)
-    with engine.begin() as conn:
-        rows = conn.execute(text(
-            """
-            SELECT id, name, title, website
-            FROM elected_officials
-            WHERE state = 'FL' AND website IS NOT NULL AND TRIM(website) <> ''
-            ORDER BY id
-            """
-        )).mappings().all()
+    supabase = create_client(SUPABASE_URL, SUPABASE_KEY)
+    rows: list[dict] = []
+    page = 0
+    PAGE = 1000
+    while True:
+        q = (
+            supabase.table("elected_officials")
+            .select("id, name, title, website")
+            .eq("state", "FL")
+            .not_.is_("website", "null")
+            .neq("website", "")
+            .order("id")
+            .range(page * PAGE, page * PAGE + PAGE - 1)
+            .execute()
+        )
+        chunk = q.data or []
+        if not chunk:
+            break
+        rows.extend(chunk)
+        if len(chunk) < PAGE:
+            break
+        page += 1
 
     candidates = [r for r in rows if _matches_position(r["title"] or "", patterns)]
     if args.limit:
@@ -139,7 +153,7 @@ def main() -> int:
         for row in flagged:
             w.writerow(row)
 
-    print(f"done. {len(flagged)} of {len(candidates)} officials flagged → {REPORT_PATH}", flush=True)
+    print(f"done. {len(flagged)} of {len(candidates)} officials flagged -> {REPORT_PATH}", flush=True)
     return 0
 
 
