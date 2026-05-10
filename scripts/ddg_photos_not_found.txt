@@ -1,0 +1,1220 @@
+# id	name	level	title	reason
+372	Bill Carlson	local	City Council Member, District 4	no-trusted-result
+373	Naya Young	local	City Council Member, District 5	no-trusted-result
+377	Ken Hagan	local	County Commissioner, District 2	no-trusted-result
+381	Chris Boles	local	County Commissioner, District 6	no-trusted-result
+382	Joshua Wostal	local	County Commissioner, District 7	no-trusted-result
+387	Raquel A. Regalado	local	County Commissioner, District 7	no-trusted-result
+400	Becky Troutman	local	County Commissioner, District 1	no-trusted-result
+405	Katie Delaney	local	County Commissioner, District 1	no-trusted-result
+407	Kim Adkinson	local	County Commissioner, District 3	no-trusted-result
+408	Rob Feltner	local	County Commissioner, District 4, Chair	no-trusted-result
+422	Andy Dance	local	County Commissioner, District 1	no-trusted-result
+424	Leann Pennington	local	County Commissioner, District 3	no-trusted-result
+425	Greg Hansen	local	County Commissioner, District 4	no-trusted-result
+426	Kim Carney	local	County Commissioner, District 5	no-trusted-result
+427	Rick Staly	local	Flagler County Sheriff	no-trusted-result
+438	Steven Glassman	local	Commissioner, City of Fort Lauderdale, District 2	no-trusted-result
+440	Christian Whitehurst	local	County Commissioner, District 1	no-trusted-result
+441	Sarah Arnold	local	County Commissioner, District 2	no-trusted-result
+442	Clay Murphy	local	County Commissioner, District 3 (Vice Chair)	no-trusted-result
+443	Krista Joseph	local	County Commissioner, District 4 (Chair)	no-trusted-result
+444	Ann Taylor	local	County Commissioner, District 5	no-trusted-result
+445	Robert Hardwick	local	Sheriff, St. Johns County	no-trusted-result
+446	Kevin Ruane	local	County Commissioner, District 1	no-trusted-result
+447	Cecil Pendergrass	local	County Commissioner, District 2 (Chairman)	no-trusted-result
+448	David Mulicka	local	County Commissioner, District 3 (Vice Chairman)	no-trusted-result
+449	Brian Hamman	local	County Commissioner, District 4	no-trusted-result
+450	Trish Petrosky	local	County Commissioner, District 5	no-trusted-result
+451	Nicole H. Wilson	local	County Commissioner, District 1	no-trusted-result
+455	Kelly Martinez Semrad	local	County Commissioner, District 5	no-trusted-result
+456	Michael Scott	local	County Commissioner, District 6	dup:s3.amazonaws.com
+460	Sara Baxter	local	County Commissioner, District 6	no-trusted-result
+461	Bobby Powell Jr.	local	County Commissioner, District 7	no-trusted-result
+470	James Reyes	local	Director, Miami-Dade Police	no-trusted-result
+476	Carmine Marceno	local	Sheriff, Lee County	no-trusted-result
+478	Wayne Ivey	local	Sheriff, Brevard County	no-trusted-result
+480	Emery Gainey	local	Sheriff, Alachua County	no-trusted-result
+481	Chip Simmons	local	Sheriff, Escambia County	no-trusted-result
+482	Bob Johnson	local	Sheriff, Santa Rosa County	no-trusted-result
+483	Eric Aden	local	Sheriff, Okaloosa County	no-trusted-result
+484	Michael Adkinson	local	Sheriff, Walton County	no-trusted-result
+485	John Tate	local	Sheriff, Washington County	no-trusted-result
+486	Kevin Crews	local	Sheriff, Holmes County	no-trusted-result
+487	Donnie Edenfield	local	Sheriff, Jackson County	no-trusted-result
+488	Tommy Ford	local	Sheriff, Bay County	no-trusted-result
+489	Mike Harrison	local	Sheriff, Gulf County	no-trusted-result
+490	A.J. Smith	local	Sheriff, Franklin County	no-trusted-result
+491	Bobby Schultz	local	Sheriff, Calhoun County	no-trusted-result
+492	Eddie Joe White	local	Sheriff, Liberty County	no-trusted-result
+493	Morris Young	local	Sheriff, Gadsden County	no-trusted-result
+494	Walt McNeil	local	Sheriff, Leon County	no-trusted-result
+495	Jared Miller	local	Sheriff, Jefferson County	no-trusted-result
+496	Benjamin Stewart	local	Sheriff, Madison County	no-trusted-result
+497	Wayne Padgett	local	Sheriff, Taylor County	no-trusted-result
+498	Jared Miller	local	Sheriff, Wakulla County	no-trusted-result
+499	Noel Stephen	local	Sheriff, Columbia County	no-trusted-result
+500	Brad Whitehead	local	Sheriff, Hamilton County	no-trusted-result
+501	Sam St. John	local	Sheriff, Suwannee County	no-trusted-result
+503	David Harstine	local	Sheriff, Dixie County	no-trusted-result
+504	Scott Harmon	local	Sheriff, Gilchrist County	no-trusted-result
+505	Brad King	local	Sheriff, Baker County	no-trusted-result
+506	Gordon Smith	local	Sheriff, Bradford County	no-trusted-result
+507	David Shoar	local	Sheriff, Union County	no-trusted-result
+508	Bill Leeper	local	Sheriff, Nassau County	no-trusted-result
+509	Michelle Cook	local	Sheriff, Clay County	no-trusted-result
+510	Gator DeLoach	local	Sheriff, Putnam County	no-trusted-result
+511	Bobby McCallum	local	Sheriff, Levy County	no-trusted-result
+513	Peyton Grinnell	local	Sheriff, Lake County	no-trusted-result
+516	Eric Flowers	local	Sheriff, Indian River County	no-trusted-result
+517	Richard Del Toro	local	Sheriff, St. Lucie County	no-trusted-result
+518	William Snyder	local	Sheriff, Martin County	no-trusted-result
+519	Jeff Blackmon	local	Sheriff, Citrus County	no-trusted-result
+520	Al Nienhuis	local	Sheriff, Hernando County	no-trusted-result
+521	Chris Nocco	local	Sheriff, Pasco County	no-trusted-result
+522	Rick Wells	local	Sheriff, Manatee County	no-trusted-result
+523	Kurt Hoffman	local	Sheriff, Sarasota County	no-trusted-result
+524	Bill Prummell	local	Sheriff, Charlotte County	no-trusted-result
+525	Kevin Rambosk	local	Sheriff, Collier County	no-trusted-result
+526	Steve Whidden	local	Sheriff, Hendry County	no-trusted-result
+528	Noel Stephen	local	Sheriff, Okeechobee County	no-trusted-result
+530	Vent Crawford	local	Sheriff, DeSoto County	no-trusted-result
+531	Arnold Lanier	local	Sheriff, Hardee County	no-trusted-result
+532	John Budensiek	local	Sheriff, Sumter County	no-trusted-result
+533	Rick Ramsay	local	Sheriff, Monroe County	no-trusted-result
+538	Rick LoCastro	local	County Commissioner, District 1	no-trusted-result
+539	Chris Hall	local	County Commissioner, District 2	no-trusted-result
+542	William McDaniel	local	County Commissioner, District 5	dup:sumtercountyfl.gov
+544	Neil Rainford	local	County Commissioner, District 2	no-trusted-result
+545	Mark Smith	local	County Commissioner, District 3	no-trusted-result
+546	Joe Barbetta	local	County Commissioner, District 4	no-trusted-result
+547	Ron Cutsinger	local	County Commissioner, District 5	no-trusted-result
+548	James Satcher	local	County Commissioner, District 1 (Chair)	no-trusted-result
+549	Mike Rahn	local	County Commissioner, District 2	no-trusted-result
+550	Kevin Van Ostenbridge	local	County Commissioner, District 3	no-trusted-result
+551	George Kruse	local	County Commissioner, District 5	no-trusted-result
+552	Amanda Ballard	local	County Commissioner, At Large 1	no-trusted-result
+553	Jason Bearden	local	County Commissioner, At Large 2	no-trusted-result
+554	Raymond Turner	local	County Commissioner, At Large 3	no-trusted-result
+555	Ron Oakley	local	County Commissioner, District 1	no-trusted-result
+556	Seth Weightman	local	County Commissioner, District 2	no-trusted-result
+558	Gary Bradford	local	County Commissioner, District 4	no-trusted-result
+560	Peggy Choudhry	local	County Commissioner, District 1 (Chair)	no-trusted-result
+562	Viviana Janer	local	County Commissioner, District 3	no-trusted-result
+563	Cheryl Grieb	local	County Commissioner, District 4	no-trusted-result
+570	Craig Curry	local	County Commissioner, District 1	no-trusted-result
+571	Kathy Bryant	local	County Commissioner, District 2 (Chair)	no-trusted-result
+572	Michelle Stone	local	County Commissioner, District 3	no-trusted-result
+573	Carl Zalak III	local	County Commissioner, District 4	no-trusted-result
+575	Anthony Bonna	local	County Commissioner, District 1	no-trusted-result
+576	Sean Mitchell	local	County Commissioner, District 2	no-trusted-result
+577	Larry Leet	local	County Commissioner, District 3	no-trusted-result
+578	Cathy Townsend	local	County Commissioner, District 4	no-trusted-result
+580	Doug Smith	local	County Commissioner, District 1	dup:www.martin.fl.us
+581	Stacey Hetherington	local	County Commissioner, District 2	no-trusted-result
+583	Edward Ciampi	local	County Commissioner, District 4 (Chair)	no-trusted-result
+585	Peter O'Bryan	local	County Commissioner, District 1	no-trusted-result
+586	Susan Adams	local	County Commissioner, District 2	no-trusted-result
+587	Joe Earman	local	County Commissioner, District 3 (Chair)	no-trusted-result
+588	Laura Moss	local	County Commissioner, District 4	no-trusted-result
+590	Jeff Bergosh	local	County Commissioner, District 1	no-trusted-result
+591	Mike Kohler	local	County Commissioner, District 2	no-trusted-result
+592	Lumon May	local	County Commissioner, District 3	no-trusted-result
+593	Robert Bender	local	County Commissioner, District 4	no-trusted-result
+594	Steven Barry	local	County Commissioner, District 5 (Chair)	no-trusted-result
+596	Jeremy Matlow	local	County Commissioner, District 3	no-trusted-result
+601	Mike Cella	local	County Commissioner, District 1	no-trusted-result
+602	Alexandra Compere	local	County Commissioner, District 2	no-trusted-result
+603	James Renninger	local	County Commissioner, District 3	no-trusted-result
+604	Betsy Condon	local	County Commissioner, District 4 (Chair)	no-trusted-result
+605	Kristen Burke	local	County Commissioner, District 5	no-trusted-result
+606	John Martin	local	County Commissioner, District 1	dup:www.martin.fl.us
+607	Aaron Bell	local	County Commissioner, District 2	no-trusted-result
+608	Klynt Farmer	local	County Commissioner, District 3	no-trusted-result
+609	Thomas Ford	local	County Commissioner, District 4 (Chair)	no-trusted-result
+610	Jeff Gray	local	County Commissioner, District 5	no-trusted-result
+611	Joe Tiseo	local	County Commissioner, District 1	no-trusted-result
+612	Chris Constance	local	County Commissioner, District 2 (Chair)	no-trusted-result
+614	Bill Truex	local	County Commissioner, District 4	no-trusted-result
+615	Stephen R. Deutsch	local	County Commissioner, District 5	no-trusted-result
+616	Jeff Kinnard	local	County Commissioner, District 1	no-trusted-result
+617	Ron Kitchen Jr.	local	County Commissioner, District 2	dup:files.nc.gov
+618	Ruthie Davis Schlabach	local	County Commissioner, District 3 (Chair)	no-trusted-result
+619	Scott Carnahan	local	County Commissioner, District 4	no-trusted-result
+620	Holly Davis	local	County Commissioner, District 5	no-trusted-result
+621	Steve Champion	local	County Commissioner, District 1	no-trusted-result
+623	Elizabeth Narverud	local	County Commissioner, District 3	no-trusted-result
+624	John Allocco	local	County Commissioner, District 4	no-trusted-result
+625	Brian Hawkins	local	County Commissioner, District 5	no-trusted-result
+627	James Scholl	local	County Commissioner, District 2	no-trusted-result
+628	Eddie Martinez	local	County Commissioner, District 3	no-trusted-result
+631	Jay Zembower	local	County Commissioner, District 1	dup:www.orlandosentinel.com
+633	Chris Hall	local	County Commissioner, District 1	no-trusted-result
+637	Rick LoCastro	local	County Commissioner, District 2	no-trusted-result
+638	Mark Smith	local	County Commissioner, District 1	no-trusted-result
+639	Joseph Neunder	local	County Commissioner, District 2	no-trusted-result
+640	Neil Rainford	local	County Commissioner, District 3	no-trusted-result
+641	Mike Moran	local	County Commissioner, District 4	no-trusted-result
+643	James Satcher	local	County Commissioner, District 1	no-trusted-result
+647	Amanda Ballard	local	County Commissioner, District 4	no-trusted-result
+648	Jason Bearden	local	County Commissioner, District 6	no-trusted-result
+649	Carol Whitmore	local	County Commissioner, District 7 (At-Large)	no-trusted-result
+655	Peggy Choudhry	local	County Commissioner, District 1	no-trusted-result
+656	Viviana Janer	local	County Commissioner, District 2	no-trusted-result
+660	Joe Earman	local	County Commissioner, District 1	no-trusted-result
+662	Joe Flescher	local	County Commissioner, District 3	no-trusted-result
+667	Chris Dzadovsky	local	County Commissioner, District 3	no-trusted-result
+668	Jamie Fowler	local	County Commissioner, District 4	no-trusted-result
+669	Cathy Townsend	local	County Commissioner, District 5	no-trusted-result
+672	Harold Jenkins	local	County Commissioner, District 3 (Chair)	no-trusted-result
+676	Chris Constance	local	County Commissioner, District 2	no-trusted-result
+678	Bill Truex	local	County Commissioner, District 4 (Chair)	no-trusted-result
+687	Sean Parks	local	County Commissioner, District 3	dup:cdn.lakecountyfl.gov
+688	Douglas Shields	local	County Commissioner, District 4	dup:files.nc.gov
+689	Leslie Campione	local	County Commissioner, District 5 (Chair)	dup:cdn.lakecountyfl.gov
+690	Griff Griffitts	local	County Commissioner, District 5	no-trusted-result
+693	Robert Carroll	local	County Commissioner, District 2 (Chair)	dup:www.baycountyfl.gov
+695	Tim Murphy	local	County Commissioner, District 5	no-trusted-result
+697	Ricky Jernigan	local	County Commissioner, District 3	dup:files.nc.gov
+698	Bucky Nash	local	County Commissioner, District 2	no-trusted-result
+703	Carolyn Ketchel	local	County Commissioner, District 2 (Chair)	no-trusted-result
+708	Kerry Smith	local	County Commissioner, District 2	no-trusted-result
+709	Sam Parker	local	County Commissioner, District 1	no-trusted-result
+710	Craig Estep	local	County Commissioner, District 5	dup:sumtercountyfl.gov
+712	Oren Miller	local	County Commissioner, District 3 (Chair)	dup:sumtercountyfl.gov
+715	Steve Stroberger	local	County Commissioner, District 1	no-trusted-result
+718	Ashlee Hofberger	local	County Commissioner, District 4	no-trusted-result
+719	Steven Barry	local	County Commissioner, District 5	no-trusted-result
+723	Thomas Ford	local	County Commissioner, District 4	dup:files.nc.gov
+731	Kathy Bryant	local	County Commissioner, District 2	no-trusted-result
+732	Jeff Gold	local	County Commissioner, District 3	no-trusted-result
+733	Carl Zalak	local	County Commissioner, District 4	no-trusted-result
+734	Michelle Stone	local	County Commissioner, District 5	no-trusted-result
+736	John Allocco	local	County Commissioner, District 2	no-trusted-result
+737	Brian Hawkins	local	County Commissioner, District 3	no-trusted-result
+738	John Mitten	local	County Commissioner, District 4	dup:www.swfwmd.state.fl.us
+740	Rebecca Bays	local	County Commissioner, District 1	no-trusted-result
+742	Ron Kitchen Jr.	local	County Commissioner, District 3	no-trusted-result
+743	Jeff Kinnard	local	County Commissioner, District 4	no-trusted-result
+746	Carolyn Ketchel	local	County Commissioner, District 2	no-trusted-result
+748	Trey Goodwin	local	County Commissioner, District 4	dup:myokaloosa.gov
+751	Jim Scholl	local	County Commissioner, District 2	no-trusted-result
+760	Robert Carroll	local	County Commissioner, District 1	dup:www.baycountyfl.gov
+767	Oren Miller	local	County Commissioner, District 3	dup:elections.sumtercountyfl.gov
+770	Tim Murphy	local	County Commissioner, District 1	no-trusted-result
+772	Bucky Nash	local	County Commissioner, District 3	dup:files.nc.gov
+773	Toby Brewer	local	County Commissioner, District 4	no-trusted-result
+774	Rusty DePratter	local	County Commissioner, District 5	dup:sumtercountyfl.gov
+775	Chris Campbell	local	County Commissioner, District 1	no-trusted-result
+777	Kevin Roberts	local	County Commissioner, District 3	no-trusted-result
+778	Scott Kirouac	local	County Commissioner, District 4	no-trusted-result
+779	Jim Brooks	local	County Commissioner, District 5	no-trusted-result
+780	Jim Peacock	local	County Commissioner, District 1	no-trusted-result
+781	Alex McKinnie	local	County Commissioner, District 2	dup:files.nc.gov
+786	Terry Turner	local	County Commissioner, District 2	no-trusted-result
+787	Buddy Goddard	local	County Commissioner, District 3	no-trusted-result
+788	Jeff Helms	local	County Commissioner, District 4	no-trusted-result
+789	Chip Laibl	local	County Commissioner, District 5	dup:files.nc.gov
+791	Danny Glidewell	local	County Commissioner, District 2	no-trusted-result
+794	Bobby Brack	local	County Commissioner, District 5	dup:sumtercountyfl.gov
+795	Terry Burroughs	local	County Commissioner, District 1	no-trusted-result
+796	Brad Goodbread	local	County Commissioner, District 2	no-trusted-result
+797	David Hazellief	local	County Commissioner, District 3	no-trusted-result
+799	Terry Burroughs Jr.	local	County Commissioner, District 5	dup:files.nc.gov
+801	Elton Langford	local	County Commissioner, District 2	dup:files.nc.gov
+802	Buddy Mansfield	local	County Commissioner, District 3	no-trusted-result
+803	J.C. Deriso	local	County Commissioner, District 4	no-trusted-result
+804	Jim Selph Jr.	local	County Commissioner, District 5	dup:sumtercountyfl.gov
+806	Scottie Rhoden	local	County Commissioner, District 2	dup:files.nc.gov
+807	James Bennett	local	County Commissioner, District 3	no-trusted-result
+809	Rocky Rhoden	local	County Commissioner, District 5	no-trusted-result
+810	Danny Riddick	local	County Commissioner, District 1	dup:www.baycountyfl.gov
+811	Doyle Thomas	local	County Commissioner, District 2	dup:files.nc.gov
+812	Eddie Lewis	local	County Commissioner, District 3	dup:files.nc.gov
+813	Ross Chandler	local	County Commissioner, District 4	dup:files.nc.gov
+814	Kenny Thompson	local	County Commissioner, District 5	dup:www.sumtercountyfl.gov
+815	Matt Gavin	local	County Commissioner, District 1	no-trusted-result
+816	Alonzetta Jones	local	County Commissioner, District 2	no-trusted-result
+817	Eric Hinson	local	County Commissioner, District 3	no-trusted-result
+818	Brenda Holt	local	County Commissioner, District 4	no-trusted-result
+819	Kimberly McFarland	local	County Commissioner, District 5	no-trusted-result
+820	Thomas Demps	local	County Commissioner, District 1	no-trusted-result
+822	Derrick Jennings	local	County Commissioner, District 3	no-trusted-result
+826	Pam Feagle	local	County Commissioner, District 2	no-trusted-result
+827	Thomas Demps	local	County Commissioner, District 3	dup:www.baycountyfl.gov
+828	Malcolm Page	local	County Commissioner, District 4	dup:files.nc.gov
+829	Steve Spradley	local	County Commissioner, District 5	dup:www.sumtercountyfl.gov
+831	Fred Nichols	local	County Commissioner, District 2	no-trusted-result
+832	Mike Kemp	local	County Commissioner, District 3	no-trusted-result
+833	Quincee Messersmith	local	County Commissioner, District 4	no-trusted-result
+834	Chuck Hess	local	County Commissioner, District 5	dup:www.mywaltonfl.gov
+835	Steve Joyner	local	County Commissioner, District 1	no-trusted-result
+836	Ricky Gamble	local	County Commissioner, District 2	no-trusted-result
+840	David Goodman	local	County Commissioner, District 1	dup:www.mywaltonfl.gov
+841	Rock Meeks	local	County Commissioner, District 2	no-trusted-result
+842	Mike Joyner	local	County Commissioner, District 3	no-trusted-result
+847	Rick Knight	local	County Commissioner, District 3	dup:www.sumtercountyfl.gov
+848	Russell Melendy	local	County Commissioner, District 4	no-trusted-result
+851	Michael Swindle	local	County Commissioner, District 2	dup:sumtercountyfl.gov
+853	Mitchell Kemmerer	local	County Commissioner, District 4	dup:jacksoncountyfl.gov
+854	Emma Byrd	local	County Commissioner, District 5	no-trusted-result
+855	James Rideout	local	County Commissioner, District 1	no-trusted-result
+856	Jeff Good	local	County Commissioner, District 2	dup:files.nc.gov
+857	Clint Erickson	local	County Commissioner, District 3	dup:files.nc.gov
+858	Earl Stafford	local	County Commissioner, District 4	dup:files.nc.gov
+859	Bobby Sasnett	local	County Commissioner, District 5	no-trusted-result
+860	Tray Hawkins	local	County Commissioner, District 1	no-trusted-result
+862	Charles Kent	local	County Commissioner, District 3	dup:files.nc.gov
+863	Todd Abbott	local	County Commissioner, District 4	dup:www.sumtercountyfl.gov
+864	Hubert Hendrix	local	County Commissioner, District 5	dup:sumtercountyfl.gov
+865	Maura McCarthy Bulman	local	School Board Member, District 1	no-trusted-result
+873	Debra Hixon	local	School Board Member, At-Large Seat 9	no-trusted-result
+874	Erica Whitfield	local	School Board Member, District 1	no-trusted-result
+878	Frank Barbieri	local	School Board Member, District 5	no-trusted-result
+880	Bridget Ziegler	local	School Board Member, District 7	no-trusted-result
+882	Henry Washington Jr.	local	School Board Member, District 4	no-trusted-result
+888	Angie Gallo	local	School Board Chair, District 1	no-trusted-result
+889	Johanna Lopez	local	School Board Member, District 2	no-trusted-result
+891	Pam Gould	local	School Board Member, District 4	no-trusted-result
+894	Melissa Byrd	local	School Board Member, District 7	no-trusted-result
+895	Darryl Willie	local	School Board Chair, District 4	no-trusted-result
+896	Lori Hershey	local	School Board Member, District 1	no-trusted-result
+897	Elizabeth Andersen	local	School Board Member, District 2	no-trusted-result
+898	Cindy Pearson	local	School Board Member, District 3	no-trusted-result
+899	Warren Jones	local	School Board Member, District 5	no-trusted-result
+900	Charlotte Joyce	local	School Board Member, District 6	no-trusted-result
+901	April Scott	local	School Board Member, District 7	no-trusted-result
+902	Debbie Jordan	local	School Board Chair, District 1	no-trusted-result
+904	Chris Patricca	local	School Board Member, District 3	no-trusted-result
+905	Jada Langford-Fleming	local	School Board Member, District 4	no-trusted-result
+906	Sam Fisher	local	School Board Member, District 5	no-trusted-result
+907	Armor Persons	local	School Board Member, District 6	no-trusted-result
+908	Betsy Vaughn	local	School Board Member, District 7	no-trusted-result
+910	Tommy Allen	local	School Board Member, District 2	no-trusted-result
+911	Patrick Canan	local	School Board Member, District 3	no-trusted-result
+913	Bill Mignon	local	School Board Member, District 5	no-trusted-result
+914	Jamie Haynes	local	School Board Chair, District 1	no-trusted-result
+915	Anita Burnette	local	School Board Member, District 2	no-trusted-result
+916	Carl Persis	local	School Board Member, District 3	no-trusted-result
+917	Ruben Colón	local	School Board Member, District 4	no-trusted-result
+919	Luisa Santos	local	School Board Member, District 1	no-trusted-result
+921	Lucia Baez-Geller	local	School Board Chair, District 3	no-trusted-result
+922	Marta Pérez	local	School Board Member, District 4	no-trusted-result
+924	Steve Gallon III	local	School Board Vice Chair, District 6	no-trusted-result
+925	Lubby Navarro	local	School Board Member, District 7	no-trusted-result
+927	Danny Espino	local	School Board Member, District 9	no-trusted-result
+928	Lisa Cane	local	School Board Chair, District 1	no-trusted-result
+934	Eileen Long	local	School Board Member, District 7	no-trusted-result
+935	Kay Fields	local	School Board Chair, District 1	no-trusted-result
+937	Lisa Miller	local	School Board Member, District 3	no-trusted-result
+938	Lori Cunningham	local	School Board Member, District 4	no-trusted-result
+939	Billy Townsend	local	School Board Member, District 5	no-trusted-result
+940	Lynn Wilson	local	School Board Member, District 6	no-trusted-result
+941	Rick Nolte	local	School Board Member, District 7	no-trusted-result
+942	Megan Wright	local	School Board Chair, District 1	no-trusted-result
+943	Gene Trent	local	School Board Member, District 2	no-trusted-result
+944	Jennifer Jenkins	local	School Board Member, District 3	no-trusted-result
+945	Matt Susin	local	School Board Member, District 4	no-trusted-result
+946	Katye Campbell	local	School Board Member, District 5	no-trusted-result
+947	Kristine Kraus	local	School Board Member, District 1	no-trusted-result
+950	Tina Calderone	local	School Board Chair, District 4	no-trusted-result
+952	Jerry Gibson	local	School Board Chair, District 1	no-trusted-result
+953	Stephanie Lucarelli	local	School Board Member, District 2	no-trusted-result
+954	Kelly Lichter	local	School Board Member, District 3	no-trusted-result
+957	Tom Edwards	local	School Board Chair, District 1	no-trusted-result
+958	Karen Rose	local	School Board Member, District 2	no-trusted-result
+959	Bridget Ziegler	local	School Board Member, District 3	no-trusted-result
+960	Robyn Marinelli	local	School Board Member, District 4	no-trusted-result
+961	Timothy Enos	local	School Board Member, District 5	no-trusted-result
+962	Chad Choate	local	School Board Chair, District 1	no-trusted-result
+963	Mary Foreman	local	School Board Member, District 2	no-trusted-result
+964	James Golden	local	School Board Member, District 3	no-trusted-result
+965	Richard Tatem	local	School Board Member, District 4	no-trusted-result
+966	Cindy Spray	local	School Board Member, District 5	no-trusted-result
+968	James Washington	local	School Board Member, District 2	no-trusted-result
+971	Ally Bernstein	local	School Board Member, District 5	no-trusted-result
+972	Terry Castillo	local	School Board Chair, District 1	no-trusted-result
+973	Kelvin Soto	local	School Board Member, District 2	no-trusted-result
+974	Tim Weisheyer	local	School Board Member, District 3	no-trusted-result
+975	Julius Melendez	local	School Board Member, District 4	no-trusted-result
+976	Ricky Booth	local	School Board Member, District 5	no-trusted-result
+980	Shelley Hilliard	local	School Board Member, District 4	no-trusted-result
+982	Tina Certain	local	School Board Chair, District 1	no-trusted-result
+983	Diyonne McGraw	local	School Board Member, District 2	no-trusted-result
+984	Mildred Russell	local	School Board Member, District 3	no-trusted-result
+987	Alex Stemle	local	School Board Chair, District 1	no-trusted-result
+989	Laurie Cox	local	School Board Member, District 3	no-trusted-result
+990	Rosanne Wood	local	School Board Member, District 4	no-trusted-result
+991	Danielle Irwin	local	School Board Member, District 5	no-trusted-result
+992	Kevin Adams	local	School Board Chair, District 1	no-trusted-result
+993	Paul Fetsko	local	School Board Member, District 2	no-trusted-result
+994	Bill Slayton	local	School Board Member, District 3	no-trusted-result
+995	Patty Hightower	local	School Board Member, District 4	no-trusted-result
+997	Teri Barenborg	local	School Board Chair, District 1	no-trusted-result
+998	Jacqueline Rosario	local	School Board Member, District 2	no-trusted-result
+999	Gene Posca	local	School Board Member, District 3	no-trusted-result
+1001	Brian Barefoot	local	School Board Member, District 5	no-trusted-result
+1002	Allison Campbell	local	School Board Chair, District 1	no-trusted-result
+1003	Eric Cummings	local	School Board Member, District 2	no-trusted-result
+1005	Don Browning	local	School Board Member, District 4	no-trusted-result
+1006	Kelly King	local	School Board Member, District 5	no-trusted-result
+1007	Cara Reynolds	local	School Board Chair, District 1	no-trusted-result
+1009	Ruthie Lohmeyer	local	School Board Member, District 3	search-error: DecodeError: DecodeError('Body collection error: error decoding response body')
+1010	Kim Amontree	local	School Board Member, District 4	no-trusted-result
+1013	Daryl Johnson	local	County Commissioner, District 2	no-trusted-result
+1015	Scott Deonas	local	County Commissioner, District 4	no-trusted-result
+1016	Jeral Hall	local	County Commissioner, District 5	no-trusted-result
+1017	Ricky Jones	local	County Commissioner, District 1	no-trusted-result
+1018	Bert Boldt	local	County Commissioner, District 2	dup:files.nc.gov
+1020	Joseph Parrish	local	County Commissioner, District 4	dup:files.nc.gov
+1021	Jessica Gay	local	County Commissioner, District 5	no-trusted-result
+1028	D. Ray Harrison Jr.	local	County Commissioner, District 2	dup:files.nc.gov
+1029	Billy Philman	local	County Commissioner, District 3	dup:files.nc.gov
+1030	Ken Philman	local	County Commissioner, District 4	no-trusted-result
+1032	Donna Storter-Long	local	County Commissioner, District 1	no-trusted-result
+1033	Tim Stanley	local	County Commissioner, District 2	dup:files.nc.gov
+1034	Mark Lapp	local	County Commissioner, District 3	no-trusted-result
+1035	John Ahern	local	County Commissioner, District 4	no-trusted-result
+1036	Jerry Sapp	local	County Commissioner, District 5	no-trusted-result
+1037	Mark Hatch	local	County Commissioner, District 1	dup:www.martin.fl.us
+1038	James Valentine	local	County Commissioner, District 2	dup:files.nc.gov
+1040	Jamie Johnson	local	County Commissioner, District 4	dup:files.nc.gov
+1044	Donnie Browning	local	County Commissioner, District 3	dup:sumtercountyfl.gov
+1045	James Sullivan	local	County Commissioner, District 4	dup:files.nc.gov
+1046	Noel Roberts	local	County Commissioner, District 5	no-trusted-result
+1047	Doyle Brown	local	County Commissioner, District 1	dup:www.martin.fl.us
+1048	Jim Johnson	local	County Commissioner, District 2	dup:files.nc.gov
+1049	David Crummie	local	County Commissioner, District 3	dup:files.nc.gov
+1050	Davis Stoutamire	local	County Commissioner, District 4	dup:files.nc.gov
+1051	Dexter Barber	local	County Commissioner, District 5	dup:files.nc.gov
+1054	Alfred Martin	local	County Commissioner, District 3	dup:files.nc.gov
+1056	Rick Davis	local	County Commissioner, District 5	no-trusted-result
+1057	Wayne Smith	local	County Commissioner, District 1	dup:www.martin.fl.us
+1058	Channing Dobbs	local	County Commissioner, District 2	dup:files.nc.gov
+1059	Ross Chandler	local	County Commissioner, District 3	dup:files.nc.gov
+1060	Willie Whitehead	local	County Commissioner, District 4	dup:files.nc.gov
+1061	Jimmy Tallman	local	County Commissioner, District 5	dup:sumtercountyfl.gov
+1062	Robert Brown	local	County Commissioner, District 1	no-trusted-result
+1063	Randy Ogburn	local	County Commissioner, District 2	no-trusted-result
+1065	Buster Oxendine	local	County Commissioner, District 4	dup:files.nc.gov
+1066	Beth Burnam	local	County Commissioner, District 5	no-trusted-result
+1067	Christia Li Roberts	local	School Board Chair, District 1	no-trusted-result
+1068	Donna Powers	local	School Board Member, District 2	no-trusted-result
+1077	Donna Martin	local	School Board Chair, District 1	no-trusted-result
+1080	Jonathan Wagner	local	School Board Member, District 4	no-trusted-result
+1082	Janice Kerekes	local	School Board Chair, District 1	no-trusted-result
+1083	Erin Skipper	local	School Board Member, District 2	no-trusted-result
+1085	Mary Bolla	local	School Board Member, District 4	no-trusted-result
+1087	Linda Prescott	local	School Board Chair, District 1	no-trusted-result
+1090	Mark Johnson	local	School Board Member, District 4	no-trusted-result
+1091	Shannon Rodriguez	local	School Board Member, District 5	no-trusted-result
+1092	Virginia Bryant	local	School Board Chair, District 1	no-trusted-result
+1093	Thomas Kennedy	local	School Board Member, District 2	no-trusted-result
+1094	Ginger Bryant	local	School Board Member, District 3	no-trusted-result
+1095	Sandy Counts	local	School Board Member, District 4	no-trusted-result
+1097	Sally Moss	local	School Board Chair, District 1	no-trusted-result
+1099	Eddy Thompson	local	School Board Member, District 3	dup:www.sumtercountyfl.gov
+1105	Andy Tuck	local	School Board Member, District 4	no-trusted-result
+1106	Joy Gerig	local	School Board Member, District 5	no-trusted-result
+1107	Linda Sanborn	local	School Board Chair, District 1	no-trusted-result
+1108	Carol Boston	local	School Board Member, District 2	no-trusted-result
+1109	Diane Scott	local	School Board Member, District 3	no-trusted-result
+1110	Jennifer Granse	local	School Board Member, District 4	no-trusted-result
+1111	Scott Peden	local	School Board Member, District 5	no-trusted-result
+1112	Lamar White	local	School Board Chair, District 1	no-trusted-result
+1114	Linda Evanchyk	local	School Board Member, District 3	no-trusted-result
+1115	Tim Bryant	local	School Board Member, District 4	no-trusted-result
+1116	Diane Kelley	local	School Board Member, District 5	no-trusted-result
+1118	Bryce Googe	local	School Board Member, District 2	no-trusted-result
+1119	Pamm Chapman	local	School Board Member, District 3	no-trusted-result
+1121	Steve Moss	local	School Board Member, District 5	no-trusted-result
+1123	Dana Brady	local	School Board Member, District 2	no-trusted-result
+1124	Stephanie Finnell	local	School Board Member, District 3	no-trusted-result
+1125	Hunter Peeler	local	School Board Member, District 4	no-trusted-result
+1126	Steve Nelson	local	School Board Member, District 5	no-trusted-result
+1127	Andy Griffiths	local	School Board Chair, District 1	no-trusted-result
+1128	Sue Woltanski	local	School Board Member, District 2	no-trusted-result
+1129	Bobby Highsmith	local	School Board Member, District 3	no-trusted-result
+1130	John Dick	local	School Board Member, District 4	no-trusted-result
+1131	Mindy Conn	local	School Board Member, District 5	no-trusted-result
+1134	Hazel Gillis	local	School Board Member, District 3	no-trusted-result
+1135	Anthony Martin	local	School Board Member, District 4	no-trusted-result
+1137	David Buckles	local	School Board Chair, District 1	no-trusted-result
+1138	Cynthia Giles	local	School Board Member, District 2	no-trusted-result
+1139	Holly Pickens	local	School Board Member, District 3	no-trusted-result
+1140	Sandra Gilyard	local	School Board Member, District 4	no-trusted-result
+1145	Brian Kramer	state	State Attorney, 8th Circuit	no-trusted-result
+1147	Phil Archer	state	State Attorney, 18th Circuit	no-trusted-result
+1148	Harold Pryor	state	State Attorney, 17th Circuit	no-trusted-result
+1149	John Durrett	state	State Attorney, 3rd Circuit	no-trusted-result
+1150	Melissa Nelson	state	State Attorney, 4th Circuit	no-trusted-result
+1151	Ginger Bowden Madden	state	State Attorney, 1st Circuit	no-trusted-result
+1152	Andrew Warren	state	State Attorney, 13th Circuit	no-trusted-result
+1153	Thomas Bakkedahl	state	State Attorney, 19th Circuit	no-trusted-result
+1154	Amira Fox	state	State Attorney, 20th Circuit	no-trusted-result
+1155	Jack Campbell	state	State Attorney, 2nd Circuit	no-trusted-result
+1158	Bill Gladson	state	State Attorney, 16th Circuit	no-trusted-result
+1159	Andrew Bain	state	State Attorney, 9th Circuit (appointed)	no-trusted-result
+1164	Ed Brodsky	state	State Attorney, 12th Circuit	no-trusted-result
+1165	R.J. Larizza	state	State Attorney, 7th Circuit	no-trusted-result
+1167	Pedro Garcia	local	Property Appraiser, Miami-Dade County	no-trusted-result
+1173	Joe Scott	local	Supervisor of Elections, Broward County	no-trusted-result
+1175	Dorothy Jacks	local	Property Appraiser, Palm Beach County	no-trusted-result
+1180	Nancy Millan	local	Tax Collector, Hillsborough County	no-trusted-result
+1186	Jody Phillips	local	Clerk of Circuit Court, Duval County	no-trusted-result
+1189	Jerry Holland	local	Supervisor of Elections, Duval County	dup:www.duvalelections.gov
+1190	Ken Burke	local	Clerk of Circuit Court, Pinellas County	no-trusted-result
+1194	Kevin Karnes	local	Clerk of Circuit Court, Lee County	no-trusted-result
+1196	Noelle Branning	local	Tax Collector, Lee County	no-trusted-result
+1197	Tommy Doyle	local	Supervisor of Elections, Lee County	no-trusted-result
+1198	Stacy Butterfield	local	Clerk of Circuit Court, Polk County	no-trusted-result
+1200	Joe Tedder	local	Tax Collector, Polk County	no-trusted-result
+1203	Dana Blickley	local	Property Appraiser, Brevard County	no-trusted-result
+1204	Lisa Cullen	local	Tax Collector, Brevard County	no-trusted-result
+1206	Laura Roth	local	Clerk of Circuit Court, Volusia County	no-trusted-result
+1207	Larry Bartlett	local	Property Appraiser, Volusia County	no-trusted-result
+1208	Will Roberts	local	Tax Collector, Volusia County	no-trusted-result
+1210	Grant Maloy	local	Clerk of Circuit Court, Seminole County	no-trusted-result
+1211	David Johnson	local	Property Appraiser, Seminole County	no-trusted-result
+1214	Karen Rushing	local	Clerk of Circuit Court, Sarasota County	no-trusted-result
+1216	Barbara Ford-Coates	local	Tax Collector, Sarasota County	no-trusted-result
+1221	Brian Corley	local	Supervisor of Elections, Pasco County	no-trusted-result
+1222	Angel Colonneso	local	Clerk of Circuit Court, Manatee County	no-trusted-result
+1223	Jim Todora	local	Property Appraiser, Manatee County	no-trusted-result
+1224	Ken Burton Jr.	local	Tax Collector, Manatee County	no-trusted-result
+1225	James Satcher	local	Supervisor of Elections, Manatee County	no-trusted-result
+1226	Crystal Kinzel	local	Clerk of Circuit Court, Collier County	no-trusted-result
+1227	Abe Skinner	local	Property Appraiser, Collier County	no-trusted-result
+1228	Abe Skinner	local	Tax Collector, Collier County	no-trusted-result
+1231	Katrina Scarborough	local	Property Appraiser, Osceola County	no-trusted-result
+1233	Mary Jane Arrington	local	Supervisor of Elections, Osceola County	no-trusted-result
+1235	Michelle Franklin	local	Property Appraiser, St. Lucie County	no-trusted-result
+1236	Chris Craft	local	Tax Collector, St. Lucie County	no-trusted-result
+1240	David Jordan	local	Tax Collector, Lake County	no-trusted-result
+1242	Gregory Harrell	local	Clerk of Circuit Court, Marion County	no-trusted-result
+1244	George Albright	local	Tax Collector, Marion County	no-trusted-result
+1246	Pam Childers	local	Clerk of Circuit Court, Escambia County	no-trusted-result
+1247	Chris Jones	local	Property Appraiser, Escambia County	no-trusted-result
+1248	Scott Lunsford	local	Tax Collector, Escambia County	no-trusted-result
+1249	Robert Bender	local	Supervisor of Elections, Escambia County	no-trusted-result
+1250	J.K. Irby	local	Clerk of Circuit Court, Alachua County	no-trusted-result
+1251	Ayesha Solomon	local	Property Appraiser, Alachua County	no-trusted-result
+1252	John Power	local	Tax Collector, Alachua County	no-trusted-result
+1253	Kim Barton	local	Supervisor of Elections, Alachua County	no-trusted-result
+1254	Roger Eaton	local	Clerk of Circuit Court, Charlotte County	no-trusted-result
+1258	Jeffrey Barton	local	Clerk of Circuit Court, Indian River County	no-trusted-result
+1259	Wesley Davis	local	Property Appraiser, Indian River County	no-trusted-result
+1260	Carole Jean Jordan	local	Tax Collector, Indian River County	no-trusted-result
+1261	Leslie Swan	local	Supervisor of Elections, Indian River County	no-trusted-result
+1263	Jenny Fields	local	Property Appraiser, Martin County	no-trusted-result
+1264	Ruth Pietruszewski	local	Tax Collector, Martin County	no-trusted-result
+1266	Brandon Patty	local	Clerk of Circuit Court, St. Johns County	no-trusted-result
+1267	Eddie Creamer	local	Property Appraiser, St. Johns County	no-trusted-result
+1273	Kaiti Lenhart	local	Supervisor of Elections, Flagler County	no-trusted-result
+1274	Gwen Marshall	local	Clerk of Circuit Court, Leon County	no-trusted-result
+1275	Akin Akinyemi	local	Property Appraiser, Leon County	no-trusted-result
+1276	Doris Maloy	local	Tax Collector, Leon County	no-trusted-result
+1278	Tara Green	local	Clerk of Circuit Court, Clay County	no-trusted-result
+1279	Roger Suggs	local	Property Appraiser, Clay County	no-trusted-result
+1280	Diane Hutchings	local	Tax Collector, Clay County	no-trusted-result
+1281	Chris Chambless	local	Supervisor of Elections, Clay County	no-trusted-result
+1282	John Crawford	local	Clerk of Circuit Court, Nassau County	no-trusted-result
+1283	Michael Hickox	local	Property Appraiser, Nassau County	dup:www.orlandosentinel.com
+1284	John Drew	local	Tax Collector, Nassau County	no-trusted-result
+1286	Bob Germaine	local	Clerk of Circuit Court, Highlands County	no-trusted-result
+1287	Ray McIntyre	local	Property Appraiser, Highlands County	no-trusted-result
+1288	Eric Zwayer	local	Tax Collector, Highlands County	no-trusted-result
+1289	Penny Ogg	local	Supervisor of Elections, Highlands County	no-trusted-result
+1291	Sandra Haas	local	Property Appraiser, Hernando County	no-trusted-result
+1292	John Druzbick	local	Tax Collector, Hernando County	no-trusted-result
+1294	Angela Vick	local	Clerk of Circuit Court, Citrus County	no-trusted-result
+1295	Cregg Dalton	local	Property Appraiser, Citrus County	no-trusted-result
+1296	Janice Warren	local	Tax Collector, Citrus County	no-trusted-result
+1301	William Keen Jr.	local	Supervisor of Elections, Sumter County	dup:elections.sumtercountyfl.gov
+1305	Tappie Villane	local	Supervisor of Elections, Santa Rosa County	no-trusted-result
+1306	JD Peacock	local	Clerk of Circuit Court, Okaloosa County	no-trusted-result
+1308	Ben Anderson	local	Tax Collector, Okaloosa County	no-trusted-result
+1310	Bill Kinsaul	local	Clerk of Circuit Court, Bay County	no-trusted-result
+1311	Dan Sowell	local	Property Appraiser, Bay County	no-trusted-result
+1312	Chuck Perdue	local	Tax Collector, Bay County	no-trusted-result
+1314	P. DeWitt Cason	local	Clerk of Circuit Court, Columbia County	no-trusted-result
+1316	Ronnie Broughton	local	Tax Collector, Columbia County	no-trusted-result
+1318	Kevin Madok	local	Clerk of Circuit Court, Monroe County	no-trusted-result
+1320	Danise Henriquez	local	Tax Collector, Monroe County	no-trusted-result
+1322	Alex Alford	local	Clerk of Circuit Court, Walton County	no-trusted-result
+1324	Rhonda Skipper	local	Tax Collector, Walton County	no-trusted-result
+1325	Bobby Beasley	local	Supervisor of Elections, Walton County	dup:www.mywaltonfl.gov
+1327	Rick Hagan	local	Property Appraiser, Putnam County	no-trusted-result
+1329	Charles Overturf	local	Supervisor of Elections, Putnam County	no-trusted-result
+1330	Clay Rooks	local	Clerk of Circuit Court, Jackson County	no-trusted-result
+1331	Pete Andrews	local	Property Appraiser, Jackson County	dup:map.polkflpa.gov
+1334	Jerald Bryant	local	Clerk of Circuit Court, Okeechobee County	no-trusted-result
+1335	Walt Chancey	local	Property Appraiser, Okeechobee County	dup:vrcdn.electionsfl.org
+1336	Celeste Watford	local	Tax Collector, Okeechobee County	no-trusted-result
+1337	Melissa Arnold	local	Supervisor of Elections, Okeechobee County	dup:vrcdn.electionsfl.org
+1339	Lorie Ayers	local	Property Appraiser, DeSoto County	no-trusted-result
+1341	Mark Negley	local	Supervisor of Elections, DeSoto County	no-trusted-result
+1345	Jeff Ussery	local	Supervisor of Elections, Hardee County	no-trusted-result
+1346	Barbara Butler	local	Clerk of Circuit Court, Hendry County	no-trusted-result
+1347	Phillip Pelletier	local	Property Appraiser, Hendry County	no-trusted-result
+1348	Peggy Hampton	local	Tax Collector, Hendry County	no-trusted-result
+1351	Timothy Sweat	local	Property Appraiser, Baker County	no-trusted-result
+1352	Gene Harvey	local	Tax Collector, Baker County	no-trusted-result
+1354	Ray Norman	local	Clerk of Circuit Court, Bradford County	no-trusted-result
+1356	Teresa Phillips	local	Tax Collector, Bradford County	no-trusted-result
+1358	Nicholas Thomas	local	Clerk of Circuit Court, Gadsden County	no-trusted-result
+1359	Clyde Collins	local	Property Appraiser, Gadsden County	dup:www.orlandosentinel.com
+1360	Dale Summerford	local	Tax Collector, Gadsden County	no-trusted-result
+1362	Annie Mae Murphy	local	Clerk of Circuit Court, Taylor County	no-trusted-result
+1364	Mark Wiggins	local	Tax Collector, Taylor County	no-trusted-result
+1366	Brent Whitaker	local	Clerk of Circuit Court, Suwannee County	no-trusted-result
+1368	Sharon Jordan	local	Tax Collector, Suwannee County	dup:suwanneecountyfl.gov
+1371	Ed Brimner	local	Property Appraiser, Wakulla County	no-trusted-result
+1372	Lisa Craze	local	Tax Collector, Wakulla County	no-trusted-result
+1373	Joseph Morgan	local	Supervisor of Elections, Wakulla County	no-trusted-result
+1375	Greg Payne	local	Property Appraiser, Holmes County	no-trusted-result
+1378	Lora Bell	local	Clerk of Circuit Court, Washington County	no-trusted-result
+1379	Gil Carter	local	Property Appraiser, Washington County	dup:www.orlandosentinel.com
+1380	Faye Worthington	local	Tax Collector, Washington County	no-trusted-result
+1381	Carol Finch Rudd	local	Supervisor of Elections, Washington County	dup:www.sun-sentinel.com
+1382	Kirk Reams	local	Clerk of Circuit Court, Jefferson County	no-trusted-result
+1383	Angela Gray	local	Property Appraiser, Jefferson County	no-trusted-result
+1384	Lois Hunter	local	Tax Collector, Jefferson County	no-trusted-result
+1387	Leigh Barfield	local	Property Appraiser, Madison County	dup:map.polkflpa.gov
+1390	Ruth Attaway	local	Clerk of Circuit Court, Calhoun County	no-trusted-result
+1391	Joe Wood	local	Property Appraiser, Calhoun County	dup:www.orlandosentinel.com
+1392	Jim Strickland	local	Tax Collector, Calhoun County	no-trusted-result
+1393	Margie Laramore	local	Supervisor of Elections, Calhoun County	dup:jeffersonvotesfl.gov
+1394	Dana Johnson	local	Clerk of Circuit Court, Dixie County	no-trusted-result
+1395	Larry Sapp	local	Property Appraiser, Dixie County	no-trusted-result
+1398	Marcia Johnson	local	Clerk of Circuit Court, Franklin County	no-trusted-result
+1399	Rhonda Skipper	local	Property Appraiser, Franklin County	no-trusted-result
+1403	Ed Wolgast	local	Property Appraiser, Gilchrist County	dup:www.orlandosentinel.com
+1405	Connie Sanchez	local	Supervisor of Elections, Gilchrist County	no-trusted-result
+1407	Lorie Ward	local	Property Appraiser, Glades County	no-trusted-result
+1410	Rebecca Norris	local	Clerk of Circuit Court, Gulf County	no-trusted-result
+1411	Mitch Burke	local	Property Appraiser, Gulf County	dup:map.polkflpa.gov
+1412	Shirley Jenkins	local	Tax Collector, Gulf County	no-trusted-result
+1413	John Hanlon	local	Supervisor of Elections, Gulf County	no-trusted-result
+1414	Ricky Lyons	local	Clerk of Circuit Court, Lafayette County	no-trusted-result
+1415	Bobby Hatch	local	Property Appraiser, Lafayette County	no-trusted-result
+1417	Lavan Hawkins	local	Supervisor of Elections, Lafayette County	no-trusted-result
+1418	Daniel Stanley	local	Clerk of Circuit Court, Liberty County	no-trusted-result
+1419	Patricia Whitfield	local	Property Appraiser, Liberty County	no-trusted-result
+1420	Marie Goodman	local	Tax Collector, Liberty County	no-trusted-result
+1423	Greg Godwin	local	Property Appraiser, Hamilton County	no-trusted-result
+1426	Danny Shipp	local	Clerk of Circuit Court, Levy County	no-trusted-result
+1427	Osborn Barker	local	Property Appraiser, Levy County	no-trusted-result
+1428	Linda Fugate	local	Tax Collector, Levy County	no-trusted-result
+1431	Virginia Barton	local	Property Appraiser, Union County	no-trusted-result
+1433	Deborah Osborne	local	Supervisor of Elections, Union County	no-trusted-result
+1434	Raemi Eagle-Glenn	local	County Commissioner, District 5 (Chair)	no-trusted-result
+1436	Anna Prizzia	local	County Commissioner, District 3	no-trusted-result
+1437	Marihelen Wheeler	local	County Commissioner, District 2	no-trusted-result
+1438	Mary Alford	local	County Commissioner, District 1	no-trusted-result
+1439	Harold McCartney	local	City Council Member, At-Large Group 5	dup:www.duvalelections.gov
+1440	Nick Howland	local	City Council Member, At-Large Group 4	no-trusted-result
+1441	Matt Carlucci	local	City Council Member, At-Large Group 3	no-trusted-result
+1442	Sam Newby	local	City Council Member, At-Large Group 2	no-trusted-result
+1443	Michael Boylan	local	City Council Member, At-Large Group 1	no-trusted-result
+1444	Kevin Carrico	local	City Council Vice President	no-trusted-result
+1445	Ron Salem	local	City Council President	no-trusted-result
+1453	Jesse Davis	local	School Board Member, District 1	no-trusted-result
+1454	Charlie Burnett	local	School Board Member, District 2	no-trusted-result
+1455	Artie Burnett	local	School Board Member, District 3	no-trusted-result
+1457	Brad Griffis	local	School Board Member, District 5	no-trusted-result
+1458	Stacy Creighton	local	School Board Member, District 1	no-trusted-result
+1459	Sheila Gallagher	local	School Board Member, District 2	no-trusted-result
+1461	Cheryl Canova	local	School Board Member, District 4	no-trusted-result
+1462	Daniel Riddick	local	School Board Member, District 5	dup:lirp.cdn-website.com
+1464	Tim Smith	local	School Board Member, District 2	no-trusted-result
+1465	Willie Lewis	local	School Board Member, District 3	no-trusted-result
+1466	Clifton Edenfield	local	School Board Member, District 4	no-trusted-result
+1468	Michael Cosentino	local	School Board Member, District 1	no-trusted-result
+1469	Carlos Kelly	local	School Board Member, District 2	no-trusted-result
+1471	Emily Morrison	local	School Board Member, District 4	no-trusted-result
+1473	Eric Hatcher	local	School Board Member, District 1	no-trusted-result
+1474	Wayne Feagle	local	School Board Member, District 2	no-trusted-result
+1476	Rebecca Sapp	local	School Board Member, District 4	no-trusted-result
+1477	Mitch Hardee	local	School Board Member, District 5	no-trusted-result
+1478	Pam Shiver	local	School Board Member, District 1	no-trusted-result
+1479	Carl Whaley	local	School Board Member, District 2	dup:housedocs.myfloridahouse.gov
+1480	Fonda Davis	local	School Board Member, District 3	no-trusted-result
+1481	Stacy Kirvin	local	School Board Member, District 4	no-trusted-result
+1483	Steve Scott	local	School Board Member, District 1	no-trusted-result
+1484	Tyrone Smith	local	School Board Member, District 2	no-trusted-result
+1485	Isaac Simmons	local	School Board Member, District 3	no-trusted-result
+1486	Charlie Frost	local	School Board Member, District 4	no-trusted-result
+1487	Audrey Lewis	local	School Board Member, District 5	no-trusted-result
+1488	Kyle Pedersen	local	School Board Member, District 1	no-trusted-result
+1490	Marion Poitevint	local	School Board Member, District 3	dup:gilchrist.fl.us
+1491	Michael Martin	local	School Board Member, District 4	no-trusted-result
+1492	Devin Strickland	local	School Board Member, District 5	no-trusted-result
+1493	Laura Akin	local	School Board Member, District 1	no-trusted-result
+1495	Sandra Drury	local	School Board Member, District 3	dup:www.stlucie.k12.fl.us
+1496	Mike McLeod	local	School Board Member, District 4	no-trusted-result
+1497	Rachel Denton	local	School Board Member, District 5	no-trusted-result
+1498	Billy Traylor	local	School Board Member, District 1	no-trusted-result
+1499	Brooke Wooten	local	School Board Member, District 2	no-trusted-result
+1501	Danny Little	local	School Board Member, District 4	dup:www.sun-sentinel.com
+1502	Brett Banks	local	School Board Member, District 5	no-trusted-result
+1504	Garry McWhorter	local	School Board Member, District 2	dup:cmsv2-assets.apptegy.net
+1505	Thomas Trevino	local	School Board Member, District 3	dup:cmsv2-assets.apptegy.net
+1506	Mildred Smith	local	School Board Member, District 4	no-trusted-result
+1507	Cathy Towns	local	School Board Member, District 5	dup:cmsv2-assets.apptegy.net
+1508	Stephanie Daniels	local	School Board Member, District 1	no-trusted-result
+1509	Victoria Washington	local	School Board Member, District 2	no-trusted-result
+1510	John Perry	local	School Board Member, District 3	no-trusted-result
+1511	Jon Woosley	local	School Board Member, District 4	no-trusted-result
+1512	Emily Puente	local	School Board Member, District 5	no-trusted-result
+1513	Sid Johnson	local	School Board Member, District 1	no-trusted-result
+1514	Alan Justice	local	School Board Member, District 2	no-trusted-result
+1515	Debra Lewis	local	School Board Member, District 3	no-trusted-result
+1517	Tommy Rone	local	School Board Member, District 5	no-trusted-result
+1518	Chris Johnson	local	School Board Member, District 1	no-trusted-result
+1519	Charlotte Gardner	local	School Board Member, District 2	no-trusted-result
+1520	Mack Howard	local	School Board Member, District 3	no-trusted-result
+1521	Stacey Goodson	local	School Board Member, District 4	no-trusted-result
+1522	Diane Basford	local	School Board Member, District 5	no-trusted-result
+1523	Larry Halsey	local	School Board Member, District 1	no-trusted-result
+1524	Sandra Saunders	local	School Board Member, District 2	no-trusted-result
+1525	Shirley Washington	local	School Board Member, District 3	no-trusted-result
+1526	Larry Branan	local	School Board Member, District 4	dup:www.sun-sentinel.com
+1527	Charles Boland	local	School Board Member, District 5	no-trusted-result
+1528	Jason Walker	local	School Board Member, District 1	no-trusted-result
+1530	Steve Land	local	School Board Member, District 3	no-trusted-result
+1531	J.W. Morris	local	School Board Member, District 4	dup:www.lafayette.k12.fl.us
+1532	Jill Barrington	local	School Board Member, District 5	no-trusted-result
+1533	Kyle Peddie	local	School Board Member, District 1	no-trusted-result
+1534	Todd McDaniel	local	School Board Member, District 2	no-trusted-result
+1535	Darrel Hayes	local	School Board Member, District 3	no-trusted-result
+1536	Jim Jeter	local	School Board Member, District 4	no-trusted-result
+1537	Tina Tharpe	local	School Board Member, District 5	no-trusted-result
+1538	VeEtta Hagan	local	School Board Member, District 1	dup:cmsv2-assets.apptegy.net
+1539	Karen Pickles	local	School Board Member, District 2	no-trusted-result
+1540	Susie Williamson	local	School Board Member, District 3	no-trusted-result
+1541	Bart Alford	local	School Board Member, District 4	dup:www.sun-sentinel.com
+1542	Kenny Hall	local	School Board Member, District 5	no-trusted-result
+1544	Jill Holcomb	local	School Board Member, District 2	dup:core-docs.s3.amazonaws.com
+1545	Gary Ritter	local	School Board Member, District 3	no-trusted-result
+1546	Malissa Morgan	local	School Board Member, District 4	no-trusted-result
+1547	Melisa Jahner	local	School Board Member, District 5	dup:core-docs.s3.amazonaws.com
+1548	Tim Alcorn	local	School Board Member, District 1	no-trusted-result
+1550	Catherine Cason	local	School Board Member, District 3	no-trusted-result
+1551	Jerry Taylor	local	School Board Member, District 4	dup:cmsv2-assets.apptegy.net
+1552	Ronald White	local	School Board Member, District 5	dup:cmsv2-assets.apptegy.net
+1553	Deidra Zorn	local	School Board Member, District 1	dup:cmsv2-assets.apptegy.net
+1554	Sandra Gandy	local	School Board Member, District 2	no-trusted-result
+1555	Jeannie Mathis	local	School Board Member, District 3	no-trusted-result
+1557	Kenny Murphy	local	School Board Member, District 5	no-trusted-result
+1558	Joann Daniels	local	School Board Member, District 1	no-trusted-result
+1559	Josh Brown	local	School Board Member, District 2	no-trusted-result
+1560	Laura Lawhon	local	School Board Member, District 3	no-trusted-result
+1561	Greg Thomas	local	School Board Member, District 4	no-trusted-result
+1562	Cale Langston	local	School Board Member, District 5	no-trusted-result
+1564	Susan Roberts	local	School Board Member, District 2	no-trusted-result
+1565	Vann Brock	local	School Board Member, District 3	no-trusted-result
+1566	Brad Steverson	local	School Board Member, District 4	no-trusted-result
+1568	Sammy McCoy	local	School Board Member, District 1	dup:cmsv2-assets.apptegy.net
+1569	Gary Godwin	local	School Board Member, District 2	dup:lirp.cdn-website.com
+1570	Thomas Moffses	local	School Board Member, District 3	no-trusted-result
+1571	Johnny Bullard	local	School Board Member, District 4	no-trusted-result
+1573	Stacy Scott	state	Public Defender, 8th Circuit (Alachua/Baker/Bradford/Gilchrist/Levy/Union)	no-trusted-result
+1574	Brandon Perkins	state	Public Defender, 14th Circuit (Bay/Calhoun/Gulf/Holmes/Jackson/Washington)	dup:www.sun-sentinel.com
+1575	Blaise Trettis	state	Public Defender, 18th Circuit (Brevard/Seminole)	no-trusted-result
+1576	Gordon Weekes	state	Public Defender, 17th Circuit (Broward)	no-trusted-result
+1577	Blair Payne	state	Public Defender, 3rd Circuit (Columbia/Dixie/Hamilton/Lafayette/Madison/Suwannee/Taylor)	no-trusted-result
+1578	Charlie Cofer	state	Public Defender, 4th Circuit (Duval/Clay/Nassau)	no-trusted-result
+1580	Julianne Holt	state	Public Defender, 13th Circuit (Hillsborough)	no-trusted-result
+1581	Diamond Litty	state	Public Defender, 19th Circuit (Indian River/Martin/Okeechobee/St. Lucie)	no-trusted-result
+1583	Jessica Yeary	state	Public Defender, 2nd Circuit (Leon/Gadsden/Jefferson/Wakulla/Liberty/Franklin)	no-trusted-result
+1585	Carlos Martinez	state	Public Defender, 11th Circuit (Miami-Dade)	no-trusted-result
+1588	Carey Haughwout	state	Public Defender, 15th Circuit (Palm Beach)	no-trusted-result
+1590	Rex Dimmig	state	Public Defender, 10th Circuit (Polk/Hardee/Highlands)	no-trusted-result
+1591	Larry Eger	state	Public Defender, 12th Circuit (Sarasota/Manatee/DeSoto)	no-trusted-result
+1606	Gloria Walker	state	Chief Judge, 8th Judicial Circuit	no-trusted-result
+1610	Andrew Decker	state	Chief Judge, 3rd Judicial Circuit	dup:cc-flcourts-storage.s3.amazona
+1611	Mark Borello	state	Chief Judge, 4th Judicial Circuit	dup:cc-flcourts-storage.s3.amazona
+1612	John Simon	state	Chief Judge, 1st Judicial Circuit	dup:cc-flcourts-storage.s3.amazona
+1618	Nushin Sayfie	state	Chief Judge, 11th Judicial Circuit	no-trusted-result
+1619	Mark Jones	state	Chief Judge, 16th Judicial Circuit	no-trusted-result
+1622	Michael Andrews	state	Chief Judge, 6th Judicial Circuit	dup:cc-flcourts-storage.s3.amazona
+1623	Donald Jacobsen	state	Chief Judge, 10th Judicial Circuit	no-trusted-result
+1624	Charles Roberts	state	Chief Judge, 12th Judicial Circuit	dup:cc-flcourts-storage.s3.amazona
+1626	Tom Keen	local	City Commissioner, District 1, Orlando	no-trusted-result
+1633	Brandi Gabbard	local	City Council Member, District 2, St. Petersburg	no-trusted-result
+1634	Ed Montanari	local	City Council Member, District 3, St. Petersburg	no-trusted-result
+1644	Christine King	local	City Commissioner, District 5, Miami	no-trusted-result
+1646	Jeremy Matlow	local	City Commissioner, Seat 2, Tallahassee	no-trusted-result
+1647	Jack Porter	local	City Commissioner, Seat 3, Tallahassee	no-trusted-result
+1649	John Dailey	local	Mayor, City of Tallahassee	no-trusted-result
+1650	Bill Steinke	local	City Council Member, District 1, Cape Coral	no-trusted-result
+1651	Dan Sheppard	local	City Council Member, District 2, Cape Coral	no-trusted-result
+1653	Patty Cummings	local	City Council Member, District 4, Cape Coral	no-trusted-result
+1655	Keith Long	local	City Council Member, District 6, Cape Coral	no-trusted-result
+1656	John Gunter	local	Mayor, City of Cape Coral	no-trusted-result
+1658	Jesus Tundidor	local	City Council President, Hialeah	no-trusted-result
+1659	Vivian Casals-Munoz	local	City Council Member, Hialeah	no-trusted-result
+1661	Teniadé Broughton	local	City Council Member, District 1, Pensacola	no-trusted-result
+1662	Sherri Myers	local	City Council Member, District 2, Pensacola	no-trusted-result
+1664	Jared Moore	local	City Council Member, District 4, Pensacola	no-trusted-result
+1665	Allison Patton	local	City Council Member, District 5, Pensacola	no-trusted-result
+1666	Ann Hill	local	City Council Member, District 6, Pensacola	no-trusted-result
+1667	D.C. Reeves	local	Mayor, City of Pensacola	no-trusted-result
+1669	Matt Howland	local	City Commissioner, At-Large 1, Gainesville	no-trusted-result
+1671	Shannon Martin	local	Mayor, City of Port St. Lucie	no-trusted-result
+1672	Jolien Caraballo	local	Vice Mayor, City of Port St. Lucie	no-trusted-result
+1674	Stephanie Madden	local	City Commissioner, Lakeland	no-trusted-result
+1675	Vacant (District 1)	local	School Board Member, District 1	no-trusted-result
+1676	Janie Ruddy	local	School Board Member, District 2	no-trusted-result
+1677	Lauren Ramirez	local	School Board Member, District 3	no-trusted-result
+1678	Christy Chong	local	School Board Chair, District 4	no-trusted-result
+1679	Will Furry	local	School Board Member, District 5	no-trusted-result
+1681	Ken Amaro	local	City Council Member, District 1	no-trusted-result
+1682	Mike Gay	local	City Council Member, District 2	no-trusted-result
+1687	Jimmy Peluso	local	City Council Member, District 7	no-trusted-result
+1688	Reggie Gaffney Jr.	local	City Council Member, District 8	no-trusted-result
+1689	Tyrona Clark-Murray	local	City Council Member, District 9	no-trusted-result
+1690	Ju'Coby Pittman	local	City Council Member, District 10	no-trusted-result
+1691	Raul Arias Jr.	local	City Council Member, District 11	no-trusted-result
+1693	Rory Diamond	local	City Council Member, District 13	no-trusted-result
+1694	Rahman Johnson	local	City Council Member, District 14	no-trusted-result
+1695	Terrance Freeman	local	City Council Member, At-Large Group 1	no-trusted-result
+1699	Chris Miller	local	City Council Member, At-Large Group 5	no-trusted-result
+1711	Gwendolyn Henderson	local	Tampa City Council, District 5	no-trusted-result
+1724	Mike Harting	local	St. Petersburg City Council, District 3	no-trusted-result
+1739	Dianne Williams-Cox	local	Tallahassee City Commissioner, Seat 4	no-trusted-result
+1743	Anthony Bonna	local	Port St. Lucie City Council Member	no-trusted-result
+1744	Stephanie Morgan	local	Port St. Lucie City Council Member	no-trusted-result
+1745	David Poitier	local	Port St. Lucie City Council Member	no-trusted-result
+1748	Tom Kilraine	local	Cape Coral City Council, District 2	no-trusted-result
+1750	Dan Kaduk	local	Cape Coral City Council, District 4	no-trusted-result
+1751	Tim Nelson	local	Cape Coral City Council, District 5	no-trusted-result
+1753	Alyssa Lehmann	local	Cape Coral City Council, District 7	no-trusted-result
+1757	Maria Rodriguez	local	Pembroke Pines Commissioner, District 3	no-trusted-result
+1758	Michael Hernandez	local	Pembroke Pines Vice Mayor, District 4	no-trusted-result
+1763	Bruce Rector	local	Mayor of Clearwater	no-trusted-result
+1766	Rob Medina	local	Mayor of Palm Bay	no-trusted-result
+1770	Santiago Avila	local	Mayor of Deltona	no-trusted-result
+1774	Paul Anderson	local	Mayor of Melbourne	no-trusted-result
+1775	Todd Drosky	local	Mayor of Deerfield Beach	no-trusted-result
+1776	Rodney Harris	local	Mayor of Miami Gardens	no-trusted-result
+1779	Rhonda A. Anderson	local	Mayor of Coral Gables	dup:mdctaxcollector.gov
+1782	Mike Amundsen	local	Mayor of Ocala	no-trusted-result
+1783	Kevin Anderson	local	Mayor of Fort Myers	no-trusted-result
+1784	Shelly Petrolia	local	Mayor of Delray Beach	no-trusted-result
+1785	Jackie Espinosa	local	Mayor of Kissimmee	no-trusted-result
+1787	Trinette Frazier	local	Mayor of Boynton Beach	no-trusted-result
+1788	Caryl Shuham	local	Hollywood Commissioner, District 1	no-trusted-result
+1791	Adam Gruber	local	Hollywood Commissioner, District 4	dup:www.broward.org
+1792	Kevin Biederman	local	Hollywood Commissioner, District 5	no-trusted-result
+1794	Cathleen Ward	local	West Palm Beach Commissioner, District 1	no-trusted-result
+1795	Shalonda Warren	local	West Palm Beach Commission President, District 2	no-trusted-result
+1796	Christy Fox	local	West Palm Beach Commissioner, District 3	no-trusted-result
+1797	Joseph Peduzzi	local	West Palm Beach Commissioner, District 4	no-trusted-result
+1800	Jeff Webb	local	Vice Mayor of Cedar Key	no-trusted-result
+1803	Brenda Ash	local	Mayor of Apalachicola	no-trusted-result
+1804	Despina George	local	City Commissioner, Apalachicola	no-trusted-result
+1805	Adriane Elliott	local	City Commissioner, Apalachicola	no-trusted-result
+1807	Donna Duncan	local	City Commissioner, Apalachicola	no-trusted-result
+1808	James P. Kersey	local	Mayor of Bristol	no-trusted-result
+1810	Rodney Braden	local	City Council Member, Destin	dup:www.jupiter.fl.us
+1812	Jim Bagby	local	City Council Member, Destin	no-trusted-result
+1814	Sandy Trammell	local	City Council Member, Destin	no-trusted-result
+1816	Laurence Vorisek	local	Mayor of Yankeetown	no-trusted-result
+1822	George Gay	local	Mayor of Alford	no-trusted-result
+1827	Fletcher J. Hope	local	Mayor of Archer	no-trusted-result
+1829	Keller Lanahan	local	Vice Mayor of Atlantis	no-trusted-result
+1832	Billy James	local	Mayor of Bascom	no-trusted-result
+1833	Todd Watzel	local	Mayor of Bay Lake	no-trusted-result
+1834	Sandra Moore	local	Mayor of Bell	no-trusted-result
+1836	Steve Blume	local	Mayor of Belleair Shore	no-trusted-result
+1838	Stephen Emmett	local	Mayor of Beverly Beach	no-trusted-result
+1842	John Chappie	local	Mayor of Bradenton Beach	no-trusted-result
+1844	Ken Saunders	local	Mayor of Branford	no-trusted-result
+1845	Ted Gross	local	Mayor of Briny Breezes	no-trusted-result
+1846	Bruce A. Greenlee	local	Mayor of Bronson	no-trusted-result
+1849	Randy Knagge	local	Mayor of Callahan	no-trusted-result
+1850	Douglas Cotton	local	Mayor of Campbellton	no-trusted-result
+1854	Tom Shoriak	local	City Council Member, Cape Canaveral	no-trusted-result
+1855	Don Willis	local	City Council Member, Cape Canaveral	no-trusted-result
+1859	Christopher Moultry	local	Mayor of Chattahoochee	no-trusted-result
+1868	Josh Cramer	local	City Council Member, Bradenton	no-trusted-result
+1869	Marianne Barnebey	local	City Council Member, Bradenton	no-trusted-result
+1870	Lisa Gonzalez Moore	local	City Council Member, Bradenton	no-trusted-result
+1871	Pam Coachman	local	City Council Member, Bradenton	no-trusted-result
+1872	Mike Gibson	local	Mayor of Bonita Springs	no-trusted-result
+1875	David Griggs	local	City Commissioner, Callaway	no-trusted-result
+1876	Kenneth L. Ayers	local	City Commissioner, Callaway	no-trusted-result
+1879	Mark Busch	local	City Commissioner, Casselberry	no-trusted-result
+1880	Thomas E. Kirk	local	City Commissioner, Casselberry	dup:www.orlando.gov
+1881	Anthony Aramendia	local	Vice Mayor of Casselberry	no-trusted-result
+1892	Lavander Hearn	local	City Council Member, Cocoa	no-trusted-result
+1893	Patricia Weeks	local	City Council Member, Cocoa	dup:www.cocoafl.gov
+1895	Keith Capizzi	local	Mayor of Cocoa Beach	no-trusted-result
+1897	Tim Tumulty	local	City Commissioner, Cocoa Beach	no-trusted-result
+1898	Jeremy Hutcherson	local	City Commissioner, Cocoa Beach	no-trusted-result
+1900	Calvary Chapel Merritt Island	local	City Commissioner, Cocoa Beach	no-trusted-result
+1903	Who Is My	local	City Commissioner, Coconut Creek	no-trusted-result
+1912	Steve Miller	local	Mayor of Coleman	dup:elections.sumtercountyfl.gov
+1915	Nancy Metayer	local	Vice Mayor of Coral Springs	no-trusted-result
+1948	Bob Campbell	local	Mayor of DeFuniak Springs	no-trusted-result
+1957	Chris Cloudman	local	Mayor of DeLand	no-trusted-result
+1959	Kevin Reid	local	City Commissioner, DeLand	no-trusted-result
+1960	Daniel Reed	local	City Commissioner, DeLand	no-trusted-result
+1974	Rafael Pineyro Councilman Maureen	local	City Council Member, Doral	no-trusted-result
+1975	Nicole Reinoso Councilwoman Doral	local	City Council Member, Doral	no-trusted-result
+1977	Councilwoman Rafael Pineyro	local	City Council Member, Doral	no-trusted-result
+1978	Maureen Porras	local	City Council Member, Doral	no-trusted-result
+1979	Nicole Reinoso	local	City Council Member, Doral	no-trusted-result
+1994	Freaney Maureen	local	Mayor of Dunedin	no-trusted-result
+2003	David Evans	local	Mayor of Ebro	no-trusted-result
+2037	Candace Kelly	local	City Commissioner, Atlantic Beach	dup:www.miramarfl.gov
+2038	Thomas Grant	local	City Commissioner, Atlantic Beach	no-trusted-result
+2039	Bruce Bole	local	City Commissioner, Atlantic Beach	no-trusted-result
+2040	Jessica Ring	local	City Commissioner, Atlantic Beach	no-trusted-result
+2049	Daniel J Alfonso	local	City Council Member, Davie	no-trusted-result
+2053	Marilyn Green	local	City Commissioner, Archer	dup:www.miramarfl.gov
+2054	Iris Bailey	local	Vice Mayor of Archer	no-trusted-result
+2055	Karen Fiore	local	City Commissioner, Archer	no-trusted-result
+2056	Kathy Penny	local	City Commissioner, Archer	no-trusted-result
+2058	Sam Newbern	local	Mayor of Auburndale	no-trusted-result
+2059	Ed Crackel	local	City Commissioner, Auburndale	dup:www.orlando.gov
+2060	Ronnie Spears	local	City Commissioner, Auburndale	dup:www.miramarfl.gov
+2068	Mike Wilkinson	local	Mayor of Belleair	dup:cityofsweetwater.fl.gov
+2069	Todd Jennings	local	City Commissioner, Belleair	no-trusted-result
+2070	Patricia Barris	local	City Commissioner, Belleair	no-trusted-result
+2071	Thomas Kelly	local	City Commissioner, Belleair	no-trusted-result
+2072	Todd Jennings March	local	City Commissioner, Belleair	dup:www.orlando.gov
+2074	Thomas Kelly March	local	City Commissioner, Belleair	dup:pinellas.gov
+2075	Tom Shelly	local	City Commissioner, Belleair	no-trusted-result
+2076	Christine Dobkowski	local	Mayor of Belleview	no-trusted-result
+2078	Ray Dwyer	local	City Commissioner, Belleview	no-trusted-result
+2079	Ronald T. Livsey	local	City Commissioner, Belleview	no-trusted-result
+2080	James Howard	local	City Commissioner, Beverly Beach	no-trusted-result
+2083	Jeffrey Borges	local	City Commissioner, Beverly Beach	no-trusted-result
+2088	Kelly Perry	local	City Council Member, Bronson	no-trusted-result
+2090	Christy O'Brien	local	City Council Member, Bronson	no-trusted-result
+2091	Kayla Greenway	local	City Council Member, Bronson	no-trusted-result
+2099	Mali Gardner	local	City Commissioner, Clewiston	no-trusted-result
+2101	Jason Williams	local	City Commissioner, Clewiston	dup:jacksoncountyfl.gov
+2116	Omarr C. Nickerson	local	Mayor of El Portal	no-trusted-result
+2120	Charles Winters	local	City Council Member, El Portal	dup:mayor.northmiamifl.gov
+2121	Krystal Bien	local	City Council Member, Esto	dup:www.ashevillenc.gov
+2122	Maxie Yates	local	City Council Member, Esto	dup:www.ashevillenc.gov
+2123	Poynter Tuesday	local	City Commissioner, Fernandina Beach	no-trusted-result
+2133	John R. King	local	City Council Member, Fort Myers Beach	no-trusted-result
+2136	Linda Hudson	local	Mayor of Fort Pierce	no-trusted-result
+2145	George Jacob Thomas	local	Mayor of Fort White	dup:jacksonvillenc.gov
+2150	Alice McLane	local	Mayor of Glen Ridge	no-trusted-result
+2151	Juanice Padgett	local	Mayor of Glen St. Mary	dup:dos.elections.myflorida.com
+2152	Glenn Singer	local	Mayor of Golden Beach	no-trusted-result
+2153	Jessie Mendal	local	Vice Mayor of Golden Beach	no-trusted-result
+2156	Kenneth Bernstein	local	City Council Member, Golden Beach	no-trusted-result
+2157	Peter B. Hamilton	local	Mayor of Golf	no-trusted-result
+2160	Curtis Pinkard	local	City Commissioner, Graceville	no-trusted-result
+2161	Marshall Davis	local	City Commissioner, Graceville	dup:jacksoncountyfl.gov
+2162	John McClendon	local	City Commissioner, Graceville	dup:jacksoncountyfl.gov
+2163	Chris Harrell	local	Mayor of Grand Ridge	no-trusted-result
+2168	Lamar Alday	local	Mayor of Greensboro	no-trusted-result
+2169	Ryan Kornegay	local	Mayor of Greenville	no-trusted-result
+2170	Phyllis Bowman	local	Mayor of Greenwood	no-trusted-result
+2171	Anthony J. Baker	local	Mayor of Gretna	no-trusted-result
+2173	Barbara Gaines	local	City Council Member, Groveland	no-trusted-result
+2174	Michael C. Jaycox	local	City Council Member, Groveland	dup:groveland-fl.gov
+2176	Cherry Fitch	local	Mayor of Gulf Breeze	no-trusted-result
+2177	Brittany Simpson	local	City Council Member, Gulf Breeze	no-trusted-result
+2178	Tim Burr	local	City Council Member, Gulf Breeze	no-trusted-result
+2179	Amy Tavai	local	City Council Member, Gulf Breeze	no-trusted-result
+2181	Scott W. Morgan	local	Mayor of Gulf Stream	no-trusted-result
+2194	Jay Beckby	local	Mayor of Hastings	no-trusted-result
+2197	Jacquelyn Randall	local	Mayor of Hawthorne	no-trusted-result
+2209	Brandon McWhorter	local	City Commissioner, Highland Park	dup:cityofsweetwater.fl.gov
+2210	Amanda Updike	local	City Commissioner, Highland Park	no-trusted-result
+2211	Derek Camann	local	City Commissioner, Highland Park	no-trusted-result
+2212	Sam Knight	local	City Commissioner, Hillcrest Heights	dup:www.orlando.gov
+2219	Heather Berman	local	City Commissioner, Hillsboro Beach	dup:www.sun-sentinel.com
+2226	Clemente Canabal	local	City Council Member, Homestead	no-trusted-result
+2230	Arthur Kight	local	City Council Member, Horseshoe Beach	no-trusted-result
+2233	Jerry Dixon	local	City Council Member, Horseshoe Beach	no-trusted-result
+2235	Otis Burl Philmon	local	City Council Member, Horseshoe Beach	no-trusted-result
+2236	Johnny Osteen	local	City Council Member, Horseshoe Beach	no-trusted-result
+2237	Cecil Wilder	local	City Council Member, Horseshoe Beach	dup:www.horseshoe-bay-tx.gov
+2239	Sam Downing	local	City Council Member, Horseshoe Beach	no-trusted-result
+2240	George Osteen	local	City Council Member, Horseshoe Beach	dup:www.horseshoe-bay-tx.gov
+2241	Jo Ann White	local	City Council Member, Horseshoe Beach	no-trusted-result
+2242	John Sheffield	local	City Council Member, Horseshoe Beach	no-trusted-result
+2243	John Cherry	local	City Council Member, Horseshoe Beach	no-trusted-result
+2244	Danny Kight	local	City Council Member, Horseshoe Beach	dup:www.horseshoe-bay-tx.gov
+2245	Johnny Squires	local	City Council Member, Horseshoe Beach	dup:www.horseshoe-bay-tx.gov
+2246	Debbie Corbin	local	City Council Member, Horseshoe Beach	no-trusted-result
+2247	Katherine Hutchinson	local	City Council Member, Horseshoe Beach	no-trusted-result
+2248	Roxie Revels	local	City Council Member, Horseshoe Beach	no-trusted-result
+2249	Tina Brotherton	local	City Council Member, Horseshoe Beach	no-trusted-result
+2251	Terri Taylor	local	City Council Member, Horseshoe Beach	no-trusted-result
+2253	Jim Livingston	local	City Council Member, Horseshoe Beach	no-trusted-result
+2254	Talmadge Bennett	local	City Council Member, Horseshoe Beach	dup:www.horseshoe-bay-tx.gov
+2255	Mike Puerner	local	City Council Member, Horseshoe Beach	no-trusted-result
+2256	Frances Cherry	local	City Council Member, Horseshoe Beach	no-trusted-result
+2259	Mike Ewing	local	City Council Member, Horseshoe Beach	dup:www.horseshoe-bay-tx.gov
+2261	Bob Webb	local	City Council Member, Horseshoe Beach	no-trusted-result
+2264	Roads Johnny Squires	local	City Council Member, Horseshoe Beach	dup:www.horseshoe-bay-tx.gov
+2265	Police Danny Kight	local	City Council Member, Horseshoe Beach	dup:www.horseshoe-bay-tx.gov
+2267	Rec Johnny Squires	local	City Council Member, Horseshoe Beach	no-trusted-result
+2268	Maintenance Debbie Corbin	local	City Council Member, Horseshoe Beach	dup:www.horseshoe-bay-tx.gov
+2269	Fire Katherine Hutchinson	local	City Council Member, Horseshoe Beach	no-trusted-result
+2271	Maintenance Tina Brotherton	local	City Council Member, Horseshoe Beach	dup:www.horseshoe-bay-tx.gov
+2272	Fire Haddie Mann	local	City Council Member, Horseshoe Beach	no-trusted-result
+2273	Roads Tina Brotherton	local	City Council Member, Horseshoe Beach	no-trusted-result
+2274	Recreation Terri Taylor	local	City Council Member, Horseshoe Beach	dup:www.horseshoe-bay-tx.gov
+2279	Brian Foley	local	Mayor of Indian River Shores	no-trusted-result
+2280	Peter Tedesko	local	City Council Member, Indian River Shores	no-trusted-result
+2287	Diantha Schear	local	Mayor of Indian Shores	no-trusted-result
+2288	Isaac Young	local	Mayor of Inglis	no-trusted-result
+2297	Transparency Advocate	local	City Council Member, Islamorada	no-trusted-result
+2298	Islamorada Community Alliance	local	City Council Member, Islamorada	no-trusted-result
+2305	Vanessa Smith	local	City Council Member, Jasper	no-trusted-result
+2307	Shon Owens	local	Mayor of Jay	no-trusted-result
+2326	Bob Arrison	local	Mayor of Kenneth City	dup:www.atlantisfl.gov
+2327	Tony Chan	local	City Council Member, Kenneth City	no-trusted-result
+2328	Donald Kinney	local	City Council Member, Kenneth City	no-trusted-result
+2329	Jensyn Schmidt	local	Vice Mayor of Kenneth City	dup:www.pinellaspark.gov
+2330	Joe I. Rasco	local	Mayor of Key Biscayne	no-trusted-result
+2331	Michael F. Bracken	local	City Council Member, Key Biscayne	dup:www.cocoafl.gov
+2332	Franklin H. Caplan	local	Vice Mayor of Key Biscayne	dup:mayor.northmiamifl.gov
+2334	Nancy Stoner	local	City Council Member, Key Biscayne	no-trusted-result
+2335	Fernando A. Vazquez	local	City Council Member, Key Biscayne	no-trusted-result
+2336	Ron Sutton	local	Mayor of Key Colony Beach	no-trusted-result
+2337	Vice-Mayor Doug Colonell	local	Vice Mayor of Key Colony Beach	no-trusted-result
+2340	Project Continue Reading	local	Mayor of Key West	no-trusted-result
+2341	Dave Welch	local	Vice Mayor of Keystone Heights	no-trusted-result
+2342	Nina Rodenroth	local	Mayor of Keystone Heights	no-trusted-result
+2355	Angie Sola	local	City Council Member, Lake Buena Vista	dup:www.homesteadfl.gov
+2356	Gene King	local	City Council Member, Lake Buena Vista	dup:inverness.gov
+2357	Melissa Hendrix	local	Mayor of Lake Butler	no-trusted-result
+2360	Annette Redman	local	City Commissioner, Lake Butler	dup:www.miramarfl.gov
+2361	Fred Sirmones	local	City Commissioner, Lake Butler	no-trusted-result
+2367	Daniel Williams	local	City Commissioner, Lake Wales	dup:www.lakewalesfl.gov
+2368	Keith Thompson	local	City Commissioner, Lake Wales	dup:www.lakewalesfl.gov
+2370	Robin Gibson	local	City Commissioner, Lake Wales	dup:lakeworthbeachfl.gov
+2371	Betty Resch	local	Mayor of Lake Worth Beach	no-trusted-result
+2376	Sharon Thomas	local	Vice Mayor of Lauderdale Lakes	no-trusted-result
+2377	Safer Schools	local	Mayor of Lauderdale Lakes	dup:www.sun-sentinel.com
+2379	Randy Strauss	local	Vice Mayor of Lauderdale-by-the-Sea	no-trusted-result
+2380	Theo Poulopoulos	local	City Commissioner, Lauderdale-by-the-Sea	no-trusted-result
+2382	John Graziano	local	City Commissioner, Lauderdale-by-the-Sea	no-trusted-result
+2386	Ray Nyhuis	local	Mayor of Lazy Lake	dup:mayor.northmiamifl.gov
+2387	Jeff Grenell	local	City Council Member, Lazy Lake	no-trusted-result
+2388	Warren Nadeau	local	City Council Member, Lazy Lake	dup:www.lakewalesfl.gov
+2389	William Daugherty	local	City Council Member, Lazy Lake	no-trusted-result
+2390	Arnold Aliff	local	City Council Member, Lazy Lake	no-trusted-result
+2392	James C. Ruzicka	local	Mayor of Lee	no-trusted-result
+2395	Ross Licata	local	City Commissioner, Lighthouse Point	no-trusted-result
+2396	Frank C. Davis	local	Mayor of Live Oak	dup:suwanneecountyfl.gov
+2398	Debra Williams	local	Mayor of Longboat Key	no-trusted-result
+2401	Sam Kitching	local	City Commissioner, Macclenny	dup:www.orlando.gov
+2402	Cecil Horne	local	City Commissioner, Macclenny	no-trusted-result
+2403	Danny Norton	local	City Commissioner, Macclenny	dup:www.orlando.gov
+2404	Lynward Bones	local	City Commissioner, Macclenny	no-trusted-result
+2412	Elliot Bonner	local	City Commissioner, Manalapan	no-trusted-result
+2413	Point Orla Imbesi	local	City Commissioner, Manalapan	dup:www.atlantisfl.gov
+2414	Ocean David Knobel	local	City Commissioner, Manalapan	dup:www.atlantisfl.gov
+2415	Disclosures November	local	City Commissioner, Margate	no-trusted-result
+2417	Anthony N. Caggiano	local	Vice Mayor of Margate	no-trusted-result
+2429	Alison Scott	local	Mayor of McIntosh	no-trusted-result
+2430	Lee Deaderick	local	City Council Member, McIntosh	no-trusted-result
+2431	Don Medeiros	local	City Council Member, McIntosh	no-trusted-result
+2433	Edgar Ayala	local	City Council Member, Medley	no-trusted-result
+2434	Lizelh Rodriguez	local	City Council Member, Medley	no-trusted-result
+2436	Anna Butler	local	City Commissioner, Melbourne Beach	no-trusted-result
+2438	Sherri Quarrie	local	City Commissioner, Melbourne Beach	no-trusted-result
+2439	Bridget Foster	local	Mayor of Melbourne Village	no-trusted-result
+2440	Richard Wolff	local	Mayor of Mexico Beach	no-trusted-result
+2449	Jiana Bradshaw Williams	local	Mayor of Micanopy	no-trusted-result
+2450	Heather Lindsay December	local	Mayor of Milton	no-trusted-result
+2451	Yvette Colbourne	local	City Commissioner, Miramar	no-trusted-result
+2452	Maxwell B. Chambers	local	City Commissioner, Miramar	no-trusted-result
+2455	John Jones	local	Mayor of Monticello	no-trusted-result
+2456	Joe Wynkoop	local	Mayor of Montverde	dup:groveland-fl.gov
+2463	Fred Cleveland	local	Mayor of New Smyrna Beach	no-trusted-result
+2464	Foster Senn	local	Mayor of Newberry	no-trusted-result
+2466	Literman Joseph	local	Mayor of Noma	dup:mayor.northmiamifl.gov
+2468	Doris Acosta	local	City Commissioner, North Bay Village	no-trusted-result
+2469	Richard Chervony	local	City Commissioner, North Bay Village	no-trusted-result
+2470	Media Inquiry	local	Mayor of North Miami	dup:mayor.northmiamifl.gov
+2473	Kassandra Timothe	local	City Council Member, North Miami	no-trusted-result
+2483	Orlando Puyol	local	Vice Mayor of North Palm Beach	no-trusted-result
+2485	Kendra Zellner	local	City Council Member, North Palm Beach	no-trusted-result
+2486	Susan Bickel	local	Vice Mayor of North Palm Beach	no-trusted-result
+2488	Barbara Langdon	local	Vice Mayor of North Port	no-trusted-result
+2490	Pete Emrich	local	Mayor of North Port	dup:www.northportfl.gov
+2492	Jay Super	local	Mayor of North Redington Beach	dup:mayor.northmiamifl.gov
+2499	Kris Keller	local	City Commissioner, Oakland	dup:www.orlando.gov
+2500	Yumeko Motley	local	City Commissioner, Oakland	dup:www.miramarfl.gov
+2504	Letitia Newbold	local	City Commissioner, Oakland Park	no-trusted-result
+2513	Proclamation Recognizing	local	City Commissioner, Ocean Ridge	no-trusted-result
+2514	Rosemary Wilsen	local	Mayor of Ocoee	no-trusted-result
+2517	Noel Chandler	local	City Council Member, Okeechobee	no-trusted-result
+2518	Monica Clark	local	City Council Member, Okeechobee	no-trusted-result
+2519	Bob Jarriel	local	City Council Member, Okeechobee	no-trusted-result
+2520	David R. McAuley	local	City Council Member, Okeechobee	no-trusted-result
+2521	David McAuley	local	City Council Member, Okeechobee	no-trusted-result
+2525	Katie Gannon	local	Mayor of Oldsmar	no-trusted-result
+2526	Valerie Tatarzewski	local	City Council Member, Oldsmar	no-trusted-result
+2527	Sean Swauger	local	City Council Member, Oldsmar	no-trusted-result
+2532	Natasha L. Ervin	local	City Commissioner, Opa-locka	no-trusted-result
+2534	Vice-Mayor Winnette Sandlin	local	Vice Mayor of Orange Park	no-trusted-result
+2535	Doug Benefield	local	City Council Member, Orange Park	no-trusted-result
+2536	Glenn Taylor	local	City Council Member, Orange Park	no-trusted-result
+2539	Keen's Spring Fest	local	City Commissioner, Orlando	no-trusted-result
+2540	Glenda Hood Park	local	Mayor of Orlando	no-trusted-result
+2541	Jason Leslie	local	Mayor of Ormond Beach	no-trusted-result
+2542	Travis Sargent	local	City Commissioner, Ormond Beach	no-trusted-result
+2543	Kristin Deaton	local	City Commissioner, Ormond Beach	no-trusted-result
+2544	Harold Briley	local	City Commissioner, Ormond Beach	no-trusted-result
+2545	Lori Tolland	local	City Commissioner, Ormond Beach	no-trusted-result
+2546	Therese Granger	local	Mayor of Otter Creek	no-trusted-result
+2552	Justin Campbell	local	City Commissioner, Palatka	no-trusted-result
+2555	Danielle H. Moore	local	Mayor of Palm Beach	no-trusted-result
+2556	Julie Araskog	local	City Council Member, Palm Beach	no-trusted-result
+2557	Nicki McDonald	local	City Council Member, Palm Beach	no-trusted-result
+2559	Cooney Lew Crampton	local	City Council Member, Palm Beach	no-trusted-result
+2560	Crampton Julie Araskog	local	City Council Member, Palm Beach	no-trusted-result
+2561	Araskog Nicki McDonald	local	City Council Member, Palm Beach	no-trusted-result
+2562	McDonald Bridget Moran	local	City Council Member, Palm Beach	no-trusted-result
+2565	Marcie Tinsley	local	City Council Member, Palm Beach Gardens	no-trusted-result
+2567	Rachelle A. Litt	local	City Council Member, Palm Beach Gardens	no-trusted-result
+2572	Sharon Secord	local	Mayor of Palm Shores	no-trusted-result
+2574	Karyn Cunningham	local	Mayor of Palmetto Bay	no-trusted-result
+2577	Ordinances Resolutions Archived	local	Mayor of Panama City Beach	no-trusted-result
+2578	Andrew Kelly	local	Mayor of Parker	no-trusted-result
+2582	Rich Walker	local	Mayor of Parkland	no-trusted-result
+2583	Simeon Brier	local	Vice Mayor of Parkland	no-trusted-result
+2584	Jordan Isrow	local	City Commissioner, Parkland	no-trusted-result
+2585	Cindy Murphy-Salomone	local	City Commissioner, Parkland	no-trusted-result
+2586	Neil Kanterman	local	City Commissioner, Parkland	no-trusted-result
+2592	Jay D. Schwartz	local	City Commissioner, Pembroke Pines	no-trusted-result
+2593	Tom DeVille	local	City Council Member, Penney Farms	no-trusted-result
+2594	Annette Brooks	local	City Council Member, Penney Farms	no-trusted-result
+2595	Elizabeth Ryder	local	City Council Member, Penney Farms	no-trusted-result
+2596	Adrian Andrews	local	City Council Member, Penney Farms	no-trusted-result
+2597	Richard Hollowell	local	City Council Member, Penney Farms	no-trusted-result
+2600	Robert Greenlund	local	Vice Mayor of Pierson	dup:www.volusiaelections.gov
+2601	Linnie R. Richardson	local	City Council Member, Pierson	no-trusted-result
+2605	South Dade	local	Mayor of Pinecrest	dup:www.miamidade.gov
+2613	Tim Keith V	local	City Council Member, Pinellas Park	no-trusted-result
+2614	Sandra Patti Reed	local	City Council Member, Pinellas Park	no-trusted-result
+2615	Mary Thomas Mathis	local	Mayor of Plant City	no-trusted-result
+2617	Shane Busby	local	Mayor of Ponce de Leon	no-trusted-result
+2620	Cliff Shepard	local	Vice Mayor of Ponce Inlet	no-trusted-result
+2624	Eric Langston	local	City Commissioner, Port St. Joe	no-trusted-result
+2628	John Vetter	local	Mayor of Reddick	no-trusted-result
+2629	Myra Sherman	local	City Council Member, Reddick	no-trusted-result
+2630	Shirley Youmans	local	City Council Member, Reddick	no-trusted-result
+2631	Nadine Stokes	local	City Council Member, Reddick	no-trusted-result
+2632	Patti Vetter	local	City Council Member, Reddick	dup:www.pinellaspark.gov
+2633	Andrea Frazier	local	City Council Member, Reddick	no-trusted-result
+2635	Tom Kapper	local	Mayor of Redington Shores	no-trusted-result
+2637	CJ Hoyt	local	City Commissioner, Redington Shores	dup:pinellas.gov
+2638	Erin Schoos	local	City Commissioner, Redington Shores	dup:pinellas.gov
+2639	Larry Maynard	local	City Commissioner, Redington Shores	no-trusted-result
+2641	Tom Price	local	Mayor of Rockledge	no-trusted-result
+2642	Michael A. Cadore	local	City Council Member, Rockledge	no-trusted-result
+2643	R. Shaun Ferguson	local	City Council Member, Rockledge	no-trusted-result
+2645	Frank T. Forester	local	City Council Member, Rockledge	no-trusted-result
+2646	Duane Daski	local	City Council Member, Rockledge	no-trusted-result
+2647	Tara L. Connor	local	City Council Member, Rockledge	no-trusted-result
+2648	Shaun Ferguson	local	City Council Member, Rockledge	no-trusted-result
+2649	Thomas J. Price	local	City Council Member, Rockledge	no-trusted-result
+2650	Jeff Hmara	local	Mayor of Royal Palm Beach	no-trusted-result
+2651	John T. Vogel	local	Mayor of San Antonio	no-trusted-result
+2668	Jodi Rozycki	local	Vice Mayor of Satellite Beach	no-trusted-result
+2672	Herbert G. Yardley	local	Mayor of Sea Ranch Lakes	no-trusted-result
+2678	Mark Franks	local	Mayor of Shalimar	no-trusted-result
+2679	Leonard Tartt	local	Mayor of Sopchoppy	no-trusted-result
+2680	Lara Edwards	local	Vice Mayor of Sopchoppy	no-trusted-result
+2681	Mary Katherine Westmark	local	City Council Member, Sopchoppy	no-trusted-result
+2682	Nathan Lewis	local	City Council Member, Sopchoppy	no-trusted-result
+2683	Fred McClendon	local	City Council Member, Sopchoppy	no-trusted-result
+2688	Doug Quartier	local	City Council Member, South Daytona	dup:www.sun-sentinel.com
+2689	Group I	local	City Commissioner, South Miami	no-trusted-result
+2690	Rafael Pineiro	local	Mayor of South Palm Beach	no-trusted-result
+2691	Jim Allbritton	local	Mayor of Southwest Ranches	no-trusted-result
+2692	Nancy Sikes-Kline	local	Mayor of St. Augustine	no-trusted-result
+2693	Barbara Blonder	local	Vice Mayor of St. Augustine	no-trusted-result
+2694	Cynthia Garris	local	City Commissioner, St. Augustine	no-trusted-result
+2695	Jim Springfield	local	City Commissioner, St. Augustine	no-trusted-result
+2696	Jon DePreter	local	City Commissioner, St. Augustine	no-trusted-result
+2697	Chris Robertson	local	Mayor of St. Cloud	no-trusted-result
+2702	Related Pages	local	Mayor of St. Marks	no-trusted-result
+2708	Commitment To Youth	local	Mayor of St. Petersburg	no-trusted-result
+2718	Viscarra Game On	local	City Commissioner, Sunny Isles Beach	no-trusted-result
+2719	Larisa Svechin	local	Mayor of Sunny Isles Beach	no-trusted-result
+2721	Charles W. Burkett	local	Mayor of Surfside	no-trusted-result
+2725	Bob Grenier	local	Vice Mayor of Tavares	dup:www.tavaresfl.gov
+2744	Floyd Croucher	local	Vice Mayor of Trenton	dup:groveland-fl.gov
+2745	Marci Butts	local	City Council Member, Trenton	no-trusted-result
+2747	Kenneth Roark	local	City Council Member, Trenton	dup:gilchrist.fl.us
+2750	Veronica Gutierrez	local	City Commissioner, Umatilla	dup:www.homesteadfl.gov
+2751	Carol Jones	local	City Commissioner, Umatilla	no-trusted-result
+2752	Yesenia Leon-Tejeda	local	City Commissioner, Umatilla	dup:www.homesteadfl.gov
+2754	Chair Jennifer Cooper	local	City Commissioner, Umatilla	dup:hallandalebeachfl.gov
+2755	Gary W. Owens	local	Mayor of Vernon	no-trusted-result
+2763	Shannon Boal	local	City Council Member, Waldo	dup:www.ashevillenc.gov
+2768	Kathy Washington	local	Mayor of Welaka	no-trusted-result
+2771	Amanda Silvestri	local	City Council Member, Wellington	dup:www.wellingtonfl.gov
+2773	Johnny Meier	local	City Council Member, Wellington	no-trusted-result
+2774	Maria S	local	Vice Mayor of Wellington	dup:www.sun-sentinel.com
+2776	Keith A. James	local	Mayor of West Palm Beach	no-trusted-result
+2778	Adam McKenzie	local	Mayor of Westville	no-trusted-result
+2788	Tonja R. Brown	local	Mayor of White Springs	no-trusted-result
+2789	Organization Chart	local	Mayor of Wildwood	dup:cityofsweetwater.fl.gov
+2797	Brandi Haines	local	City Council Member, Windermere	no-trusted-result
+2799	L. Tracy Mercer	local	Mayor of Winter Haven	no-trusted-result
+2800	Chad Davis	local	City Commissioner, Winter Haven	no-trusted-result
+2802	Sheila DeCiccio	local	Mayor of Winter Park	no-trusted-result
+2811	Travis Hemphill	local	City Council Member, Worthington Springs	dup:lexsc.gov
+2812	Priscilla Kirby	local	City Council Member, Worthington Springs	no-trusted-result
+2820	Sarah Reece	local	Altamonte Springs Council Member	no-trusted-result
+2821	Bob O'Malley	local	Altamonte Springs Council Member	no-trusted-result
+2822	Zane Teeters, Jr.	local	Mayor of Astatula	no-trusted-result
+2823	Cheryl Marinelli	local	Vice Mayor of Astatula	no-trusted-result
+2824	Kay MacQueen	local	Astatula Council Member	no-trusted-result
+2827	Bruce Bole	local	Atlantic Beach Council Member	dup:www.atlantisfl.gov
+2828	Thomas Grant	local	Atlantic Beach Council Member	no-trusted-result
+2829	Candace Kelly	local	Atlantic Beach Council Member	no-trusted-result
+2830	Jessica Ring	local	Atlantic Beach Council Member	no-trusted-result
+2836	Mali Gardner	local	Clewiston Commissioner	no-trusted-result
+2838	Jason Williams II	local	Clewiston Commissioner	no-trusted-result
+2839	Daniel Alfonso	local	Davie Council Member	no-trusted-result
+2840	Susan Starkey	local	Davie Council Member	dup:www.davie-fl.gov
+2842	Nancy Miller	local	Mayor of Daytona Beach Shores	no-trusted-result
+2843	Chris Conomos	local	Daytona Beach Shores Commissioner	no-trusted-result
+2844	Stephan Dembinsky	local	Daytona Beach Shores Commissioner	no-trusted-result
+2845	Mark Card	local	Daytona Beach Shores Commissioner	no-trusted-result
+2851	Malise Sundstrom	local	Jupiter Council Member	no-trusted-result
+2852	Joe Ayoub	local	Mayor of Safety Harbor	no-trusted-result
+2853	Nancy Besore	local	Vice Mayor of Safety Harbor	no-trusted-result
+2854	Andy Steingold	local	Safety Harbor Council Member	no-trusted-result
+2856	Kevin Shanks	local	Safety Harbor Council Member	no-trusted-result
+2857	Joe Kyles	local	Mayor of South Bay	no-trusted-result
+2861	Gustavo J. Ceballos	local	West Miami Commissioner	no-trusted-result
+2871	Eric Rappaport	local	Bay Harbor Islands Council Member	no-trusted-result
+2872	Molly Diallo	local	Bay Harbor Islands Council Member	dup:www.bayharborislands-fl.gov
+2873	Tracy Andrews	local	Mayor of Chipley	no-trusted-result
+2876	Linda Cain	local	Chipley Council Member	no-trusted-result
+2877	Leonard Blount	local	Chipley Council Member	no-trusted-result
+2879	David Tagliarini	local	Vice Mayor of Madeira Beach	no-trusted-result
+2880	Jerome Charles	local	Mayor of Miami Shores	no-trusted-result
+2881	Neil Cantor	local	Vice Mayor of Miami Shores	dup:www.msvfl.gov
+2882	George Burch	local	Miami Shores Council Member	dup:mayor.northmiamifl.gov
+2884	Patrick Devaney	local	Miami Shores Council Member	dup:www.msvfl.gov
+2885	Steve Castaneda	local	Sweetwater Commissioner	dup:cityofsweetwater.fl.gov
+2889	Elizabeth Cox	local	Sweetwater Commissioner	dup:www.mdctaxcollector.gov
+2890	Ron Morrison	local	Sweetwater Commissioner	dup:www.cityofsweetwater.fl.gov
+2891	Ditas Yamane	local	Sweetwater Commissioner	dup:cityofsweetwater.fl.gov
+2893	Panagiotis (Peter) Koulias	local	Vice Mayor of Tarpon Springs	no-trusted-result
+2895	David Banther	local	Tarpon Springs Commissioner	dup:pinellas.gov
+2896	Jonathan E. Groth	local	Mayor of Biscayne Park	no-trusted-result
+2898	Veronica Amsler	local	Biscayne Park Commissioner	no-trusted-result
+2899	Art Gonzalez	local	Biscayne Park Commissioner	no-trusted-result
