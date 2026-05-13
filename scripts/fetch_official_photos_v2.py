@@ -1,39 +1,36 @@
-"""Replace ui-avatars.com placeholders on elected_officials with real photos.
+"""Backfill real photos via the MediaWiki pageimages API.
 
-Sources tried in order — falling back to a DiceBear professional silhouette
-when nothing else hits. Sources 3/5/6/7 (Playwright-driven scrapes of
-myfloridahouse / flsenate / fl-counties / floridaleagueofcities) and source
-8 (Google CSE) are intentionally NOT implemented in-process — they require
-heavy deps and a paid API key respectively. The script flags officials that
-fall through to DiceBear with elected_officials.needs_photo=true so a future
-Playwright pass can target them precisely.
+Targets every FL official whose photo_url is still a DiceBear silhouette
+or whose needs_photo column is true. Single source — Wikipedia — so the
+script is small, stateless, and free.
 
-Sources implemented (HTTP only):
-  1. Congress Bioguide                     – federal officials
-  2. Wikipedia REST API                    – named officials with a wiki page
-  4. Ballotpedia infobox                   – any FL official with a BP page
-  9. DiceBear personas (fallback)          – everyone else, flagged
+For each candidate:
+  1. GET https://en.wikipedia.org/w/api.php?action=query&titles={name}
+                                       &prop=pageimages&format=json&pithumbsize=300
+  2. If a pageimages.thumbnail.source is returned, HEAD-verify image/*
+  3. UPDATE photo_url + clear needs_photo
+  4. Otherwise SKIP — never invent a photo
+
+Batch updates every 10 rows, 0.5s delay between batches (Wikipedia is
+rate-friendly; this is courteous, not strictly required).
 
 Run:
-  python scripts/fetch_official_photos_v2.py --limit 25 --dry-run
-  python scripts/fetch_official_photos_v2.py --limit 100
-  python scripts/fetch_official_photos_v2.py            # all 1,981
+  python scripts/fetch_official_photos_v2.py
+  python scripts/fetch_official_photos_v2.py --limit 50
+  python scripts/fetch_official_photos_v2.py --dry-run
 
-Env: SUPABASE_URL, SUPABASE_SERVICE_KEY, CONGRESS_API_KEY (optional)
+Env: SUPABASE_URL, SUPABASE_SERVICE_KEY (or SUPABASE_KEY)
 """
 
 from __future__ import annotations
 
 import argparse
 import os
-import re
 import sys
 import time
-from typing import Optional, Tuple
-from urllib.parse import quote
+from typing import Optional
 
 import requests
-from bs4 import BeautifulSoup
 from dotenv import load_dotenv
 from supabase import create_client
 
@@ -41,14 +38,18 @@ load_dotenv()
 
 SUPABASE_URL = os.getenv("SUPABASE_URL")
 SUPABASE_KEY = os.getenv("SUPABASE_SERVICE_KEY") or os.getenv("SUPABASE_KEY")
-CONGRESS_KEY = os.getenv("CONGRESS_API_KEY")
 
-LOG_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "photos_log.txt")
-NOTFOUND_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "photos_not_found.txt")
+LOG_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "wiki_photos_log.txt")
+SKIP_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "wiki_photos_skipped.txt")
 
-UA = "PolitiScore Photo Bot (+https://politiscore.com)"
-TIMEOUT = 10
-REQ_DELAY = 0.6  # respect rate limits everywhere
+UA = "PolitiScore PhotoBot/1.0 (https://politiscore.com; ops@politiscore.com)"
+HEAD_TIMEOUT = 8
+WIKI_TIMEOUT = 10
+PITHUMBSIZE = 300
+BATCH_SIZE = 10
+BATCH_DELAY = 0.5
+MAX_URL_LEN = 500
+
 session = requests.Session()
 session.headers.update({"User-Agent": UA})
 
@@ -63,259 +64,83 @@ def log(msg: str) -> None:
 
 
 def head_is_image(url: str) -> bool:
+    """HEAD → 200 + image/*. Falls back to a Range GET on 403/405 (some
+    Wikimedia mirrors don't accept HEAD)."""
     try:
-        r = session.head(url, timeout=TIMEOUT, allow_redirects=True)
-        if r.status_code != 200:
-            return False
-        ctype = r.headers.get("content-type", "").lower()
-        return ctype.startswith("image/")
+        r = session.head(url, timeout=HEAD_TIMEOUT, allow_redirects=True)
+        if r.status_code == 200 and r.headers.get("content-type", "").lower().startswith("image/"):
+            return True
+        if r.status_code in (403, 405):
+            r2 = session.get(url, timeout=HEAD_TIMEOUT, headers={"Range": "bytes=0-32"}, stream=True)
+            try:
+                ok = r2.status_code in (200, 206) and r2.headers.get("content-type", "").lower().startswith("image/")
+            finally:
+                r2.close()
+            return ok
+        return False
     except requests.RequestException:
         return False
 
 
-# ─── Source 1: Congress Bioguide ────────────────────────────────────────────
-_FED_BIOGUIDE_CACHE: dict[str, str] = {}
-
-
-def _load_fed_bioguide_cache() -> None:
-    """One-shot fetch of all FL members of Congress with their bioguide IDs."""
-    if not CONGRESS_KEY or _FED_BIOGUIDE_CACHE:
-        return
+def wiki_thumbnail(name: str) -> Optional[str]:
+    """Return a thumbnail URL via MediaWiki pageimages, or None when the
+    article doesn't exist / has no associated image."""
+    if not name:
+        return None
     try:
         r = session.get(
-            "https://api.congress.gov/v3/member",
-            params={"stateCode": "FL", "limit": 250, "api_key": CONGRESS_KEY, "format": "json"},
-            timeout=TIMEOUT,
-        )
-        if r.status_code != 200:
-            log(f"  bioguide API returned {r.status_code}")
-            return
-        members = r.json().get("members", [])
-        for m in members:
-            name = (m.get("name") or "").strip()
-            bid = (m.get("bioguideId") or "").strip()
-            if name and bid:
-                _FED_BIOGUIDE_CACHE[name.lower()] = bid
-        log(f"  bioguide: cached {len(_FED_BIOGUIDE_CACHE)} FL members")
-    except requests.RequestException as e:
-        log(f"  bioguide cache load failed: {e}")
-
-
-def try_bioguide(official: dict) -> Optional[str]:
-    if (official.get("level") or "").lower() != "federal":
-        return None
-    _load_fed_bioguide_cache()
-    name = (official.get("name") or "").strip()
-    if not name:
-        return None
-    # API lists members as "Last, First", DB stores "First Last"; try both
-    candidates = [name.lower()]
-    parts = name.split()
-    if len(parts) >= 2:
-        candidates.append(f"{parts[-1]}, {' '.join(parts[:-1])}".lower())
-    bid = next((_FED_BIOGUIDE_CACHE.get(c) for c in candidates if _FED_BIOGUIDE_CACHE.get(c)), None)
-    if not bid:
-        return None
-    photo = f"https://bioguide.congress.gov/bioguide/photo/{bid[0]}/{bid}.jpg"
-    return photo if head_is_image(photo) else None
-
-
-# ─── Source 2: Wikipedia ────────────────────────────────────────────────────
-def try_wikipedia(official: dict) -> Optional[str]:
-    name = (official.get("name") or "").strip()
-    if not name:
-        return None
-    slug = quote(name.replace(" ", "_"))
-    try:
-        r = session.get(f"https://en.wikipedia.org/api/rest_v1/page/summary/{slug}", timeout=TIMEOUT)
-        if r.status_code != 200:
-            return None
-        data = r.json()
-        if data.get("type") == "disambiguation":
-            return None
-        thumb = (data.get("thumbnail") or {}).get("source")
-        if not thumb:
-            return None
-        # Prefer the original (higher-res) over the thumb
-        original = (data.get("originalimage") or {}).get("source") or thumb
-        if not (original.startswith("http") and ("/wikipedia/" in original or "wikimedia.org" in original)):
-            return None
-        return original
-    except requests.RequestException:
-        return None
-
-
-# ─── Source 4: Ballotpedia ──────────────────────────────────────────────────
-def try_ballotpedia(official: dict) -> Optional[str]:
-    name = (official.get("name") or "").strip()
-    if not name:
-        return None
-    slug = quote(name.replace(" ", "_"))
-    try:
-        r = session.get(f"https://ballotpedia.org/{slug}", timeout=TIMEOUT)
-        if r.status_code != 200:
-            return None
-        soup = BeautifulSoup(r.text, "lxml")
-        # Most BP infoboxes are <div class="infobox-person"> or <table class="infobox">
-        for parent in (
-            soup.find("div", class_=re.compile(r"infobox", re.I)),
-            soup.find("table", class_=re.compile(r"infobox", re.I)),
-        ):
-            if not parent:
-                continue
-            img = parent.find("img")
-            if img and img.get("src"):
-                src = img["src"]
-                if src.startswith("//"):
-                    src = "https:" + src
-                if src.startswith("http") and head_is_image(src):
-                    return src
-    except requests.RequestException:
-        return None
-    return None
-
-
-# ─── Source 8: Google Custom Search Engine ──────────────────────────────────
-GOOGLE_CSE_KEY = os.getenv("GOOGLE_CSE_API_KEY")
-GOOGLE_CSE_ID = os.getenv("GOOGLE_CSE_ID")
-
-# Only accept image hosts in this trust set when the result page sits on a
-# .gov / FL legislature / ballotpedia / wikipedia domain. Mirrors the DDG
-# script's allow-list — the CSE itself can be configured to bias toward
-# these too, but we re-verify here so a misconfigured CSE doesn't taint
-# the photo column.
-_GOOG_TRUSTED_HOST_SUFFIXES = (".gov", ".gov.us", ".fl.us", ".myflorida.com")
-_GOOG_TRUSTED_HOSTS = {
-    "ballotpedia.org", "myfloridahouse.gov", "flsenate.gov",
-    "en.wikipedia.org", "upload.wikimedia.org",
-    "broward.org", "miamidade.gov", "hillsboroughcounty.org", "pinellas.gov",
-    "polkfl.gov", "volusia.org", "tampa.gov",
-    "sun-sentinel.com", "miamiherald.com", "tampabay.com", "orlandosentinel.com",
-}
-
-
-def _goog_trusted(url: str) -> bool:
-    try:
-        host = (urlparse(url).hostname or "").lower()
-    except Exception:
-        return False
-    if host in _GOOG_TRUSTED_HOSTS:
-        return True
-    if any(host.endswith(s) for s in _GOOG_TRUSTED_HOST_SUFFIXES):
-        return True
-    if host.startswith("www.") and host[4:] in _GOOG_TRUSTED_HOSTS:
-        return True
-    return False
-
-
-def try_google_cse(official: dict) -> Optional[str]:
-    if not (GOOGLE_CSE_KEY and GOOGLE_CSE_ID):
-        return None
-    name = (official.get("name") or "").strip()
-    title = (official.get("title") or "").strip()
-    county = (official.get("county") or "").strip()
-    if not name:
-        return None
-    q = f'"{name}" "{title}" "{county} Florida" official photo'.strip()
-    try:
-        r = session.get(
-            "https://www.googleapis.com/customsearch/v1",
+            "https://en.wikipedia.org/w/api.php",
             params={
-                "key": GOOGLE_CSE_KEY, "cx": GOOGLE_CSE_ID,
-                "q": q, "searchType": "image", "num": 5, "safe": "off",
+                "action": "query",
+                "titles": name,
+                "prop": "pageimages",
+                "format": "json",
+                "pithumbsize": PITHUMBSIZE,
+                "redirects": 1,
             },
-            timeout=TIMEOUT,
+            timeout=WIKI_TIMEOUT,
         )
-        if r.status_code == 429:
-            log("    google CSE 429: daily quota exhausted")
-            return None
         if r.status_code != 200:
             return None
-        items = (r.json() or {}).get("items") or []
+        pages = (r.json().get("query") or {}).get("pages") or {}
     except (requests.RequestException, ValueError):
         return None
 
-    for item in items:
-        img = (item.get("link") or "").strip()
-        page = ((item.get("image") or {}).get("contextLink") or "").strip()
-        if not img or len(img) > 500:
+    for _page_id, page in pages.items():
+        thumb = (page.get("thumbnail") or {}).get("source")
+        if not thumb or len(thumb) > MAX_URL_LEN:
             continue
-        # Either the image URL itself or its source page must be trusted
-        if not (_goog_trusted(img) or _goog_trusted(page)):
-            continue
-        if head_is_image(img):
-            return img
+        return thumb
     return None
-
-
-# ─── Source 9: DiceBear fallback ────────────────────────────────────────────
-def dicebear_url(name: str) -> str:
-    seed = quote((name or "anon").strip().lower().replace(" ", "-"))
-    return f"https://api.dicebear.com/7.x/personas/svg?seed={seed}&backgroundColor=1a56db&radius=50"
-
-
-# ─── Pipeline ───────────────────────────────────────────────────────────────
-ALL_SOURCES = [
-    ("bioguide",    try_bioguide),
-    ("wikipedia",   try_wikipedia),
-    ("ballotpedia", try_ballotpedia),
-    ("google",      try_google_cse),
-]
-
-
-def find_photo(official: dict, sources: list[tuple[str, callable]]) -> Tuple[str, str, bool]:
-    """Returns (url, source_label, is_real). Real means non-DiceBear."""
-    for label, source_fn in sources:
-        try:
-            url = source_fn(official)
-        except Exception as e:
-            log(f"    {label} crashed: {e}")
-            url = None
-        time.sleep(REQ_DELAY)
-        if url and len(url) < 500:
-            return url, label, True
-    return dicebear_url(official.get("name") or "anon"), "dicebear", False
 
 
 def main() -> int:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--limit", type=int, default=None, help="Cap rows processed")
+    parser.add_argument("--limit", type=int, default=None)
     parser.add_argument("--dry-run", action="store_true")
-    parser.add_argument("--level", choices=["federal", "state", "local"], default=None,
-                        help="Restrict to a single official_level")
-    parser.add_argument("--include-real", action="store_true",
-                        help="Also reprocess officials whose photo_url is already a real photo "
-                             "(default: only ui-avatars + needs_photo=true)")
-    parser.add_argument("--source", choices=[s[0] for s in ALL_SOURCES], default=None,
-                        help="Restrict to a single source (default: try all in order)")
     args = parser.parse_args()
 
     if not (SUPABASE_URL and SUPABASE_KEY):
         log("ERROR: SUPABASE_URL and SUPABASE_SERVICE_KEY must be set")
         return 1
-    if not CONGRESS_KEY:
-        log("WARN: CONGRESS_API_KEY not set — federal bioguide source will be skipped")
 
     sb = create_client(SUPABASE_URL, SUPABASE_KEY)
 
-    # Pull officials needing a real photo. Default: still ui-avatars OR
-    # already flagged needs_photo (i.e. previous DiceBear fallbacks). Pass
-    # --include-real to reprocess everyone.
+    # Pull candidates: needs_photo=true OR photo_url ILIKE '%dicebear%'
     rows: list[dict] = []
     page = 0
     PAGE = 500
     while True:
-        q = (
+        chunk = (
             sb.table("elected_officials")
-            .select("id, name, level, state, title, website, photo_url, needs_photo")
+            .select("id, name, title, county, photo_url, needs_photo")
             .eq("state", "FL")
             .order("id")
             .range(page * PAGE, page * PAGE + PAGE - 1)
+            .execute()
+            .data
+            or []
         )
-        if args.level:
-            q = q.eq("level", args.level)
-        q = q.execute()
-        chunk = q.data or []
         if not chunk:
             break
         rows.extend(chunk)
@@ -323,76 +148,78 @@ def main() -> int:
             break
         page += 1
 
-    # Filter to rows that need work: still ui-avatars OR previously flagged
-    # needs_photo (DiceBear fallback) — unless --include-real was passed.
-    if not args.include_real:
-        rows = [
-            r for r in rows
-            if (r.get("photo_url") and "ui-avatars" in r["photo_url"])
-            or r.get("needs_photo") is True
-        ]
-
+    candidates = [
+        r for r in rows
+        if r.get("needs_photo") is True
+        or (r.get("photo_url") and "dicebear" in (r["photo_url"] or ""))
+    ]
     if args.limit:
-        rows = rows[: args.limit]
-    log(f"to process: {len(rows)} officials  (level={args.level or 'all'} dry-run={args.dry_run})")
-    if not rows:
+        candidates = candidates[: args.limit]
+
+    # Cross-official dedup — never reuse a URL already attached to a real
+    # photo elsewhere. Wikipedia is mostly fine here, but worth the cost.
+    existing_urls: set[str] = set()
+    for r in rows:
+        u = (r.get("photo_url") or "").strip()
+        if u and "dicebear" not in u and "ui-avatars" not in u:
+            existing_urls.add(u)
+
+    log(f"candidates: {len(candidates)}  dry-run={args.dry_run}")
+    if not candidates:
         return 0
 
-    # Build the source list once per run. --source filters; default = all.
-    if args.source:
-        sources = [(name, fn) for name, fn in ALL_SOURCES if name == args.source]
-    else:
-        sources = ALL_SOURCES
-    log(f"sources: {[s[0] for s in sources]}")
+    success = 0
+    skipped: list[str] = []
+    pending: list[dict] = []
 
-    real_count = fallback_count = failed_count = 0
-    notfound_lines: list[str] = []
-    pending_updates: list[Tuple[int, str, bool]] = []  # (id, url, is_real)
+    for i, off in enumerate(candidates, 1):
+        name = (off.get("name") or "").strip()
+        thumb = wiki_thumbnail(name)
+        if thumb and thumb in existing_urls:
+            thumb = None  # de-dup
+        if thumb and not head_is_image(thumb):
+            thumb = None
 
-    for i, off in enumerate(rows, 1):
-        try:
-            url, source, is_real = find_photo(off, sources)
-        except Exception as e:
-            failed_count += 1
-            log(f"[{i}/{len(rows)}] id={off['id']:5d} {off.get('name','?')[:32]:32}  CRASH {e}")
-            continue
-        if is_real:
-            real_count += 1
+        if thumb:
+            success += 1
+            existing_urls.add(thumb)
+            log(f"[{i}/{len(candidates)}] SUCCESS {name} -> {thumb}")
+            pending.append({"id": off["id"], "url": thumb})
         else:
-            fallback_count += 1
-            notfound_lines.append(f"{off['id']}\t{off.get('name','?')}\t{off.get('level','?')}\t{off.get('title','?')}")
-        log(f"[{i}/{len(rows)}] id={off['id']:5d} {off.get('name','?')[:32]:32}  {source:11}  {url[:70]}")
-        pending_updates.append((off["id"], url, is_real))
+            skipped.append(f"{off['id']}\t{name}\t{off.get('title','?')}\t{off.get('county','?')}")
+            log(f"[{i}/{len(candidates)}] SKIP    {name}")
 
-        # Batch UPDATE every 25 rows
-        if len(pending_updates) >= 25 and not args.dry_run:
-            for oid, u, real in pending_updates:
-                sb.table("elected_officials").update({
-                    "photo_url": u,
-                    "needs_photo": (not real),
-                    "updated_at": "now()",
-                }).eq("id", oid).execute()
-            pending_updates = []
+        # Batch flush every BATCH_SIZE rows; sleep between batches.
+        if i % BATCH_SIZE == 0:
+            if pending and not args.dry_run:
+                for p in pending:
+                    sb.table("elected_officials").update({
+                        "photo_url": p["url"],
+                        "needs_photo": False,
+                        "updated_at": "now()",
+                    }).eq("id", p["id"]).execute()
+                pending = []
+            time.sleep(BATCH_DELAY)
 
-    if pending_updates and not args.dry_run:
-        for oid, u, real in pending_updates:
+    # Final flush
+    if pending and not args.dry_run:
+        for p in pending:
             sb.table("elected_officials").update({
-                "photo_url": u,
-                "needs_photo": (not real),
+                "photo_url": p["url"],
+                "needs_photo": False,
                 "updated_at": "now()",
-            }).eq("id", oid).execute()
+            }).eq("id", p["id"]).execute()
 
-    if notfound_lines:
+    if skipped:
         try:
-            with open(NOTFOUND_FILE, "w", encoding="utf-8") as f:
-                f.write("# Officials that fell through to the DiceBear fallback.\n")
-                f.write("# id\tname\tlevel\ttitle\n")
-                f.write("\n".join(notfound_lines))
+            with open(SKIP_FILE, "w", encoding="utf-8") as f:
+                f.write("# id\tname\ttitle\tcounty\n")
+                f.write("\n".join(skipped))
         except OSError:
             pass
 
     log("")
-    log(f"DONE  real={real_count}  fallback(dicebear)={fallback_count}  failed={failed_count}  of {len(rows)}")
+    log(f"DONE  added={success}  skipped={len(skipped)}  of {len(candidates)}")
     return 0
 
 

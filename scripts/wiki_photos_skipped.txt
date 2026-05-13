@@ -1,0 +1,1218 @@
+# id	name	title	county
+372	Bill Carlson	City Council Member, District 4	Hillsborough
+373	Naya Young	City Council Member, District 5	Hillsborough
+377	Ken Hagan	County Commissioner, District 2	Hillsborough
+381	Chris Boles	County Commissioner, District 6	Hillsborough
+382	Joshua Wostal	County Commissioner, District 7	Hillsborough
+387	Raquel A. Regalado	County Commissioner, District 7	Miami-Dade
+400	Becky Troutman	County Commissioner, District 1	Polk
+405	Katie Delaney	County Commissioner, District 1	Brevard
+407	Kim Adkinson	County Commissioner, District 3	Brevard
+408	Rob Feltner	County Commissioner, District 4, Chair	Brevard
+422	Andy Dance	County Commissioner, District 1	Flagler
+424	Leann Pennington	County Commissioner, District 3	Flagler
+425	Greg Hansen	County Commissioner, District 4	Flagler
+426	Kim Carney	County Commissioner, District 5	Flagler
+427	Rick Staly	Flagler County Sheriff	Flagler
+438	Steven Glassman	Commissioner, City of Fort Lauderdale, District 2	Broward
+440	Christian Whitehurst	County Commissioner, District 1	St. Johns
+441	Sarah Arnold	County Commissioner, District 2	St. Johns
+442	Clay Murphy	County Commissioner, District 3 (Vice Chair)	St. Johns
+443	Krista Joseph	County Commissioner, District 4 (Chair)	St. Johns
+444	Ann Taylor	County Commissioner, District 5	St. Johns
+445	Robert Hardwick	Sheriff, St. Johns County	St. Johns
+446	Kevin Ruane	County Commissioner, District 1	Lee
+447	Cecil Pendergrass	County Commissioner, District 2 (Chairman)	Lee
+448	David Mulicka	County Commissioner, District 3 (Vice Chairman)	Lee
+449	Brian Hamman	County Commissioner, District 4	Lee
+450	Trish Petrosky	County Commissioner, District 5	Lee
+451	Nicole H. Wilson	County Commissioner, District 1	Orange
+455	Kelly Martinez Semrad	County Commissioner, District 5	Orange
+456	Michael Scott	County Commissioner, District 6	Orange
+460	Sara Baxter	County Commissioner, District 6	Palm Beach
+461	Bobby Powell Jr.	County Commissioner, District 7	Palm Beach
+470	James Reyes	Director, Miami-Dade Police	Miami-Dade
+476	Carmine Marceno	Sheriff, Lee County	Lee
+478	Wayne Ivey	Sheriff, Brevard County	Brevard
+480	Emery Gainey	Sheriff, Alachua County	Alachua
+481	Chip Simmons	Sheriff, Escambia County	Escambia
+482	Bob Johnson	Sheriff, Santa Rosa County	Santa Rosa
+483	Eric Aden	Sheriff, Okaloosa County	Okaloosa
+484	Michael Adkinson	Sheriff, Walton County	Walton
+485	John Tate	Sheriff, Washington County	Washington
+486	Kevin Crews	Sheriff, Holmes County	Holmes
+487	Donnie Edenfield	Sheriff, Jackson County	Jackson
+488	Tommy Ford	Sheriff, Bay County	Bay
+489	Mike Harrison	Sheriff, Gulf County	Gulf
+490	A.J. Smith	Sheriff, Franklin County	Franklin
+491	Bobby Schultz	Sheriff, Calhoun County	Calhoun
+492	Eddie Joe White	Sheriff, Liberty County	Liberty
+493	Morris Young	Sheriff, Gadsden County	Gadsden
+494	Walt McNeil	Sheriff, Leon County	Leon
+495	Jared Miller	Sheriff, Jefferson County	Jefferson
+496	Benjamin Stewart	Sheriff, Madison County	Jefferson
+497	Wayne Padgett	Sheriff, Taylor County	Taylor
+498	Jared Miller	Sheriff, Wakulla County	Wakulla
+499	Noel Stephen	Sheriff, Columbia County	Columbia
+500	Brad Whitehead	Sheriff, Hamilton County	Columbia
+501	Sam St. John	Sheriff, Suwannee County	Suwannee
+503	David Harstine	Sheriff, Dixie County	Dixie
+504	Scott Harmon	Sheriff, Gilchrist County	Gilchrist
+505	Brad King	Sheriff, Baker County	Baker
+506	Gordon Smith	Sheriff, Bradford County	Bradford
+507	David Shoar	Sheriff, Union County	Columbia
+508	Bill Leeper	Sheriff, Nassau County	Nassau
+509	Michelle Cook	Sheriff, Clay County	Clay
+510	Gator DeLoach	Sheriff, Putnam County	Putnam
+511	Bobby McCallum	Sheriff, Levy County	Alachua
+513	Peyton Grinnell	Sheriff, Lake County	Lake
+516	Eric Flowers	Sheriff, Indian River County	Indian River
+517	Richard Del Toro	Sheriff, St. Lucie County	St. Lucie
+518	William Snyder	Sheriff, Martin County	Martin
+519	Jeff Blackmon	Sheriff, Citrus County	Citrus
+520	Al Nienhuis	Sheriff, Hernando County	Hernando
+521	Chris Nocco	Sheriff, Pasco County	Pasco
+522	Rick Wells	Sheriff, Manatee County	Manatee
+523	Kurt Hoffman	Sheriff, Sarasota County	Sarasota
+524	Bill Prummell	Sheriff, Charlotte County	Charlotte
+525	Kevin Rambosk	Sheriff, Collier County	Collier
+526	Steve Whidden	Sheriff, Hendry County	Hendry
+528	Noel Stephen	Sheriff, Okeechobee County	Okeechobee
+530	Vent Crawford	Sheriff, DeSoto County	DeSoto
+531	Arnold Lanier	Sheriff, Hardee County	Hardee
+532	John Budensiek	Sheriff, Sumter County	Sumter
+533	Rick Ramsay	Sheriff, Monroe County	Monroe
+538	Rick LoCastro	County Commissioner, District 1	Collier
+539	Chris Hall	County Commissioner, District 2	Collier
+542	William McDaniel	County Commissioner, District 5	Collier
+544	Neil Rainford	County Commissioner, District 2	Sarasota
+545	Mark Smith	County Commissioner, District 3	Sarasota
+546	Joe Barbetta	County Commissioner, District 4	Sarasota
+547	Ron Cutsinger	County Commissioner, District 5	Sarasota
+548	James Satcher	County Commissioner, District 1 (Chair)	Manatee
+549	Mike Rahn	County Commissioner, District 2	Manatee
+550	Kevin Van Ostenbridge	County Commissioner, District 3	Manatee
+551	George Kruse	County Commissioner, District 5	Manatee
+552	Amanda Ballard	County Commissioner, At Large 1	Manatee
+553	Jason Bearden	County Commissioner, At Large 2	Manatee
+554	Raymond Turner	County Commissioner, At Large 3	Manatee
+555	Ron Oakley	County Commissioner, District 1	Pasco
+556	Seth Weightman	County Commissioner, District 2	Pasco
+558	Gary Bradford	County Commissioner, District 4	Pasco
+560	Peggy Choudhry	County Commissioner, District 1 (Chair)	Osceola
+562	Viviana Janer	County Commissioner, District 3	Osceola
+563	Cheryl Grieb	County Commissioner, District 4	Osceola
+570	Craig Curry	County Commissioner, District 1	Marion
+571	Kathy Bryant	County Commissioner, District 2 (Chair)	Marion
+572	Michelle Stone	County Commissioner, District 3	Marion
+573	Carl Zalak III	County Commissioner, District 4	Marion
+575	Anthony Bonna	County Commissioner, District 1	St. Lucie
+576	Sean Mitchell	County Commissioner, District 2	St. Lucie
+577	Larry Leet	County Commissioner, District 3	St. Lucie
+578	Cathy Townsend	County Commissioner, District 4	St. Lucie
+580	Doug Smith	County Commissioner, District 1	Martin
+581	Stacey Hetherington	County Commissioner, District 2	Martin
+583	Edward Ciampi	County Commissioner, District 4 (Chair)	Martin
+585	Peter O'Bryan	County Commissioner, District 1	Indian River
+586	Susan Adams	County Commissioner, District 2	Indian River
+587	Joe Earman	County Commissioner, District 3 (Chair)	Indian River
+588	Laura Moss	County Commissioner, District 4	Indian River
+590	Jeff Bergosh	County Commissioner, District 1	Escambia
+591	Mike Kohler	County Commissioner, District 2	Escambia
+592	Lumon May	County Commissioner, District 3	Escambia
+593	Robert Bender	County Commissioner, District 4	Escambia
+594	Steven Barry	County Commissioner, District 5 (Chair)	Escambia
+596	Jeremy Matlow	County Commissioner, District 3	Leon
+601	Mike Cella	County Commissioner, District 1	Clay
+602	Alexandra Compere	County Commissioner, District 2	Clay
+603	James Renninger	County Commissioner, District 3	Clay
+604	Betsy Condon	County Commissioner, District 4 (Chair)	Clay
+605	Kristen Burke	County Commissioner, District 5	Clay
+606	John Martin	County Commissioner, District 1	Nassau
+607	Aaron Bell	County Commissioner, District 2	Nassau
+608	Klynt Farmer	County Commissioner, District 3	Nassau
+609	Thomas Ford	County Commissioner, District 4 (Chair)	Nassau
+610	Jeff Gray	County Commissioner, District 5	Nassau
+611	Joe Tiseo	County Commissioner, District 1	Charlotte
+612	Chris Constance	County Commissioner, District 2 (Chair)	Charlotte
+614	Bill Truex	County Commissioner, District 4	Charlotte
+615	Stephen R. Deutsch	County Commissioner, District 5	Charlotte
+616	Jeff Kinnard	County Commissioner, District 1	Citrus
+617	Ron Kitchen Jr.	County Commissioner, District 2	Citrus
+618	Ruthie Davis Schlabach	County Commissioner, District 3 (Chair)	Citrus
+619	Scott Carnahan	County Commissioner, District 4	Citrus
+620	Holly Davis	County Commissioner, District 5	Citrus
+621	Steve Champion	County Commissioner, District 1	Hernando
+623	Elizabeth Narverud	County Commissioner, District 3	Hernando
+624	John Allocco	County Commissioner, District 4	Hernando
+625	Brian Hawkins	County Commissioner, District 5	Hernando
+627	James Scholl	County Commissioner, District 2	Monroe
+628	Eddie Martinez	County Commissioner, District 3	Monroe
+631	Jay Zembower	County Commissioner, District 1	Seminole
+633	Chris Hall	County Commissioner, District 1	Collier
+637	Rick LoCastro	County Commissioner, District 2	Collier
+638	Mark Smith	County Commissioner, District 1	Sarasota
+639	Joseph Neunder	County Commissioner, District 2	Sarasota
+640	Neil Rainford	County Commissioner, District 3	Sarasota
+641	Mike Moran	County Commissioner, District 4	Sarasota
+643	James Satcher	County Commissioner, District 1	Manatee
+647	Amanda Ballard	County Commissioner, District 4	Manatee
+648	Jason Bearden	County Commissioner, District 6	Manatee
+649	Carol Whitmore	County Commissioner, District 7 (At-Large)	Manatee
+655	Peggy Choudhry	County Commissioner, District 1	Osceola
+656	Viviana Janer	County Commissioner, District 2	Osceola
+660	Joe Earman	County Commissioner, District 1	Indian River
+662	Joe Flescher	County Commissioner, District 3	Indian River
+667	Chris Dzadovsky	County Commissioner, District 3	St. Lucie
+668	Jamie Fowler	County Commissioner, District 4	St. Lucie
+669	Cathy Townsend	County Commissioner, District 5	St. Lucie
+672	Harold Jenkins	County Commissioner, District 3 (Chair)	Martin
+676	Chris Constance	County Commissioner, District 2	Charlotte
+678	Bill Truex	County Commissioner, District 4 (Chair)	Charlotte
+687	Sean Parks	County Commissioner, District 3	Lake
+688	Douglas Shields	County Commissioner, District 4	Lake
+689	Leslie Campione	County Commissioner, District 5 (Chair)	Lake
+690	Griff Griffitts	County Commissioner, District 5	Bay
+693	Robert Carroll	County Commissioner, District 2 (Chair)	Bay
+695	Tim Murphy	County Commissioner, District 5	Columbia
+697	Ricky Jernigan	County Commissioner, District 3	Columbia
+698	Bucky Nash	County Commissioner, District 2	Columbia
+703	Carolyn Ketchel	County Commissioner, District 2 (Chair)	Okaloosa
+708	Kerry Smith	County Commissioner, District 2	Santa Rosa
+709	Sam Parker	County Commissioner, District 1	Santa Rosa
+710	Craig Estep	County Commissioner, District 5	Sumter
+712	Oren Miller	County Commissioner, District 3 (Chair)	Sumter
+715	Steve Stroberger	County Commissioner, District 1	Escambia
+718	Ashlee Hofberger	County Commissioner, District 4	Escambia
+719	Steven Barry	County Commissioner, District 5	Escambia
+723	Thomas Ford	County Commissioner, District 4	Nassau
+731	Kathy Bryant	County Commissioner, District 2	Marion
+732	Jeff Gold	County Commissioner, District 3	Marion
+733	Carl Zalak	County Commissioner, District 4	Marion
+734	Michelle Stone	County Commissioner, District 5	Marion
+736	John Allocco	County Commissioner, District 2	Hernando
+737	Brian Hawkins	County Commissioner, District 3	Hernando
+738	John Mitten	County Commissioner, District 4	Hernando
+740	Rebecca Bays	County Commissioner, District 1	Citrus
+742	Ron Kitchen Jr.	County Commissioner, District 3	Citrus
+743	Jeff Kinnard	County Commissioner, District 4	Citrus
+746	Carolyn Ketchel	County Commissioner, District 2	Okaloosa
+748	Trey Goodwin	County Commissioner, District 4	Okaloosa
+751	Jim Scholl	County Commissioner, District 2	Monroe
+760	Robert Carroll	County Commissioner, District 1	Bay
+767	Oren Miller	County Commissioner, District 3	Sumter
+770	Tim Murphy	County Commissioner, District 1	Columbia
+772	Bucky Nash	County Commissioner, District 3	Columbia
+773	Toby Brewer	County Commissioner, District 4	Columbia
+774	Rusty DePratter	County Commissioner, District 5	Columbia
+775	Chris Campbell	County Commissioner, District 1	Highlands
+777	Kevin Roberts	County Commissioner, District 3	Highlands
+778	Scott Kirouac	County Commissioner, District 4	Highlands
+779	Jim Brooks	County Commissioner, District 5	Highlands
+780	Jim Peacock	County Commissioner, District 1	Jackson
+781	Alex McKinnie	County Commissioner, District 2	Jackson
+786	Terry Turner	County Commissioner, District 2	Putnam
+787	Buddy Goddard	County Commissioner, District 3	Putnam
+788	Jeff Helms	County Commissioner, District 4	Putnam
+789	Chip Laibl	County Commissioner, District 5	Putnam
+791	Danny Glidewell	County Commissioner, District 2	Walton
+794	Bobby Brack	County Commissioner, District 5	Walton
+795	Terry Burroughs	County Commissioner, District 1	Okeechobee
+796	Brad Goodbread	County Commissioner, District 2	Okeechobee
+797	David Hazellief	County Commissioner, District 3	Okeechobee
+799	Terry Burroughs Jr.	County Commissioner, District 5	Okeechobee
+801	Elton Langford	County Commissioner, District 2	DeSoto
+802	Buddy Mansfield	County Commissioner, District 3	DeSoto
+803	J.C. Deriso	County Commissioner, District 4	DeSoto
+804	Jim Selph Jr.	County Commissioner, District 5	DeSoto
+806	Scottie Rhoden	County Commissioner, District 2	Baker
+807	James Bennett	County Commissioner, District 3	Baker
+809	Rocky Rhoden	County Commissioner, District 5	Baker
+810	Danny Riddick	County Commissioner, District 1	Bradford
+811	Doyle Thomas	County Commissioner, District 2	Bradford
+812	Eddie Lewis	County Commissioner, District 3	Bradford
+813	Ross Chandler	County Commissioner, District 4	Bradford
+814	Kenny Thompson	County Commissioner, District 5	Bradford
+815	Matt Gavin	County Commissioner, District 1	Gadsden
+816	Alonzetta Jones	County Commissioner, District 2	Gadsden
+817	Eric Hinson	County Commissioner, District 3	Gadsden
+818	Brenda Holt	County Commissioner, District 4	Gadsden
+819	Kimberly McFarland	County Commissioner, District 5	Gadsden
+820	Thomas Demps	County Commissioner, District 1	Jefferson
+822	Derrick Jennings	County Commissioner, District 3	Jefferson
+826	Pam Feagle	County Commissioner, District 2	Taylor
+827	Thomas Demps	County Commissioner, District 3	Taylor
+828	Malcolm Page	County Commissioner, District 4	Taylor
+829	Steve Spradley	County Commissioner, District 5	Taylor
+831	Fred Nichols	County Commissioner, District 2	Wakulla
+832	Mike Kemp	County Commissioner, District 3	Wakulla
+833	Quincee Messersmith	County Commissioner, District 4	Wakulla
+834	Chuck Hess	County Commissioner, District 5	Wakulla
+835	Steve Joyner	County Commissioner, District 1	Suwannee
+836	Ricky Gamble	County Commissioner, District 2	Suwannee
+840	David Goodman	County Commissioner, District 1	Alachua
+841	Rock Meeks	County Commissioner, District 2	Alachua
+842	Mike Joyner	County Commissioner, District 3	Alachua
+847	Rick Knight	County Commissioner, District 3	Hardee
+848	Russell Melendy	County Commissioner, District 4	Hardee
+851	Michael Swindle	County Commissioner, District 2	Hendry
+853	Mitchell Kemmerer	County Commissioner, District 4	Hendry
+854	Emma Byrd	County Commissioner, District 5	Hendry
+855	James Rideout	County Commissioner, District 1	Holmes
+856	Jeff Good	County Commissioner, District 2	Holmes
+857	Clint Erickson	County Commissioner, District 3	Holmes
+858	Earl Stafford	County Commissioner, District 4	Holmes
+859	Bobby Sasnett	County Commissioner, District 5	Holmes
+860	Tray Hawkins	County Commissioner, District 1	Washington
+862	Charles Kent	County Commissioner, District 3	Washington
+863	Todd Abbott	County Commissioner, District 4	Washington
+864	Hubert Hendrix	County Commissioner, District 5	Washington
+865	Maura McCarthy Bulman	School Board Member, District 1	Broward
+873	Debra Hixon	School Board Member, At-Large Seat 9	Broward
+874	Erica Whitfield	School Board Member, District 1	Palm Beach
+878	Frank Barbieri	School Board Member, District 5	Palm Beach
+880	Bridget Ziegler	School Board Member, District 7	Palm Beach
+882	Henry Washington Jr.	School Board Member, District 4	Hillsborough
+888	Angie Gallo	School Board Chair, District 1	Orange
+889	Johanna Lopez	School Board Member, District 2	Orange
+891	Pam Gould	School Board Member, District 4	Orange
+894	Melissa Byrd	School Board Member, District 7	Orange
+895	Darryl Willie	School Board Chair, District 4	Duval
+896	Lori Hershey	School Board Member, District 1	Duval
+897	Elizabeth Andersen	School Board Member, District 2	Duval
+898	Cindy Pearson	School Board Member, District 3	Duval
+899	Warren Jones	School Board Member, District 5	Duval
+900	Charlotte Joyce	School Board Member, District 6	Duval
+901	April Scott	School Board Member, District 7	Duval
+902	Debbie Jordan	School Board Chair, District 1	Lee
+904	Chris Patricca	School Board Member, District 3	Lee
+905	Jada Langford-Fleming	School Board Member, District 4	Lee
+906	Sam Fisher	School Board Member, District 5	Lee
+907	Armor Persons	School Board Member, District 6	Lee
+908	Betsy Vaughn	School Board Member, District 7	Lee
+910	Tommy Allen	School Board Member, District 2	St. Johns
+911	Patrick Canan	School Board Member, District 3	St. Johns
+913	Bill Mignon	School Board Member, District 5	St. Johns
+914	Jamie Haynes	School Board Chair, District 1	Volusia
+915	Anita Burnette	School Board Member, District 2	Volusia
+916	Carl Persis	School Board Member, District 3	Volusia
+917	Ruben Colón	School Board Member, District 4	Volusia
+919	Luisa Santos	School Board Member, District 1	Miami-Dade
+921	Lucia Baez-Geller	School Board Chair, District 3	Miami-Dade
+922	Marta Pérez	School Board Member, District 4	Miami-Dade
+924	Steve Gallon III	School Board Vice Chair, District 6	Miami-Dade
+925	Lubby Navarro	School Board Member, District 7	Miami-Dade
+927	Danny Espino	School Board Member, District 9	Miami-Dade
+928	Lisa Cane	School Board Chair, District 1	Pinellas
+934	Eileen Long	School Board Member, District 7	Pinellas
+935	Kay Fields	School Board Chair, District 1	Polk
+937	Lisa Miller	School Board Member, District 3	Polk
+938	Lori Cunningham	School Board Member, District 4	Polk
+939	Billy Townsend	School Board Member, District 5	Polk
+940	Lynn Wilson	School Board Member, District 6	Polk
+941	Rick Nolte	School Board Member, District 7	Polk
+942	Megan Wright	School Board Chair, District 1	Brevard
+943	Gene Trent	School Board Member, District 2	Brevard
+944	Jennifer Jenkins	School Board Member, District 3	Brevard
+945	Matt Susin	School Board Member, District 4	Brevard
+946	Katye Campbell	School Board Member, District 5	Brevard
+947	Kristine Kraus	School Board Member, District 1	Seminole
+950	Tina Calderone	School Board Chair, District 4	Seminole
+952	Jerry Gibson	School Board Chair, District 1	Collier
+953	Stephanie Lucarelli	School Board Member, District 2	Collier
+954	Kelly Lichter	School Board Member, District 3	Collier
+957	Tom Edwards	School Board Chair, District 1	Sarasota
+958	Karen Rose	School Board Member, District 2	Sarasota
+959	Bridget Ziegler	School Board Member, District 3	Sarasota
+960	Robyn Marinelli	School Board Member, District 4	Sarasota
+961	Timothy Enos	School Board Member, District 5	Sarasota
+962	Chad Choate	School Board Chair, District 1	Manatee
+963	Mary Foreman	School Board Member, District 2	Manatee
+964	James Golden	School Board Member, District 3	Manatee
+965	Richard Tatem	School Board Member, District 4	Manatee
+966	Cindy Spray	School Board Member, District 5	Manatee
+968	James Washington	School Board Member, District 2	Pasco
+971	Ally Bernstein	School Board Member, District 5	Pasco
+972	Terry Castillo	School Board Chair, District 1	Osceola
+973	Kelvin Soto	School Board Member, District 2	Osceola
+974	Tim Weisheyer	School Board Member, District 3	Osceola
+975	Julius Melendez	School Board Member, District 4	Osceola
+976	Ricky Booth	School Board Member, District 5	Osceola
+980	Shelley Hilliard	School Board Member, District 4	Lake
+982	Tina Certain	School Board Chair, District 1	Alachua
+983	Diyonne McGraw	School Board Member, District 2	Alachua
+984	Mildred Russell	School Board Member, District 3	Alachua
+987	Alex Stemle	School Board Chair, District 1	Leon
+989	Laurie Cox	School Board Member, District 3	Leon
+990	Rosanne Wood	School Board Member, District 4	Leon
+991	Danielle Irwin	School Board Member, District 5	Leon
+992	Kevin Adams	School Board Chair, District 1	Escambia
+993	Paul Fetsko	School Board Member, District 2	Escambia
+994	Bill Slayton	School Board Member, District 3	Escambia
+995	Patty Hightower	School Board Member, District 4	Escambia
+997	Teri Barenborg	School Board Chair, District 1	Indian River
+998	Jacqueline Rosario	School Board Member, District 2	Indian River
+999	Gene Posca	School Board Member, District 3	Indian River
+1001	Brian Barefoot	School Board Member, District 5	Indian River
+1002	Allison Campbell	School Board Chair, District 1	Marion
+1003	Eric Cummings	School Board Member, District 2	Marion
+1005	Don Browning	School Board Member, District 4	Marion
+1006	Kelly King	School Board Member, District 5	Marion
+1007	Cara Reynolds	School Board Chair, District 1	Charlotte
+1009	Ruthie Lohmeyer	School Board Member, District 3	Charlotte
+1010	Kim Amontree	School Board Member, District 4	Charlotte
+1013	Daryl Johnson	County Commissioner, District 2	Calhoun
+1015	Scott Deonas	County Commissioner, District 4	Calhoun
+1016	Jeral Hall	County Commissioner, District 5	Calhoun
+1017	Ricky Jones	County Commissioner, District 1	Franklin
+1018	Bert Boldt	County Commissioner, District 2	Franklin
+1020	Joseph Parrish	County Commissioner, District 4	Franklin
+1021	Jessica Gay	County Commissioner, District 5	Franklin
+1028	D. Ray Harrison Jr.	County Commissioner, District 2	Gilchrist
+1029	Billy Philman	County Commissioner, District 3	Gilchrist
+1030	Ken Philman	County Commissioner, District 4	Gilchrist
+1032	Donna Storter-Long	County Commissioner, District 1	Glades
+1033	Tim Stanley	County Commissioner, District 2	Glades
+1034	Mark Lapp	County Commissioner, District 3	Glades
+1035	John Ahern	County Commissioner, District 4	Glades
+1036	Jerry Sapp	County Commissioner, District 5	Glades
+1037	Mark Hatch	County Commissioner, District 1	Dixie
+1038	James Valentine	County Commissioner, District 2	Dixie
+1040	Jamie Johnson	County Commissioner, District 4	Dixie
+1044	Donnie Browning	County Commissioner, District 3	Lafayette
+1045	James Sullivan	County Commissioner, District 4	Lafayette
+1046	Noel Roberts	County Commissioner, District 5	Lafayette
+1047	Doyle Brown	County Commissioner, District 1	Liberty
+1048	Jim Johnson	County Commissioner, District 2	Liberty
+1049	David Crummie	County Commissioner, District 3	Liberty
+1050	Davis Stoutamire	County Commissioner, District 4	Liberty
+1051	Dexter Barber	County Commissioner, District 5	Liberty
+1054	Alfred Martin	County Commissioner, District 3	Jefferson
+1056	Rick Davis	County Commissioner, District 5	Jefferson
+1057	Wayne Smith	County Commissioner, District 1	Columbia
+1058	Channing Dobbs	County Commissioner, District 2	Columbia
+1059	Ross Chandler	County Commissioner, District 3	Columbia
+1060	Willie Whitehead	County Commissioner, District 4	Columbia
+1061	Jimmy Tallman	County Commissioner, District 5	Columbia
+1062	Robert Brown	County Commissioner, District 1	Columbia
+1063	Randy Ogburn	County Commissioner, District 2	Columbia
+1065	Buster Oxendine	County Commissioner, District 4	Columbia
+1066	Beth Burnam	County Commissioner, District 5	Columbia
+1067	Christia Li Roberts	School Board Chair, District 1	Martin
+1068	Donna Powers	School Board Member, District 2	Martin
+1077	Donna Martin	School Board Chair, District 1	Nassau
+1080	Jonathan Wagner	School Board Member, District 4	Nassau
+1082	Janice Kerekes	School Board Chair, District 1	Clay
+1083	Erin Skipper	School Board Member, District 2	Clay
+1085	Mary Bolla	School Board Member, District 4	Clay
+1087	Linda Prescott	School Board Chair, District 1	Hernando
+1090	Mark Johnson	School Board Member, District 4	Hernando
+1091	Shannon Rodriguez	School Board Member, District 5	Hernando
+1092	Virginia Bryant	School Board Chair, District 1	Citrus
+1093	Thomas Kennedy	School Board Member, District 2	Citrus
+1094	Ginger Bryant	School Board Member, District 3	Citrus
+1095	Sandy Counts	School Board Member, District 4	Citrus
+1097	Sally Moss	School Board Chair, District 1	Sumter
+1099	Eddy Thompson	School Board Member, District 3	Sumter
+1105	Andy Tuck	School Board Member, District 4	Highlands
+1106	Joy Gerig	School Board Member, District 5	Highlands
+1107	Linda Sanborn	School Board Chair, District 1	Santa Rosa
+1108	Carol Boston	School Board Member, District 2	Santa Rosa
+1109	Diane Scott	School Board Member, District 3	Santa Rosa
+1110	Jennifer Granse	School Board Member, District 4	Santa Rosa
+1111	Scott Peden	School Board Member, District 5	Santa Rosa
+1112	Lamar White	School Board Chair, District 1	Okaloosa
+1114	Linda Evanchyk	School Board Member, District 3	Okaloosa
+1115	Tim Bryant	School Board Member, District 4	Okaloosa
+1116	Diane Kelley	School Board Member, District 5	Okaloosa
+1118	Bryce Googe	School Board Member, District 2	Bay
+1119	Pamm Chapman	School Board Member, District 3	Bay
+1121	Steve Moss	School Board Member, District 5	Bay
+1123	Dana Brady	School Board Member, District 2	Columbia
+1124	Stephanie Finnell	School Board Member, District 3	Columbia
+1125	Hunter Peeler	School Board Member, District 4	Columbia
+1126	Steve Nelson	School Board Member, District 5	Columbia
+1127	Andy Griffiths	School Board Chair, District 1	Monroe
+1128	Sue Woltanski	School Board Member, District 2	Monroe
+1129	Bobby Highsmith	School Board Member, District 3	Monroe
+1130	John Dick	School Board Member, District 4	Monroe
+1131	Mindy Conn	School Board Member, District 5	Monroe
+1134	Hazel Gillis	School Board Member, District 3	Walton
+1135	Anthony Martin	School Board Member, District 4	Walton
+1137	David Buckles	School Board Chair, District 1	Putnam
+1138	Cynthia Giles	School Board Member, District 2	Putnam
+1139	Holly Pickens	School Board Member, District 3	Putnam
+1140	Sandra Gilyard	School Board Member, District 4	Putnam
+1145	Brian Kramer	State Attorney, 8th Circuit	Alachua
+1147	Phil Archer	State Attorney, 18th Circuit	Brevard
+1148	Harold Pryor	State Attorney, 17th Circuit	Broward
+1149	John Durrett	State Attorney, 3rd Circuit	Columbia
+1150	Melissa Nelson	State Attorney, 4th Circuit	Duval
+1151	Ginger Bowden Madden	State Attorney, 1st Circuit	Escambia
+1152	Andrew Warren	State Attorney, 13th Circuit	Hillsborough
+1153	Thomas Bakkedahl	State Attorney, 19th Circuit	Indian River
+1154	Amira Fox	State Attorney, 20th Circuit	Lee
+1155	Jack Campbell	State Attorney, 2nd Circuit	Leon
+1158	Bill Gladson	State Attorney, 16th Circuit	Monroe
+1159	Andrew Bain	State Attorney, 9th Circuit (appointed)	Orange
+1164	Ed Brodsky	State Attorney, 12th Circuit	Sarasota
+1165	R.J. Larizza	State Attorney, 7th Circuit	Volusia
+1167	Pedro Garcia	Property Appraiser, Miami-Dade County	Miami-Dade
+1173	Joe Scott	Supervisor of Elections, Broward County	Broward
+1175	Dorothy Jacks	Property Appraiser, Palm Beach County	Palm Beach
+1180	Nancy Millan	Tax Collector, Hillsborough County	Hillsborough
+1186	Jody Phillips	Clerk of Circuit Court, Duval County	Duval
+1189	Jerry Holland	Supervisor of Elections, Duval County	Duval
+1190	Ken Burke	Clerk of Circuit Court, Pinellas County	Pinellas
+1194	Kevin Karnes	Clerk of Circuit Court, Lee County	Lee
+1196	Noelle Branning	Tax Collector, Lee County	Lee
+1197	Tommy Doyle	Supervisor of Elections, Lee County	Lee
+1198	Stacy Butterfield	Clerk of Circuit Court, Polk County	Polk
+1200	Joe Tedder	Tax Collector, Polk County	Polk
+1203	Dana Blickley	Property Appraiser, Brevard County	Brevard
+1204	Lisa Cullen	Tax Collector, Brevard County	Brevard
+1206	Laura Roth	Clerk of Circuit Court, Volusia County	Volusia
+1207	Larry Bartlett	Property Appraiser, Volusia County	Volusia
+1208	Will Roberts	Tax Collector, Volusia County	Volusia
+1210	Grant Maloy	Clerk of Circuit Court, Seminole County	Seminole
+1211	David Johnson	Property Appraiser, Seminole County	Seminole
+1214	Karen Rushing	Clerk of Circuit Court, Sarasota County	Sarasota
+1216	Barbara Ford-Coates	Tax Collector, Sarasota County	Sarasota
+1221	Brian Corley	Supervisor of Elections, Pasco County	Pasco
+1222	Angel Colonneso	Clerk of Circuit Court, Manatee County	Manatee
+1223	Jim Todora	Property Appraiser, Manatee County	Manatee
+1224	Ken Burton Jr.	Tax Collector, Manatee County	Manatee
+1225	James Satcher	Supervisor of Elections, Manatee County	Manatee
+1226	Crystal Kinzel	Clerk of Circuit Court, Collier County	Collier
+1227	Abe Skinner	Property Appraiser, Collier County	Collier
+1228	Abe Skinner	Tax Collector, Collier County	Collier
+1231	Katrina Scarborough	Property Appraiser, Osceola County	Osceola
+1233	Mary Jane Arrington	Supervisor of Elections, Osceola County	Osceola
+1235	Michelle Franklin	Property Appraiser, St. Lucie County	St. Lucie
+1236	Chris Craft	Tax Collector, St. Lucie County	St. Lucie
+1240	David Jordan	Tax Collector, Lake County	Lake
+1242	Gregory Harrell	Clerk of Circuit Court, Marion County	Marion
+1244	George Albright	Tax Collector, Marion County	Marion
+1246	Pam Childers	Clerk of Circuit Court, Escambia County	Escambia
+1247	Chris Jones	Property Appraiser, Escambia County	Escambia
+1248	Scott Lunsford	Tax Collector, Escambia County	Escambia
+1249	Robert Bender	Supervisor of Elections, Escambia County	Escambia
+1250	J.K. Irby	Clerk of Circuit Court, Alachua County	Alachua
+1251	Ayesha Solomon	Property Appraiser, Alachua County	Alachua
+1252	John Power	Tax Collector, Alachua County	Alachua
+1253	Kim Barton	Supervisor of Elections, Alachua County	Alachua
+1254	Roger Eaton	Clerk of Circuit Court, Charlotte County	Charlotte
+1258	Jeffrey Barton	Clerk of Circuit Court, Indian River County	Indian River
+1259	Wesley Davis	Property Appraiser, Indian River County	Indian River
+1260	Carole Jean Jordan	Tax Collector, Indian River County	Indian River
+1261	Leslie Swan	Supervisor of Elections, Indian River County	Indian River
+1263	Jenny Fields	Property Appraiser, Martin County	Martin
+1264	Ruth Pietruszewski	Tax Collector, Martin County	Martin
+1266	Brandon Patty	Clerk of Circuit Court, St. Johns County	St. Johns
+1267	Eddie Creamer	Property Appraiser, St. Johns County	St. Johns
+1273	Kaiti Lenhart	Supervisor of Elections, Flagler County	Flagler
+1274	Gwen Marshall	Clerk of Circuit Court, Leon County	Leon
+1275	Akin Akinyemi	Property Appraiser, Leon County	Leon
+1276	Doris Maloy	Tax Collector, Leon County	Leon
+1278	Tara Green	Clerk of Circuit Court, Clay County	Clay
+1279	Roger Suggs	Property Appraiser, Clay County	Clay
+1280	Diane Hutchings	Tax Collector, Clay County	Clay
+1281	Chris Chambless	Supervisor of Elections, Clay County	Clay
+1282	John Crawford	Clerk of Circuit Court, Nassau County	Nassau
+1283	Michael Hickox	Property Appraiser, Nassau County	Nassau
+1284	John Drew	Tax Collector, Nassau County	Nassau
+1286	Bob Germaine	Clerk of Circuit Court, Highlands County	Highlands
+1287	Ray McIntyre	Property Appraiser, Highlands County	Highlands
+1288	Eric Zwayer	Tax Collector, Highlands County	Highlands
+1289	Penny Ogg	Supervisor of Elections, Highlands County	Highlands
+1291	Sandra Haas	Property Appraiser, Hernando County	Hernando
+1292	John Druzbick	Tax Collector, Hernando County	Hernando
+1294	Angela Vick	Clerk of Circuit Court, Citrus County	Citrus
+1295	Cregg Dalton	Property Appraiser, Citrus County	Citrus
+1296	Janice Warren	Tax Collector, Citrus County	Citrus
+1301	William Keen Jr.	Supervisor of Elections, Sumter County	Sumter
+1305	Tappie Villane	Supervisor of Elections, Santa Rosa County	Santa Rosa
+1306	JD Peacock	Clerk of Circuit Court, Okaloosa County	Okaloosa
+1308	Ben Anderson	Tax Collector, Okaloosa County	Okaloosa
+1310	Bill Kinsaul	Clerk of Circuit Court, Bay County	Bay
+1311	Dan Sowell	Property Appraiser, Bay County	Bay
+1312	Chuck Perdue	Tax Collector, Bay County	Bay
+1314	P. DeWitt Cason	Clerk of Circuit Court, Columbia County	Columbia
+1316	Ronnie Broughton	Tax Collector, Columbia County	Columbia
+1318	Kevin Madok	Clerk of Circuit Court, Monroe County	Monroe
+1320	Danise Henriquez	Tax Collector, Monroe County	Monroe
+1322	Alex Alford	Clerk of Circuit Court, Walton County	Walton
+1324	Rhonda Skipper	Tax Collector, Walton County	Walton
+1325	Bobby Beasley	Supervisor of Elections, Walton County	Walton
+1327	Rick Hagan	Property Appraiser, Putnam County	Putnam
+1329	Charles Overturf	Supervisor of Elections, Putnam County	Putnam
+1330	Clay Rooks	Clerk of Circuit Court, Jackson County	Jackson
+1331	Pete Andrews	Property Appraiser, Jackson County	Jackson
+1334	Jerald Bryant	Clerk of Circuit Court, Okeechobee County	Okeechobee
+1335	Walt Chancey	Property Appraiser, Okeechobee County	Okeechobee
+1336	Celeste Watford	Tax Collector, Okeechobee County	Okeechobee
+1337	Melissa Arnold	Supervisor of Elections, Okeechobee County	Okeechobee
+1339	Lorie Ayers	Property Appraiser, DeSoto County	DeSoto
+1341	Mark Negley	Supervisor of Elections, DeSoto County	DeSoto
+1345	Jeff Ussery	Supervisor of Elections, Hardee County	Hardee
+1346	Barbara Butler	Clerk of Circuit Court, Hendry County	Hendry
+1347	Phillip Pelletier	Property Appraiser, Hendry County	Hendry
+1348	Peggy Hampton	Tax Collector, Hendry County	Hendry
+1351	Timothy Sweat	Property Appraiser, Baker County	Baker
+1352	Gene Harvey	Tax Collector, Baker County	Baker
+1354	Ray Norman	Clerk of Circuit Court, Bradford County	Bradford
+1356	Teresa Phillips	Tax Collector, Bradford County	Bradford
+1358	Nicholas Thomas	Clerk of Circuit Court, Gadsden County	Gadsden
+1359	Clyde Collins	Property Appraiser, Gadsden County	Gadsden
+1360	Dale Summerford	Tax Collector, Gadsden County	Gadsden
+1362	Annie Mae Murphy	Clerk of Circuit Court, Taylor County	Taylor
+1364	Mark Wiggins	Tax Collector, Taylor County	Taylor
+1366	Brent Whitaker	Clerk of Circuit Court, Suwannee County	Suwannee
+1368	Sharon Jordan	Tax Collector, Suwannee County	Suwannee
+1371	Ed Brimner	Property Appraiser, Wakulla County	Wakulla
+1372	Lisa Craze	Tax Collector, Wakulla County	Wakulla
+1373	Joseph Morgan	Supervisor of Elections, Wakulla County	Wakulla
+1375	Greg Payne	Property Appraiser, Holmes County	Holmes
+1378	Lora Bell	Clerk of Circuit Court, Washington County	Washington
+1379	Gil Carter	Property Appraiser, Washington County	Washington
+1380	Faye Worthington	Tax Collector, Washington County	Washington
+1381	Carol Finch Rudd	Supervisor of Elections, Washington County	Washington
+1382	Kirk Reams	Clerk of Circuit Court, Jefferson County	Jefferson
+1383	Angela Gray	Property Appraiser, Jefferson County	Jefferson
+1384	Lois Hunter	Tax Collector, Jefferson County	Jefferson
+1387	Leigh Barfield	Property Appraiser, Madison County	Jefferson
+1390	Ruth Attaway	Clerk of Circuit Court, Calhoun County	Calhoun
+1391	Joe Wood	Property Appraiser, Calhoun County	Calhoun
+1392	Jim Strickland	Tax Collector, Calhoun County	Calhoun
+1393	Margie Laramore	Supervisor of Elections, Calhoun County	Calhoun
+1394	Dana Johnson	Clerk of Circuit Court, Dixie County	Dixie
+1395	Larry Sapp	Property Appraiser, Dixie County	Dixie
+1398	Marcia Johnson	Clerk of Circuit Court, Franklin County	Franklin
+1399	Rhonda Skipper	Property Appraiser, Franklin County	Franklin
+1403	Ed Wolgast	Property Appraiser, Gilchrist County	Gilchrist
+1405	Connie Sanchez	Supervisor of Elections, Gilchrist County	Gilchrist
+1407	Lorie Ward	Property Appraiser, Glades County	Glades
+1410	Rebecca Norris	Clerk of Circuit Court, Gulf County	Gulf
+1411	Mitch Burke	Property Appraiser, Gulf County	Gulf
+1412	Shirley Jenkins	Tax Collector, Gulf County	Gulf
+1413	John Hanlon	Supervisor of Elections, Gulf County	Gulf
+1414	Ricky Lyons	Clerk of Circuit Court, Lafayette County	Lafayette
+1415	Bobby Hatch	Property Appraiser, Lafayette County	Lafayette
+1417	Lavan Hawkins	Supervisor of Elections, Lafayette County	Lafayette
+1418	Daniel Stanley	Clerk of Circuit Court, Liberty County	Liberty
+1419	Patricia Whitfield	Property Appraiser, Liberty County	Liberty
+1420	Marie Goodman	Tax Collector, Liberty County	Liberty
+1423	Greg Godwin	Property Appraiser, Hamilton County	Columbia
+1426	Danny Shipp	Clerk of Circuit Court, Levy County	Alachua
+1427	Osborn Barker	Property Appraiser, Levy County	Alachua
+1428	Linda Fugate	Tax Collector, Levy County	Alachua
+1431	Virginia Barton	Property Appraiser, Union County	Columbia
+1433	Deborah Osborne	Supervisor of Elections, Union County	Columbia
+1434	Raemi Eagle-Glenn	County Commissioner, District 5 (Chair)	Alachua
+1436	Anna Prizzia	County Commissioner, District 3	Alachua
+1437	Marihelen Wheeler	County Commissioner, District 2	Alachua
+1438	Mary Alford	County Commissioner, District 1	Alachua
+1439	Harold McCartney	City Council Member, At-Large Group 5	Duval
+1440	Nick Howland	City Council Member, At-Large Group 4	Duval
+1441	Matt Carlucci	City Council Member, At-Large Group 3	Duval
+1442	Sam Newby	City Council Member, At-Large Group 2	Duval
+1443	Michael Boylan	City Council Member, At-Large Group 1	Duval
+1444	Kevin Carrico	City Council Vice President	Duval
+1445	Ron Salem	City Council President	Duval
+1453	Jesse Davis	School Board Member, District 1	Baker
+1454	Charlie Burnett	School Board Member, District 2	Baker
+1455	Artie Burnett	School Board Member, District 3	Baker
+1457	Brad Griffis	School Board Member, District 5	Baker
+1458	Stacy Creighton	School Board Member, District 1	Bradford
+1459	Sheila Gallagher	School Board Member, District 2	Bradford
+1461	Cheryl Canova	School Board Member, District 4	Bradford
+1462	Daniel Riddick	School Board Member, District 5	Bradford
+1464	Tim Smith	School Board Member, District 2	Calhoun
+1465	Willie Lewis	School Board Member, District 3	Calhoun
+1466	Clifton Edenfield	School Board Member, District 4	Calhoun
+1468	Michael Cosentino	School Board Member, District 1	DeSoto
+1469	Carlos Kelly	School Board Member, District 2	DeSoto
+1471	Emily Morrison	School Board Member, District 4	DeSoto
+1473	Eric Hatcher	School Board Member, District 1	Dixie
+1474	Wayne Feagle	School Board Member, District 2	Dixie
+1476	Rebecca Sapp	School Board Member, District 4	Dixie
+1477	Mitch Hardee	School Board Member, District 5	Dixie
+1478	Pam Shiver	School Board Member, District 1	Franklin
+1479	Carl Whaley	School Board Member, District 2	Franklin
+1480	Fonda Davis	School Board Member, District 3	Franklin
+1481	Stacy Kirvin	School Board Member, District 4	Franklin
+1483	Steve Scott	School Board Member, District 1	Gadsden
+1484	Tyrone Smith	School Board Member, District 2	Gadsden
+1485	Isaac Simmons	School Board Member, District 3	Gadsden
+1486	Charlie Frost	School Board Member, District 4	Gadsden
+1487	Audrey Lewis	School Board Member, District 5	Gadsden
+1488	Kyle Pedersen	School Board Member, District 1	Gilchrist
+1490	Marion Poitevint	School Board Member, District 3	Gilchrist
+1491	Michael Martin	School Board Member, District 4	Gilchrist
+1492	Devin Strickland	School Board Member, District 5	Gilchrist
+1493	Laura Akin	School Board Member, District 1	Glades
+1495	Sandra Drury	School Board Member, District 3	Glades
+1496	Mike McLeod	School Board Member, District 4	Glades
+1497	Rachel Denton	School Board Member, District 5	Glades
+1498	Billy Traylor	School Board Member, District 1	Gulf
+1499	Brooke Wooten	School Board Member, District 2	Gulf
+1501	Danny Little	School Board Member, District 4	Gulf
+1502	Brett Banks	School Board Member, District 5	Gulf
+1504	Garry McWhorter	School Board Member, District 2	Hardee
+1505	Thomas Trevino	School Board Member, District 3	Hardee
+1506	Mildred Smith	School Board Member, District 4	Hardee
+1507	Cathy Towns	School Board Member, District 5	Hardee
+1508	Stephanie Daniels	School Board Member, District 1	Hendry
+1509	Victoria Washington	School Board Member, District 2	Hendry
+1510	John Perry	School Board Member, District 3	Hendry
+1511	Jon Woosley	School Board Member, District 4	Hendry
+1512	Emily Puente	School Board Member, District 5	Hendry
+1513	Sid Johnson	School Board Member, District 1	Holmes
+1514	Alan Justice	School Board Member, District 2	Holmes
+1515	Debra Lewis	School Board Member, District 3	Holmes
+1517	Tommy Rone	School Board Member, District 5	Holmes
+1518	Chris Johnson	School Board Member, District 1	Jackson
+1519	Charlotte Gardner	School Board Member, District 2	Jackson
+1520	Mack Howard	School Board Member, District 3	Jackson
+1521	Stacey Goodson	School Board Member, District 4	Jackson
+1522	Diane Basford	School Board Member, District 5	Jackson
+1523	Larry Halsey	School Board Member, District 1	Jefferson
+1524	Sandra Saunders	School Board Member, District 2	Jefferson
+1525	Shirley Washington	School Board Member, District 3	Jefferson
+1526	Larry Branan	School Board Member, District 4	Jefferson
+1527	Charles Boland	School Board Member, District 5	Jefferson
+1528	Jason Walker	School Board Member, District 1	Lafayette
+1530	Steve Land	School Board Member, District 3	Lafayette
+1531	J.W. Morris	School Board Member, District 4	Lafayette
+1532	Jill Barrington	School Board Member, District 5	Lafayette
+1533	Kyle Peddie	School Board Member, District 1	Liberty
+1534	Todd McDaniel	School Board Member, District 2	Liberty
+1535	Darrel Hayes	School Board Member, District 3	Liberty
+1536	Jim Jeter	School Board Member, District 4	Liberty
+1537	Tina Tharpe	School Board Member, District 5	Liberty
+1538	VeEtta Hagan	School Board Member, District 1	Jefferson
+1539	Karen Pickles	School Board Member, District 2	Jefferson
+1540	Susie Williamson	School Board Member, District 3	Jefferson
+1541	Bart Alford	School Board Member, District 4	Jefferson
+1542	Kenny Hall	School Board Member, District 5	Jefferson
+1544	Jill Holcomb	School Board Member, District 2	Okeechobee
+1545	Gary Ritter	School Board Member, District 3	Okeechobee
+1546	Malissa Morgan	School Board Member, District 4	Okeechobee
+1547	Melisa Jahner	School Board Member, District 5	Okeechobee
+1548	Tim Alcorn	School Board Member, District 1	Suwannee
+1550	Catherine Cason	School Board Member, District 3	Suwannee
+1551	Jerry Taylor	School Board Member, District 4	Suwannee
+1552	Ronald White	School Board Member, District 5	Suwannee
+1553	Deidra Zorn	School Board Member, District 1	Taylor
+1554	Sandra Gandy	School Board Member, District 2	Taylor
+1555	Jeannie Mathis	School Board Member, District 3	Taylor
+1557	Kenny Murphy	School Board Member, District 5	Taylor
+1558	Joann Daniels	School Board Member, District 1	Wakulla
+1559	Josh Brown	School Board Member, District 2	Wakulla
+1560	Laura Lawhon	School Board Member, District 3	Wakulla
+1561	Greg Thomas	School Board Member, District 4	Wakulla
+1562	Cale Langston	School Board Member, District 5	Wakulla
+1564	Susan Roberts	School Board Member, District 2	Washington
+1565	Vann Brock	School Board Member, District 3	Washington
+1566	Brad Steverson	School Board Member, District 4	Washington
+1568	Sammy McCoy	School Board Member, District 1	Columbia
+1569	Gary Godwin	School Board Member, District 2	Columbia
+1570	Thomas Moffses	School Board Member, District 3	Columbia
+1571	Johnny Bullard	School Board Member, District 4	Columbia
+1573	Stacy Scott	Public Defender, 8th Circuit (Alachua/Baker/Bradford/Gilchrist/Levy/Union)	Alachua
+1574	Brandon Perkins	Public Defender, 14th Circuit (Bay/Calhoun/Gulf/Holmes/Jackson/Washington)	Bay
+1575	Blaise Trettis	Public Defender, 18th Circuit (Brevard/Seminole)	Brevard
+1576	Gordon Weekes	Public Defender, 17th Circuit (Broward)	Broward
+1577	Blair Payne	Public Defender, 3rd Circuit (Columbia/Dixie/Hamilton/Lafayette/Madison/Suwannee/Taylor)	Columbia
+1578	Charlie Cofer	Public Defender, 4th Circuit (Duval/Clay/Nassau)	Duval
+1580	Julianne Holt	Public Defender, 13th Circuit (Hillsborough)	Hillsborough
+1581	Diamond Litty	Public Defender, 19th Circuit (Indian River/Martin/Okeechobee/St. Lucie)	Indian River
+1583	Jessica Yeary	Public Defender, 2nd Circuit (Leon/Gadsden/Jefferson/Wakulla/Liberty/Franklin)	Leon
+1585	Carlos Martinez	Public Defender, 11th Circuit (Miami-Dade)	Miami-Dade
+1588	Carey Haughwout	Public Defender, 15th Circuit (Palm Beach)	Palm Beach
+1590	Rex Dimmig	Public Defender, 10th Circuit (Polk/Hardee/Highlands)	Polk
+1591	Larry Eger	Public Defender, 12th Circuit (Sarasota/Manatee/DeSoto)	Sarasota
+1606	Gloria Walker	Chief Judge, 8th Judicial Circuit	Alachua
+1610	Andrew Decker	Chief Judge, 3rd Judicial Circuit	Columbia
+1611	Mark Borello	Chief Judge, 4th Judicial Circuit	Duval
+1612	John Simon	Chief Judge, 1st Judicial Circuit	Escambia
+1618	Nushin Sayfie	Chief Judge, 11th Judicial Circuit	Miami-Dade
+1619	Mark Jones	Chief Judge, 16th Judicial Circuit	Monroe
+1622	Michael Andrews	Chief Judge, 6th Judicial Circuit	Pinellas
+1623	Donald Jacobsen	Chief Judge, 10th Judicial Circuit	Polk
+1624	Charles Roberts	Chief Judge, 12th Judicial Circuit	Sarasota
+1626	Tom Keen	City Commissioner, District 1, Orlando	Orange
+1633	Brandi Gabbard	City Council Member, District 2, St. Petersburg	Pinellas
+1634	Ed Montanari	City Council Member, District 3, St. Petersburg	Pinellas
+1644	Christine King	City Commissioner, District 5, Miami	Miami-Dade
+1646	Jeremy Matlow	City Commissioner, Seat 2, Tallahassee	Leon
+1647	Jack Porter	City Commissioner, Seat 3, Tallahassee	Leon
+1649	John Dailey	Mayor, City of Tallahassee	Leon
+1650	Bill Steinke	City Council Member, District 1, Cape Coral	Lee
+1651	Dan Sheppard	City Council Member, District 2, Cape Coral	Lee
+1653	Patty Cummings	City Council Member, District 4, Cape Coral	Lee
+1655	Keith Long	City Council Member, District 6, Cape Coral	Lee
+1656	John Gunter	Mayor, City of Cape Coral	Lee
+1658	Jesus Tundidor	City Council President, Hialeah	Miami-Dade
+1659	Vivian Casals-Munoz	City Council Member, Hialeah	Miami-Dade
+1661	Teniadé Broughton	City Council Member, District 1, Pensacola	Escambia
+1662	Sherri Myers	City Council Member, District 2, Pensacola	Escambia
+1664	Jared Moore	City Council Member, District 4, Pensacola	Escambia
+1665	Allison Patton	City Council Member, District 5, Pensacola	Escambia
+1666	Ann Hill	City Council Member, District 6, Pensacola	Escambia
+1667	D.C. Reeves	Mayor, City of Pensacola	Escambia
+1669	Matt Howland	City Commissioner, At-Large 1, Gainesville	Alachua
+1671	Shannon Martin	Mayor, City of Port St. Lucie	St. Lucie
+1672	Jolien Caraballo	Vice Mayor, City of Port St. Lucie	St. Lucie
+1674	Stephanie Madden	City Commissioner, Lakeland	Polk
+1676	Janie Ruddy	School Board Member, District 2	Flagler
+1677	Lauren Ramirez	School Board Member, District 3	Flagler
+1678	Christy Chong	School Board Chair, District 4	Flagler
+1679	Will Furry	School Board Member, District 5	Flagler
+1681	Ken Amaro	City Council Member, District 1	Duval
+1682	Mike Gay	City Council Member, District 2	Duval
+1687	Jimmy Peluso	City Council Member, District 7	Duval
+1688	Reggie Gaffney Jr.	City Council Member, District 8	Duval
+1689	Tyrona Clark-Murray	City Council Member, District 9	Duval
+1690	Ju'Coby Pittman	City Council Member, District 10	Duval
+1691	Raul Arias Jr.	City Council Member, District 11	Duval
+1693	Rory Diamond	City Council Member, District 13	Duval
+1694	Rahman Johnson	City Council Member, District 14	Duval
+1695	Terrance Freeman	City Council Member, At-Large Group 1	Duval
+1699	Chris Miller	City Council Member, At-Large Group 5	Duval
+1711	Gwendolyn Henderson	Tampa City Council, District 5	Hillsborough
+1724	Mike Harting	St. Petersburg City Council, District 3	Pinellas
+1739	Dianne Williams-Cox	Tallahassee City Commissioner, Seat 4	Leon
+1743	Anthony Bonna	Port St. Lucie City Council Member	St. Lucie
+1744	Stephanie Morgan	Port St. Lucie City Council Member	St. Lucie
+1745	David Poitier	Port St. Lucie City Council Member	St. Lucie
+1748	Tom Kilraine	Cape Coral City Council, District 2	Lee
+1750	Dan Kaduk	Cape Coral City Council, District 4	Lee
+1751	Tim Nelson	Cape Coral City Council, District 5	Lee
+1753	Alyssa Lehmann	Cape Coral City Council, District 7	Lee
+1757	Maria Rodriguez	Pembroke Pines Commissioner, District 3	Broward
+1758	Michael Hernandez	Pembroke Pines Vice Mayor, District 4	Broward
+1763	Bruce Rector	Mayor of Clearwater	Pinellas
+1766	Rob Medina	Mayor of Palm Bay	Brevard
+1770	Santiago Avila	Mayor of Deltona	Volusia
+1774	Paul Anderson	Mayor of Melbourne	Brevard
+1775	Todd Drosky	Mayor of Deerfield Beach	Broward
+1776	Rodney Harris	Mayor of Miami Gardens	Miami-Dade
+1779	Rhonda A. Anderson	Mayor of Coral Gables	Miami-Dade
+1782	Mike Amundsen	Mayor of Ocala	Marion
+1783	Kevin Anderson	Mayor of Fort Myers	Lee
+1784	Shelly Petrolia	Mayor of Delray Beach	Palm Beach
+1785	Jackie Espinosa	Mayor of Kissimmee	Osceola
+1787	Trinette Frazier	Mayor of Boynton Beach	Palm Beach
+1788	Caryl Shuham	Hollywood Commissioner, District 1	Broward
+1791	Adam Gruber	Hollywood Commissioner, District 4	Broward
+1792	Kevin Biederman	Hollywood Commissioner, District 5	Broward
+1794	Cathleen Ward	West Palm Beach Commissioner, District 1	Palm Beach
+1795	Shalonda Warren	West Palm Beach Commission President, District 2	Palm Beach
+1796	Christy Fox	West Palm Beach Commissioner, District 3	Palm Beach
+1797	Joseph Peduzzi	West Palm Beach Commissioner, District 4	Palm Beach
+1800	Jeff Webb	Vice Mayor of Cedar Key	Alachua
+1803	Brenda Ash	Mayor of Apalachicola	Franklin
+1804	Despina George	City Commissioner, Apalachicola	Franklin
+1805	Adriane Elliott	City Commissioner, Apalachicola	Franklin
+1807	Donna Duncan	City Commissioner, Apalachicola	Franklin
+1808	James P. Kersey	Mayor of Bristol	Liberty
+1810	Rodney Braden	City Council Member, Destin	Okaloosa
+1812	Jim Bagby	City Council Member, Destin	Okaloosa
+1814	Sandy Trammell	City Council Member, Destin	Okaloosa
+1816	Laurence Vorisek	Mayor of Yankeetown	Alachua
+1822	George Gay	Mayor of Alford	Jackson
+1827	Fletcher J. Hope	Mayor of Archer	Alachua
+1829	Keller Lanahan	Vice Mayor of Atlantis	Palm Beach
+1832	Billy James	Mayor of Bascom	Jackson
+1833	Todd Watzel	Mayor of Bay Lake	Orange
+1834	Sandra Moore	Mayor of Bell	Gilchrist
+1836	Steve Blume	Mayor of Belleair Shore	Pinellas
+1838	Stephen Emmett	Mayor of Beverly Beach	Flagler
+1842	John Chappie	Mayor of Bradenton Beach	Manatee
+1844	Ken Saunders	Mayor of Branford	Suwannee
+1845	Ted Gross	Mayor of Briny Breezes	Palm Beach
+1846	Bruce A. Greenlee	Mayor of Bronson	Alachua
+1849	Randy Knagge	Mayor of Callahan	Nassau
+1850	Douglas Cotton	Mayor of Campbellton	Jackson
+1854	Tom Shoriak	City Council Member, Cape Canaveral	Brevard
+1855	Don Willis	City Council Member, Cape Canaveral	Brevard
+1859	Christopher Moultry	Mayor of Chattahoochee	Gadsden
+1868	Josh Cramer	City Council Member, Bradenton	Manatee
+1869	Marianne Barnebey	City Council Member, Bradenton	Manatee
+1870	Lisa Gonzalez Moore	City Council Member, Bradenton	Manatee
+1871	Pam Coachman	City Council Member, Bradenton	Manatee
+1872	Mike Gibson	Mayor of Bonita Springs	Lee
+1875	David Griggs	City Commissioner, Callaway	Bay
+1876	Kenneth L. Ayers	City Commissioner, Callaway	Bay
+1879	Mark Busch	City Commissioner, Casselberry	Seminole
+1880	Thomas E. Kirk	City Commissioner, Casselberry	Seminole
+1881	Anthony Aramendia	Vice Mayor of Casselberry	Seminole
+1892	Lavander Hearn	City Council Member, Cocoa	Brevard
+1893	Patricia Weeks	City Council Member, Cocoa	Brevard
+1895	Keith Capizzi	Mayor of Cocoa Beach	Brevard
+1897	Tim Tumulty	City Commissioner, Cocoa Beach	Brevard
+1898	Jeremy Hutcherson	City Commissioner, Cocoa Beach	Brevard
+1900	Calvary Chapel Merritt Island	City Commissioner, Cocoa Beach	Brevard
+1903	Who Is My	City Commissioner, Coconut Creek	Broward
+1912	Steve Miller	Mayor of Coleman	Sumter
+1915	Nancy Metayer	Vice Mayor of Coral Springs	Broward
+1948	Bob Campbell	Mayor of DeFuniak Springs	Walton
+1957	Chris Cloudman	Mayor of DeLand	Volusia
+1959	Kevin Reid	City Commissioner, DeLand	Volusia
+1960	Daniel Reed	City Commissioner, DeLand	Volusia
+1974	Rafael Pineyro Councilman Maureen	City Council Member, Doral	Miami-Dade
+1975	Nicole Reinoso Councilwoman Doral	City Council Member, Doral	Miami-Dade
+1977	Councilwoman Rafael Pineyro	City Council Member, Doral	Miami-Dade
+1978	Maureen Porras	City Council Member, Doral	Miami-Dade
+1979	Nicole Reinoso	City Council Member, Doral	Miami-Dade
+1994	Freaney Maureen	Mayor of Dunedin	Pinellas
+2003	David Evans	Mayor of Ebro	Washington
+2037	Candace Kelly	City Commissioner, Atlantic Beach	Duval
+2038	Thomas Grant	City Commissioner, Atlantic Beach	Duval
+2039	Bruce Bole	City Commissioner, Atlantic Beach	Duval
+2040	Jessica Ring	City Commissioner, Atlantic Beach	Duval
+2049	Daniel J Alfonso	City Council Member, Davie	Broward
+2053	Marilyn Green	City Commissioner, Archer	Alachua
+2054	Iris Bailey	Vice Mayor of Archer	Alachua
+2055	Karen Fiore	City Commissioner, Archer	Alachua
+2056	Kathy Penny	City Commissioner, Archer	Alachua
+2058	Sam Newbern	Mayor of Auburndale	Polk
+2059	Ed Crackel	City Commissioner, Auburndale	Polk
+2060	Ronnie Spears	City Commissioner, Auburndale	Polk
+2068	Mike Wilkinson	Mayor of Belleair	Pinellas
+2069	Todd Jennings	City Commissioner, Belleair	Pinellas
+2070	Patricia Barris	City Commissioner, Belleair	Pinellas
+2071	Thomas Kelly	City Commissioner, Belleair	Pinellas
+2072	Todd Jennings March	City Commissioner, Belleair	Pinellas
+2074	Thomas Kelly March	City Commissioner, Belleair	Pinellas
+2075	Tom Shelly	City Commissioner, Belleair	Pinellas
+2076	Christine Dobkowski	Mayor of Belleview	Marion
+2078	Ray Dwyer	City Commissioner, Belleview	Marion
+2079	Ronald T. Livsey	City Commissioner, Belleview	Marion
+2080	James Howard	City Commissioner, Beverly Beach	Flagler
+2083	Jeffrey Borges	City Commissioner, Beverly Beach	Flagler
+2088	Kelly Perry	City Council Member, Bronson	Alachua
+2090	Christy O'Brien	City Council Member, Bronson	Alachua
+2091	Kayla Greenway	City Council Member, Bronson	Alachua
+2099	Mali Gardner	City Commissioner, Clewiston	Hendry
+2101	Jason Williams	City Commissioner, Clewiston	Hendry
+2116	Omarr C. Nickerson	Mayor of El Portal	Miami-Dade
+2120	Charles Winters	City Council Member, El Portal	Miami-Dade
+2121	Krystal Bien	City Council Member, Esto	Holmes
+2122	Maxie Yates	City Council Member, Esto	Holmes
+2123	Poynter Tuesday	City Commissioner, Fernandina Beach	Nassau
+2133	John R. King	City Council Member, Fort Myers Beach	Lee
+2136	Linda Hudson	Mayor of Fort Pierce	St. Lucie
+2145	George Jacob Thomas	Mayor of Fort White	Columbia
+2150	Alice McLane	Mayor of Glen Ridge	Palm Beach
+2151	Juanice Padgett	Mayor of Glen St. Mary	Baker
+2152	Glenn Singer	Mayor of Golden Beach	Miami-Dade
+2153	Jessie Mendal	Vice Mayor of Golden Beach	Miami-Dade
+2156	Kenneth Bernstein	City Council Member, Golden Beach	Miami-Dade
+2157	Peter B. Hamilton	Mayor of Golf	Palm Beach
+2160	Curtis Pinkard	City Commissioner, Graceville	Jackson
+2161	Marshall Davis	City Commissioner, Graceville	Jackson
+2162	John McClendon	City Commissioner, Graceville	Jackson
+2163	Chris Harrell	Mayor of Grand Ridge	Jackson
+2168	Lamar Alday	Mayor of Greensboro	Gadsden
+2169	Ryan Kornegay	Mayor of Greenville	Jefferson
+2170	Phyllis Bowman	Mayor of Greenwood	Jackson
+2171	Anthony J. Baker	Mayor of Gretna	Gadsden
+2173	Barbara Gaines	City Council Member, Groveland	Lake
+2174	Michael C. Jaycox	City Council Member, Groveland	Lake
+2176	Cherry Fitch	Mayor of Gulf Breeze	Santa Rosa
+2177	Brittany Simpson	City Council Member, Gulf Breeze	Santa Rosa
+2178	Tim Burr	City Council Member, Gulf Breeze	Santa Rosa
+2179	Amy Tavai	City Council Member, Gulf Breeze	Santa Rosa
+2181	Scott W. Morgan	Mayor of Gulf Stream	Palm Beach
+2194	Jay Beckby	Mayor of Hastings	Putnam
+2197	Jacquelyn Randall	Mayor of Hawthorne	Alachua
+2209	Brandon McWhorter	City Commissioner, Highland Park	Polk
+2210	Amanda Updike	City Commissioner, Highland Park	Polk
+2211	Derek Camann	City Commissioner, Highland Park	Polk
+2212	Sam Knight	City Commissioner, Hillcrest Heights	Polk
+2219	Heather Berman	City Commissioner, Hillsboro Beach	Broward
+2226	Clemente Canabal	City Council Member, Homestead	Miami-Dade
+2230	Arthur Kight	City Council Member, Horseshoe Beach	Dixie
+2233	Jerry Dixon	City Council Member, Horseshoe Beach	Dixie
+2235	Otis Burl Philmon	City Council Member, Horseshoe Beach	Dixie
+2236	Johnny Osteen	City Council Member, Horseshoe Beach	Dixie
+2237	Cecil Wilder	City Council Member, Horseshoe Beach	Dixie
+2239	Sam Downing	City Council Member, Horseshoe Beach	Dixie
+2240	George Osteen	City Council Member, Horseshoe Beach	Dixie
+2241	Jo Ann White	City Council Member, Horseshoe Beach	Dixie
+2242	John Sheffield	City Council Member, Horseshoe Beach	Dixie
+2243	John Cherry	City Council Member, Horseshoe Beach	Dixie
+2244	Danny Kight	City Council Member, Horseshoe Beach	Dixie
+2245	Johnny Squires	City Council Member, Horseshoe Beach	Dixie
+2246	Debbie Corbin	City Council Member, Horseshoe Beach	Dixie
+2247	Katherine Hutchinson	City Council Member, Horseshoe Beach	Dixie
+2248	Roxie Revels	City Council Member, Horseshoe Beach	Dixie
+2249	Tina Brotherton	City Council Member, Horseshoe Beach	Dixie
+2251	Terri Taylor	City Council Member, Horseshoe Beach	Dixie
+2253	Jim Livingston	City Council Member, Horseshoe Beach	Dixie
+2254	Talmadge Bennett	City Council Member, Horseshoe Beach	Dixie
+2255	Mike Puerner	City Council Member, Horseshoe Beach	Dixie
+2256	Frances Cherry	City Council Member, Horseshoe Beach	Dixie
+2259	Mike Ewing	City Council Member, Horseshoe Beach	Dixie
+2261	Bob Webb	City Council Member, Horseshoe Beach	Dixie
+2264	Roads Johnny Squires	City Council Member, Horseshoe Beach	Dixie
+2265	Police Danny Kight	City Council Member, Horseshoe Beach	Dixie
+2267	Rec Johnny Squires	City Council Member, Horseshoe Beach	Dixie
+2268	Maintenance Debbie Corbin	City Council Member, Horseshoe Beach	Dixie
+2269	Fire Katherine Hutchinson	City Council Member, Horseshoe Beach	Dixie
+2271	Maintenance Tina Brotherton	City Council Member, Horseshoe Beach	Dixie
+2272	Fire Haddie Mann	City Council Member, Horseshoe Beach	Dixie
+2273	Roads Tina Brotherton	City Council Member, Horseshoe Beach	Dixie
+2274	Recreation Terri Taylor	City Council Member, Horseshoe Beach	Dixie
+2279	Brian Foley	Mayor of Indian River Shores	Indian River
+2280	Peter Tedesko	City Council Member, Indian River Shores	Indian River
+2287	Diantha Schear	Mayor of Indian Shores	Pinellas
+2288	Isaac Young	Mayor of Inglis	Alachua
+2297	Transparency Advocate	City Council Member, Islamorada	Monroe
+2298	Islamorada Community Alliance	City Council Member, Islamorada	Monroe
+2305	Vanessa Smith	City Council Member, Jasper	Columbia
+2307	Shon Owens	Mayor of Jay	Santa Rosa
+2326	Bob Arrison	Mayor of Kenneth City	Pinellas
+2327	Tony Chan	City Council Member, Kenneth City	Pinellas
+2328	Donald Kinney	City Council Member, Kenneth City	Pinellas
+2329	Jensyn Schmidt	Vice Mayor of Kenneth City	Pinellas
+2330	Joe I. Rasco	Mayor of Key Biscayne	Miami-Dade
+2331	Michael F. Bracken	City Council Member, Key Biscayne	Miami-Dade
+2332	Franklin H. Caplan	Vice Mayor of Key Biscayne	Miami-Dade
+2334	Nancy Stoner	City Council Member, Key Biscayne	Miami-Dade
+2335	Fernando A. Vazquez	City Council Member, Key Biscayne	Miami-Dade
+2336	Ron Sutton	Mayor of Key Colony Beach	Monroe
+2337	Vice-Mayor Doug Colonell	Vice Mayor of Key Colony Beach	Monroe
+2340	Project Continue Reading	Mayor of Key West	Monroe
+2341	Dave Welch	Vice Mayor of Keystone Heights	Clay
+2342	Nina Rodenroth	Mayor of Keystone Heights	Clay
+2355	Angie Sola	City Council Member, Lake Buena Vista	Orange
+2356	Gene King	City Council Member, Lake Buena Vista	Orange
+2357	Melissa Hendrix	Mayor of Lake Butler	Columbia
+2360	Annette Redman	City Commissioner, Lake Butler	Columbia
+2361	Fred Sirmones	City Commissioner, Lake Butler	Columbia
+2367	Daniel Williams	City Commissioner, Lake Wales	Polk
+2368	Keith Thompson	City Commissioner, Lake Wales	Polk
+2370	Robin Gibson	City Commissioner, Lake Wales	Polk
+2371	Betty Resch	Mayor of Lake Worth Beach	Palm Beach
+2376	Sharon Thomas	Vice Mayor of Lauderdale Lakes	Broward
+2379	Randy Strauss	Vice Mayor of Lauderdale-by-the-Sea	Broward
+2380	Theo Poulopoulos	City Commissioner, Lauderdale-by-the-Sea	Broward
+2382	John Graziano	City Commissioner, Lauderdale-by-the-Sea	Broward
+2386	Ray Nyhuis	Mayor of Lazy Lake	Broward
+2387	Jeff Grenell	City Council Member, Lazy Lake	Broward
+2388	Warren Nadeau	City Council Member, Lazy Lake	Broward
+2389	William Daugherty	City Council Member, Lazy Lake	Broward
+2390	Arnold Aliff	City Council Member, Lazy Lake	Broward
+2392	James C. Ruzicka	Mayor of Lee	Jefferson
+2395	Ross Licata	City Commissioner, Lighthouse Point	Broward
+2396	Frank C. Davis	Mayor of Live Oak	Suwannee
+2398	Debra Williams	Mayor of Longboat Key	Manatee
+2401	Sam Kitching	City Commissioner, Macclenny	Baker
+2402	Cecil Horne	City Commissioner, Macclenny	Baker
+2403	Danny Norton	City Commissioner, Macclenny	Baker
+2404	Lynward Bones	City Commissioner, Macclenny	Baker
+2412	Elliot Bonner	City Commissioner, Manalapan	Palm Beach
+2413	Point Orla Imbesi	City Commissioner, Manalapan	Palm Beach
+2414	Ocean David Knobel	City Commissioner, Manalapan	Palm Beach
+2415	Disclosures November	City Commissioner, Margate	Broward
+2417	Anthony N. Caggiano	Vice Mayor of Margate	Broward
+2429	Alison Scott	Mayor of McIntosh	Marion
+2430	Lee Deaderick	City Council Member, McIntosh	Marion
+2431	Don Medeiros	City Council Member, McIntosh	Marion
+2433	Edgar Ayala	City Council Member, Medley	Miami-Dade
+2434	Lizelh Rodriguez	City Council Member, Medley	Miami-Dade
+2436	Anna Butler	City Commissioner, Melbourne Beach	Brevard
+2438	Sherri Quarrie	City Commissioner, Melbourne Beach	Brevard
+2439	Bridget Foster	Mayor of Melbourne Village	Brevard
+2440	Richard Wolff	Mayor of Mexico Beach	Bay
+2449	Jiana Bradshaw Williams	Mayor of Micanopy	Alachua
+2450	Heather Lindsay December	Mayor of Milton	Santa Rosa
+2451	Yvette Colbourne	City Commissioner, Miramar	Broward
+2452	Maxwell B. Chambers	City Commissioner, Miramar	Broward
+2455	John Jones	Mayor of Monticello	Jefferson
+2456	Joe Wynkoop	Mayor of Montverde	Lake
+2463	Fred Cleveland	Mayor of New Smyrna Beach	Volusia
+2464	Foster Senn	Mayor of Newberry	Alachua
+2466	Literman Joseph	Mayor of Noma	Holmes
+2468	Doris Acosta	City Commissioner, North Bay Village	Miami-Dade
+2469	Richard Chervony	City Commissioner, North Bay Village	Miami-Dade
+2470	Media Inquiry	Mayor of North Miami	Miami-Dade
+2473	Kassandra Timothe	City Council Member, North Miami	Miami-Dade
+2483	Orlando Puyol	Vice Mayor of North Palm Beach	Palm Beach
+2485	Kendra Zellner	City Council Member, North Palm Beach	Palm Beach
+2486	Susan Bickel	Vice Mayor of North Palm Beach	Palm Beach
+2488	Barbara Langdon	Vice Mayor of North Port	Sarasota
+2490	Pete Emrich	Mayor of North Port	Sarasota
+2492	Jay Super	Mayor of North Redington Beach	Pinellas
+2499	Kris Keller	City Commissioner, Oakland	Orange
+2500	Yumeko Motley	City Commissioner, Oakland	Orange
+2504	Letitia Newbold	City Commissioner, Oakland Park	Orange
+2513	Proclamation Recognizing	City Commissioner, Ocean Ridge	Palm Beach
+2514	Rosemary Wilsen	Mayor of Ocoee	Orange
+2517	Noel Chandler	City Council Member, Okeechobee	Okeechobee
+2518	Monica Clark	City Council Member, Okeechobee	Okeechobee
+2519	Bob Jarriel	City Council Member, Okeechobee	Okeechobee
+2520	David R. McAuley	City Council Member, Okeechobee	Okeechobee
+2521	David McAuley	City Council Member, Okeechobee	Okeechobee
+2525	Katie Gannon	Mayor of Oldsmar	Pinellas
+2526	Valerie Tatarzewski	City Council Member, Oldsmar	Pinellas
+2527	Sean Swauger	City Council Member, Oldsmar	Pinellas
+2532	Natasha L. Ervin	City Commissioner, Opa-locka	Miami-Dade
+2534	Vice-Mayor Winnette Sandlin	Vice Mayor of Orange Park	Clay
+2535	Doug Benefield	City Council Member, Orange Park	Clay
+2536	Glenn Taylor	City Council Member, Orange Park	Clay
+2539	Keen's Spring Fest	City Commissioner, Orlando	Orange
+2540	Glenda Hood Park	Mayor of Orlando	Orange
+2541	Jason Leslie	Mayor of Ormond Beach	Volusia
+2542	Travis Sargent	City Commissioner, Ormond Beach	Volusia
+2543	Kristin Deaton	City Commissioner, Ormond Beach	Volusia
+2544	Harold Briley	City Commissioner, Ormond Beach	Volusia
+2545	Lori Tolland	City Commissioner, Ormond Beach	Volusia
+2546	Therese Granger	Mayor of Otter Creek	Alachua
+2552	Justin Campbell	City Commissioner, Palatka	Putnam
+2555	Danielle H. Moore	Mayor of Palm Beach	Palm Beach
+2556	Julie Araskog	City Council Member, Palm Beach	Palm Beach
+2557	Nicki McDonald	City Council Member, Palm Beach	Palm Beach
+2559	Cooney Lew Crampton	City Council Member, Palm Beach	Palm Beach
+2560	Crampton Julie Araskog	City Council Member, Palm Beach	Palm Beach
+2561	Araskog Nicki McDonald	City Council Member, Palm Beach	Palm Beach
+2562	McDonald Bridget Moran	City Council Member, Palm Beach	Palm Beach
+2565	Marcie Tinsley	City Council Member, Palm Beach Gardens	Palm Beach
+2567	Rachelle A. Litt	City Council Member, Palm Beach Gardens	Palm Beach
+2572	Sharon Secord	Mayor of Palm Shores	Brevard
+2574	Karyn Cunningham	Mayor of Palmetto Bay	Miami-Dade
+2577	Ordinances Resolutions Archived	Mayor of Panama City Beach	Bay
+2578	Andrew Kelly	Mayor of Parker	Bay
+2582	Rich Walker	Mayor of Parkland	Broward
+2583	Simeon Brier	Vice Mayor of Parkland	Broward
+2584	Jordan Isrow	City Commissioner, Parkland	Broward
+2585	Cindy Murphy-Salomone	City Commissioner, Parkland	Broward
+2586	Neil Kanterman	City Commissioner, Parkland	Broward
+2592	Jay D. Schwartz	City Commissioner, Pembroke Pines	Broward
+2593	Tom DeVille	City Council Member, Penney Farms	Clay
+2594	Annette Brooks	City Council Member, Penney Farms	Clay
+2595	Elizabeth Ryder	City Council Member, Penney Farms	Clay
+2596	Adrian Andrews	City Council Member, Penney Farms	Clay
+2597	Richard Hollowell	City Council Member, Penney Farms	Clay
+2600	Robert Greenlund	Vice Mayor of Pierson	Volusia
+2601	Linnie R. Richardson	City Council Member, Pierson	Volusia
+2605	South Dade	Mayor of Pinecrest	Miami-Dade
+2613	Tim Keith V	City Council Member, Pinellas Park	Pinellas
+2614	Sandra Patti Reed	City Council Member, Pinellas Park	Pinellas
+2615	Mary Thomas Mathis	Mayor of Plant City	Hillsborough
+2617	Shane Busby	Mayor of Ponce de Leon	Holmes
+2620	Cliff Shepard	Vice Mayor of Ponce Inlet	Volusia
+2624	Eric Langston	City Commissioner, Port St. Joe	Gulf
+2628	John Vetter	Mayor of Reddick	Marion
+2629	Myra Sherman	City Council Member, Reddick	Marion
+2630	Shirley Youmans	City Council Member, Reddick	Marion
+2631	Nadine Stokes	City Council Member, Reddick	Marion
+2632	Patti Vetter	City Council Member, Reddick	Marion
+2633	Andrea Frazier	City Council Member, Reddick	Marion
+2635	Tom Kapper	Mayor of Redington Shores	Pinellas
+2637	CJ Hoyt	City Commissioner, Redington Shores	Pinellas
+2638	Erin Schoos	City Commissioner, Redington Shores	Pinellas
+2639	Larry Maynard	City Commissioner, Redington Shores	Pinellas
+2641	Tom Price	Mayor of Rockledge	Brevard
+2642	Michael A. Cadore	City Council Member, Rockledge	Brevard
+2643	R. Shaun Ferguson	City Council Member, Rockledge	Brevard
+2645	Frank T. Forester	City Council Member, Rockledge	Brevard
+2646	Duane Daski	City Council Member, Rockledge	Brevard
+2647	Tara L. Connor	City Council Member, Rockledge	Brevard
+2648	Shaun Ferguson	City Council Member, Rockledge	Brevard
+2649	Thomas J. Price	City Council Member, Rockledge	Brevard
+2650	Jeff Hmara	Mayor of Royal Palm Beach	Palm Beach
+2651	John T. Vogel	Mayor of San Antonio	Pasco
+2668	Jodi Rozycki	Vice Mayor of Satellite Beach	Brevard
+2672	Herbert G. Yardley	Mayor of Sea Ranch Lakes	Broward
+2678	Mark Franks	Mayor of Shalimar	Okaloosa
+2679	Leonard Tartt	Mayor of Sopchoppy	Wakulla
+2680	Lara Edwards	Vice Mayor of Sopchoppy	Wakulla
+2681	Mary Katherine Westmark	City Council Member, Sopchoppy	Wakulla
+2682	Nathan Lewis	City Council Member, Sopchoppy	Wakulla
+2683	Fred McClendon	City Council Member, Sopchoppy	Wakulla
+2688	Doug Quartier	City Council Member, South Daytona	Volusia
+2689	Group I	City Commissioner, South Miami	Miami-Dade
+2690	Rafael Pineiro	Mayor of South Palm Beach	Palm Beach
+2691	Jim Allbritton	Mayor of Southwest Ranches	Broward
+2692	Nancy Sikes-Kline	Mayor of St. Augustine	St. Johns
+2693	Barbara Blonder	Vice Mayor of St. Augustine	St. Johns
+2694	Cynthia Garris	City Commissioner, St. Augustine	St. Johns
+2695	Jim Springfield	City Commissioner, St. Augustine	St. Johns
+2696	Jon DePreter	City Commissioner, St. Augustine	St. Johns
+2697	Chris Robertson	Mayor of St. Cloud	Osceola
+2702	Related Pages	Mayor of St. Marks	Wakulla
+2708	Commitment To Youth	Mayor of St. Petersburg	Pinellas
+2718	Viscarra Game On	City Commissioner, Sunny Isles Beach	Miami-Dade
+2719	Larisa Svechin	Mayor of Sunny Isles Beach	Miami-Dade
+2721	Charles W. Burkett	Mayor of Surfside	Miami-Dade
+2725	Bob Grenier	Vice Mayor of Tavares	Lake
+2744	Floyd Croucher	Vice Mayor of Trenton	Gilchrist
+2745	Marci Butts	City Council Member, Trenton	Gilchrist
+2747	Kenneth Roark	City Council Member, Trenton	Gilchrist
+2750	Veronica Gutierrez	City Commissioner, Umatilla	Lake
+2751	Carol Jones	City Commissioner, Umatilla	Lake
+2752	Yesenia Leon-Tejeda	City Commissioner, Umatilla	Lake
+2754	Chair Jennifer Cooper	City Commissioner, Umatilla	Lake
+2755	Gary W. Owens	Mayor of Vernon	Washington
+2763	Shannon Boal	City Council Member, Waldo	Alachua
+2768	Kathy Washington	Mayor of Welaka	Putnam
+2771	Amanda Silvestri	City Council Member, Wellington	Palm Beach
+2773	Johnny Meier	City Council Member, Wellington	Palm Beach
+2774	Maria S	Vice Mayor of Wellington	Palm Beach
+2776	Keith A. James	Mayor of West Palm Beach	Palm Beach
+2778	Adam McKenzie	Mayor of Westville	Holmes
+2788	Tonja R. Brown	Mayor of White Springs	Columbia
+2789	Organization Chart	Mayor of Wildwood	Sumter
+2797	Brandi Haines	City Council Member, Windermere	Orange
+2799	L. Tracy Mercer	Mayor of Winter Haven	Polk
+2800	Chad Davis	City Commissioner, Winter Haven	Polk
+2802	Sheila DeCiccio	Mayor of Winter Park	Orange
+2811	Travis Hemphill	City Council Member, Worthington Springs	Columbia
+2812	Priscilla Kirby	City Council Member, Worthington Springs	Columbia
+2820	Sarah Reece	Altamonte Springs Council Member	Seminole
+2821	Bob O'Malley	Altamonte Springs Council Member	Seminole
+2822	Zane Teeters, Jr.	Mayor of Astatula	Lake
+2823	Cheryl Marinelli	Vice Mayor of Astatula	Lake
+2824	Kay MacQueen	Astatula Council Member	Lake
+2827	Bruce Bole	Atlantic Beach Council Member	Duval
+2828	Thomas Grant	Atlantic Beach Council Member	Duval
+2829	Candace Kelly	Atlantic Beach Council Member	Duval
+2830	Jessica Ring	Atlantic Beach Council Member	Duval
+2836	Mali Gardner	Clewiston Commissioner	Hendry
+2838	Jason Williams II	Clewiston Commissioner	Hendry
+2839	Daniel Alfonso	Davie Council Member	Broward
+2840	Susan Starkey	Davie Council Member	Broward
+2842	Nancy Miller	Mayor of Daytona Beach Shores	Volusia
+2843	Chris Conomos	Daytona Beach Shores Commissioner	Volusia
+2844	Stephan Dembinsky	Daytona Beach Shores Commissioner	Volusia
+2845	Mark Card	Daytona Beach Shores Commissioner	Volusia
+2851	Malise Sundstrom	Jupiter Council Member	Palm Beach
+2852	Joe Ayoub	Mayor of Safety Harbor	Pinellas
+2853	Nancy Besore	Vice Mayor of Safety Harbor	Pinellas
+2854	Andy Steingold	Safety Harbor Council Member	Pinellas
+2856	Kevin Shanks	Safety Harbor Council Member	Pinellas
+2857	Joe Kyles	Mayor of South Bay	Palm Beach
+2861	Gustavo J. Ceballos	West Miami Commissioner	Miami-Dade
+2871	Eric Rappaport	Bay Harbor Islands Council Member	Miami-Dade
+2872	Molly Diallo	Bay Harbor Islands Council Member	Miami-Dade
+2873	Tracy Andrews	Mayor of Chipley	Washington
+2876	Linda Cain	Chipley Council Member	Washington
+2877	Leonard Blount	Chipley Council Member	Washington
+2879	David Tagliarini	Vice Mayor of Madeira Beach	Pinellas
+2880	Jerome Charles	Mayor of Miami Shores	Miami-Dade
+2881	Neil Cantor	Vice Mayor of Miami Shores	Miami-Dade
+2882	George Burch	Miami Shores Council Member	Miami-Dade
+2884	Patrick Devaney	Miami Shores Council Member	Miami-Dade
+2885	Steve Castaneda	Sweetwater Commissioner	Miami-Dade
+2889	Elizabeth Cox	Sweetwater Commissioner	Miami-Dade
+2890	Ron Morrison	Sweetwater Commissioner	Miami-Dade
+2891	Ditas Yamane	Sweetwater Commissioner	Miami-Dade
+2893	Panagiotis (Peter) Koulias	Vice Mayor of Tarpon Springs	Pinellas
+2895	David Banther	Tarpon Springs Commissioner	Pinellas
+2896	Jonathan E. Groth	Mayor of Biscayne Park	Miami-Dade
+2898	Veronica Amsler	Biscayne Park Commissioner	Miami-Dade
+2899	Art Gonzalez	Biscayne Park Commissioner	Miami-Dade
