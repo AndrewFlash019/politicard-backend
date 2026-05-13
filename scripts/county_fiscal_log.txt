@@ -1,0 +1,16 @@
+start  dry-run=True
+downloaded xlsx -> C:\Users\DREWK\AppData\Local\Temp\fl_county_iu1jticg.xlsx
+parsed 67 counties from xlsx
+YoY change computed for 67 counties
+county-level distribution: {'excellent': 16, 'good': 44, 'meeting': 6, 'concerning': 0, 'poor': 1}
+county commissioners in DB: 402
+
+DONE  commissioners=402  written=389  skipped_no_county=0  skipped_no_data=13
+start  dry-run=False
+downloaded xlsx -> C:\Users\DREWK\AppData\Local\Temp\fl_county_qu8r6t_8.xlsx
+parsed 67 counties from xlsx
+YoY change computed for 67 counties
+county-level distribution: {'excellent': 16, 'good': 44, 'meeting': 6, 'concerning': 0, 'poor': 1}
+county commissioners in DB: 402
+
+DONE  commissioners=402  written=389  skipped_no_county=0  skipped_no_data=13

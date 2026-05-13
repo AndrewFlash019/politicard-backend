@@ -17,3 +17,4 @@ lxml
 slowapi
 anthropic
 ddgs
+openpyxl
