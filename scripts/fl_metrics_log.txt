@@ -1,0 +1,13 @@
+start  session_year=2025 dry-run=False
+legislators to update: 156
+sponsorship counts available for 178 officials
+  openstates: per-member vote breakdown requires a separate ingest pass (200+ requests). Skipping for now; leaving voting_attendance + party_line_voting as no_data placeholders.
+  …processed 20/156
+  …processed 40/156
+  …processed 60/156
+  …processed 80/156
+  …processed 100/156
+  …processed 120/156
+  …processed 140/156
+
+DONE  bills_sponsored=156  bills_passed=156  vote_metrics=0  legislators=156
