@@ -87,11 +87,13 @@ def rate_attendance(pct: float) -> str:
 
 
 def rate_partyline(pct: float) -> str:
-    # Lower is better — more independent vote choices.
+    # Lower is better — more independent vote choices. Poor band starts >99%
+    # rather than >98% since FL's chamber is structurally polarized and the
+    # tighter cutoff isolates true rubber-stampers from the merely-loyal.
     if pct <= 80: return "excellent"
     if pct <= 90: return "good"
     if pct <= 95: return "meeting"
-    if pct <= 98: return "concerning"
+    if pct <= 99: return "concerning"
     return "poor"
 
 

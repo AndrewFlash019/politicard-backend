@@ -71,11 +71,13 @@ def rate_attendance(pct: float) -> str:
 
 
 def rate_partyline(pct: float) -> str:
-    # Lower = more independent → better
+    # Lower = more independent → better. The "poor" cutoff is >99% because
+    # FL's chamber is structurally polarized — almost everyone clears 95-98%,
+    # so the cutoff at 99 separates true rubber-stampers from the rest.
     if pct <= 80: return "excellent"
     if pct <= 90: return "good"
     if pct <= 95: return "meeting"
-    if pct <= 98: return "concerning"
+    if pct <= 99: return "concerning"
     return "poor"
 
 
