@@ -1,0 +1,149 @@
+start session=2025 dry-run=False max_pages=None
+  page 1/100: +20 bills (total 20)
+  page 2/100: +20 bills (total 40)
+  page 3/100: +20 bills (total 60)
+  page 4/100: +20 bills (total 80)
+  page 5/100: +20 bills (total 100)
+  page 6/100: +20 bills (total 120)
+  page 7/100: +20 bills (total 140)
+  page 8/100: +20 bills (total 160)
+  page 9/100: +20 bills (total 180)
+  page 10/100: +20 bills (total 200)
+  page 11 rate-limited (429), sleeping 10s and retrying
+  page 11 rate-limited (429), sleeping 10s and retrying
+  page 11 rate-limited (429), sleeping 10s and retrying
+  page 11 rate-limited (429), sleeping 10s and retrying
+  page 11/100: +20 bills (total 220)
+  page 12/100: +20 bills (total 240)
+  page 13/100: +20 bills (total 260)
+  page 14/100: +20 bills (total 280)
+  page 15/100: +20 bills (total 300)
+  page 16/100: +20 bills (total 320)
+  page 17/100: +20 bills (total 340)
+  page 18/100: +20 bills (total 360)
+  page 19/100: +20 bills (total 380)
+  page 20/100: +20 bills (total 400)
+  page 21 rate-limited (429), sleeping 10s and retrying
+  page 21 rate-limited (429), sleeping 10s and retrying
+  page 21 rate-limited (429), sleeping 10s and retrying
+  page 21 rate-limited (429), sleeping 10s and retrying
+  page 21 rate-limited (429), sleeping 10s and retrying
+  page 21/100: +20 bills (total 420)
+  page 22/100: +20 bills (total 440)
+  page 23/100: +20 bills (total 460)
+  page 24/100: +20 bills (total 480)
+  page 25/100: +20 bills (total 500)
+  page 26/100: +20 bills (total 520)
+  page 27/100: +20 bills (total 540)
+  page 28/100: +20 bills (total 560)
+  page 29/100: +20 bills (total 580)
+  page 30/100: +20 bills (total 600)
+  page 31 rate-limited (429), sleeping 10s and retrying
+  page 31 rate-limited (429), sleeping 10s and retrying
+  page 31 rate-limited (429), sleeping 10s and retrying
+  page 31 rate-limited (429), sleeping 10s and retrying
+  page 31 rate-limited (429), sleeping 10s and retrying
+  page 31/100: +20 bills (total 620)
+  page 32/100: +20 bills (total 640)
+  page 33/100: +20 bills (total 660)
+  page 34/100: +20 bills (total 680)
+  page 35/100: +20 bills (total 700)
+  page 36/100: +20 bills (total 720)
+  page 37/100: +20 bills (total 740)
+  page 38/100: +20 bills (total 760)
+  page 39/100: +20 bills (total 780)
+  page 40/100: +20 bills (total 800)
+  page 41 rate-limited (429), sleeping 10s and retrying
+  page 41 rate-limited (429), sleeping 10s and retrying
+  page 41 rate-limited (429), sleeping 10s and retrying
+  page 41 rate-limited (429), sleeping 10s and retrying
+  page 41/100: +20 bills (total 820)
+  page 42/100: +20 bills (total 840)
+  page 43/100: +20 bills (total 860)
+  page 44/100: +20 bills (total 880)
+  page 45/100: +20 bills (total 900)
+  page 46/100: +20 bills (total 920)
+  page 47/100: +20 bills (total 940)
+  page 48/100: +20 bills (total 960)
+  page 49/100: +20 bills (total 980)
+  page 50/100: +20 bills (total 1000)
+  page 51 rate-limited (429), sleeping 10s and retrying
+  page 51 rate-limited (429), sleeping 10s and retrying
+  page 51 rate-limited (429), sleeping 10s and retrying
+  page 51 rate-limited (429), sleeping 10s and retrying
+  page 51 rate-limited (429), sleeping 10s and retrying
+  page 51/100: +20 bills (total 1020)
+  page 52/100: +20 bills (total 1040)
+  page 53/100: +20 bills (total 1060)
+  page 54/100: +20 bills (total 1080)
+  page 55/100: +20 bills (total 1100)
+  page 56/100: +20 bills (total 1120)
+  page 57/100: +20 bills (total 1140)
+  page 58/100: +20 bills (total 1160)
+  page 59/100: +20 bills (total 1180)
+  page 60/100: +20 bills (total 1200)
+  page 61 rate-limited (429), sleeping 10s and retrying
+  page 61 rate-limited (429), sleeping 10s and retrying
+  page 61 rate-limited (429), sleeping 10s and retrying
+  page 61 rate-limited (429), sleeping 10s and retrying
+  page 61/100: +20 bills (total 1220)
+  page 62/100: +20 bills (total 1240)
+  page 63/100: +20 bills (total 1260)
+  page 64/100: +20 bills (total 1280)
+  page 65/100: +20 bills (total 1300)
+  page 66/100: +20 bills (total 1320)
+  page 67/100: +20 bills (total 1340)
+  page 68/100: +20 bills (total 1360)
+  page 69/100: +20 bills (total 1380)
+  page 70/100: +20 bills (total 1400)
+  page 71 rate-limited (429), sleeping 10s and retrying
+  page 71 rate-limited (429), sleeping 10s and retrying
+  page 71 rate-limited (429), sleeping 10s and retrying
+  page 71 rate-limited (429), sleeping 10s and retrying
+  page 71 rate-limited (429), sleeping 10s and retrying
+  page 71/100: +20 bills (total 1420)
+  page 72/100: +20 bills (total 1440)
+  page 73/100: +20 bills (total 1460)
+  page 74/100: +20 bills (total 1480)
+  page 75/100: +20 bills (total 1500)
+  page 76/100: +20 bills (total 1520)
+  page 77/100: +20 bills (total 1540)
+  page 78/100: +20 bills (total 1560)
+  page 79/100: +20 bills (total 1580)
+  page 80/100: +20 bills (total 1600)
+  page 81 rate-limited (429), sleeping 10s and retrying
+  page 81 rate-limited (429), sleeping 10s and retrying
+  page 81 rate-limited (429), sleeping 10s and retrying
+  page 81 rate-limited (429), sleeping 10s and retrying
+  page 81 rate-limited (429), sleeping 10s and retrying
+  page 81/100: +20 bills (total 1620)
+  page 82/100: +20 bills (total 1640)
+  page 83/100: +20 bills (total 1660)
+  page 84/100: +20 bills (total 1680)
+  page 85/100: +20 bills (total 1700)
+  page 86/100: +20 bills (total 1720)
+  page 87/100: +20 bills (total 1740)
+  page 88/100: +20 bills (total 1760)
+  page 89/100: +20 bills (total 1780)
+  page 90/100: +20 bills (total 1800)
+  page 91 rate-limited (429), sleeping 10s and retrying
+  page 91 rate-limited (429), sleeping 10s and retrying
+  page 91 rate-limited (429), sleeping 10s and retrying
+  page 91 rate-limited (429), sleeping 10s and retrying
+  page 91 rate-limited (429), sleeping 10s and retrying
+  page 91/100: +20 bills (total 1820)
+  page 92/100: +20 bills (total 1840)
+  page 93/100: +20 bills (total 1860)
+  page 94/100: +20 bills (total 1880)
+  page 95/100: +20 bills (total 1900)
+  page 96/100: +20 bills (total 1920)
+  page 97/100: +20 bills (total 1940)
+  page 98/100: +20 bills (total 1960)
+  page 99/100: +20 bills (total 1980)
+  page 100/100: +6 bills (total 1986)
+bills loaded: 1986
+  processed 2355 votes; skipped 0 (no member data)
+unique voters seen: 165
+FL state legislators in DB: 156
+
+DONE  matched=153  unmatched=3  attendance_written=153  party_line_written=153
