@@ -1,0 +1,53 @@
+#!/usr/bin/env bash
+# Block commits that stage secret-bearing files or content matching known
+# API-key / credential patterns. Enable with: git config core.hooksPath .githooks
+set -eu
+
+red()   { printf '\033[0;31m%s\033[0m\n' "$*"; }
+yellow(){ printf '\033[0;33m%s\033[0m\n' "$*"; }
+
+fail=0
+staged=$(git diff --cached --name-only --diff-filter=ACM)
+[ -z "$staged" ] && exit 0
+
+# 1. Blocked filenames (exact or by extension)
+while IFS= read -r f; do
+  case "$f" in
+    .env|env|.env.*|*.env|.envrc \
+    |*.pem|*.key|*.pfx|*.p12|*.keystore|*.jks \
+    |id_rsa|id_ed25519|*.ppk \
+    |credentials*.json|service-account*.json|firebase-adminsdk*.json \
+    |*secrets*.yml|*secrets*.yaml)
+      red "BLOCKED: $f looks like a secret file (filename rule)"
+      fail=1
+      ;;
+  esac
+done <<< "$staged"
+
+# 2. Content scan on text diffs only
+pattern='sk-ant-api03-[A-Za-z0-9_-]{20,}'
+pattern+='|AIza[A-Za-z0-9_-]{35}'
+pattern+='|eyJ[A-Za-z0-9_-]{20,}\.eyJ[A-Za-z0-9_-]{20,}\.[A-Za-z0-9_-]+'
+pattern+='|postgres(ql)?://[^:[:space:]]+:[^@[:space:]]+@'
+pattern+='|AKIA[A-Z0-9]{16}'
+pattern+='|gh[pousr]_[A-Za-z0-9]{36}'
+pattern+='|xox[bp]-[A-Za-z0-9-]+'
+pattern+='|-----BEGIN ([A-Z ]+ )?PRIVATE KEY-----'
+pattern+='|sk_(live|test)_[A-Za-z0-9]{24,}'
+pattern+='|sb_(secret|service_role)_[A-Za-z0-9_-]+'
+
+hits=$(git diff --cached -U0 --no-color | grep -nE "^\+" | grep -E "$pattern" || true)
+if [ -n "$hits" ]; then
+  red "BLOCKED: staged content matches a secret pattern:"
+  printf '%s\n' "$hits" | head -20
+  fail=1
+fi
+
+if [ "$fail" -ne 0 ]; then
+  echo
+  yellow "If this is a false positive, bypass with: git commit --no-verify"
+  yellow "But please verify nothing real leaked first."
+  exit 1
+fi
+
+exit 0
